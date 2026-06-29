@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercices — Pronoms Interrogatifs</title>
+  <style>
+    :root {
+      --indigo: #1e2d5a;
+      --gold:   #c9a84c;
+      --gold-lt:#f5e9c4;
+      --bg:     #f4f5fa;
+      --card:   #fff;
+      --pale:   #eef0f8;
+      --border: #ced5e8;
+      --text:   #1a1a2e;
+      --muted:  #5a6a8a;
+      --ok:     #7a600a;
+      --ko:     #8b1a2e;
+      --font:   -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      --ar:     'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── HEADER ── */
+    .top-strip {
+      width: 100%; max-width: 640px; height: 4px;
+      background: linear-gradient(90deg, var(--indigo), #4a6fa5, var(--gold));
+      border-radius: 2px; margin-bottom: 16px;
+    }
+    header {
+      background: var(--indigo); color: white;
+      width: 100%; max-width: 640px; border-radius: 16px;
+      padding: 20px 28px; text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 24px rgba(30,45,90,.3);
+      position: relative; overflow: hidden;
+    }
+    header::before {
+      content: 'البداية'; font-family: var(--ar);
+      font-size: 7rem; color: rgba(255,255,255,.05);
+      position: absolute; right: -1rem; top: -1.5rem;
+      line-height: 1; pointer-events: none; direction: rtl;
+    }
+    .h-brand {
+      font-size: .65rem; font-weight: 800;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 6px; position: relative;
+    }
+    .h-ar {
+      font-family: var(--ar); font-size: 2.2rem; color: #fff;
+      direction: rtl; line-height: 1.3;
+      position: relative; margin-bottom: 4px;
+    }
+    .h-fr {
+      font-size: .9rem; font-weight: 600;
+      color: rgba(255,255,255,.8); position: relative;
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex; gap: 8px;
+      width: 100%; max-width: 640px; margin-bottom: 18px;
+    }
+    .tab {
+      flex: 1; background: white;
+      border: 2px solid var(--border); border-radius: 10px;
+      padding: 10px 6px; text-align: center;
+      cursor: pointer; font-size: .75rem; font-weight: 700;
+      color: var(--muted); transition: all .15s; line-height: 1.4;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+      user-select: none; -webkit-user-select: none;
+    }
+    .tab.active { background: var(--indigo); color: white; border-color: var(--indigo); }
+    .tab:hover:not(.active) { border-color: var(--indigo); color: var(--indigo); }
+    .tab-icon { font-size: 1.1rem; display: block; margin-bottom: 2px; }
+
+    /* ── PANELS ── */
+    .panel { display: none; width: 100%; max-width: 640px; }
+    .panel.active { display: block; }
+
+    /* ── PROGRESS ── */
+    .progress-bar {
+      height: 7px; background: var(--border);
+      border-radius: 4px; margin-bottom: 10px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--indigo), var(--gold));
+      border-radius: 4px; transition: width .4s ease; width: 0%;
+    }
+    .counter {
+      font-size: .8rem; color: var(--muted);
+      font-weight: 600; margin-bottom: 14px; text-align: center;
+    }
+
+    /* ── QUESTION CARD ── */
+    .q-card {
+      background: white; border: 2px solid var(--border);
+      border-radius: 16px; padding: 26px 22px;
+      text-align: center; margin-bottom: 14px;
+      box-shadow: 0 2px 14px rgba(30,45,90,.08);
+      transition: border-color .2s, background .2s;
+    }
+    .q-card.correct { background: #fdf5e0; border-color: var(--gold); }
+    .q-card.wrong   { background: #fce8ec; border-color: #c04060; }
+    .q-label {
+      font-size: .68rem; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted); margin-bottom: 14px;
+    }
+    .q-ar {
+      font-family: var(--ar); font-size: 2rem;
+      direction: rtl; color: var(--indigo); line-height: 1.6;
+    }
+    .q-hint {
+      font-size: .8rem; color: var(--muted);
+      font-style: italic; margin-top: 8px;
+    }
+
+    /* ── CHOICE BUTTONS (QCM) ── */
+    .choices-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-bottom: 12px;
+    }
+    .choice {
+      background: white; border: 2px solid var(--border);
+      border-radius: 12px; padding: 12px 14px;
+      cursor: pointer; text-align: center;
+      transition: all .15s;
+      box-shadow: 0 1px 4px rgba(30,45,90,.06);
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .choice:hover:not(.locked) {
+      border-color: var(--indigo);
+      box-shadow: 0 3px 12px rgba(30,45,90,.15);
+    }
+    .choice.correct { background: #fdf5e0; border-color: var(--gold); }
+    .choice.wrong   { background: #fce8ec; border-color: #c04060; animation: shake .3s ease; }
+    .choice.locked  { cursor: default; }
+    .ch-ar { font-family: var(--ar); font-size: 1.9rem; direction: rtl; color: var(--indigo); display: block; }
+    .ch-fr { font-size: .72rem; color: var(--muted); font-weight: 600; display: block; margin-top: 2px; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0) }
+      25%     { transform: translateX(-5px) }
+      75%     { transform: translateX(5px) }
+    }
+
+    /* ── FEEDBACK ── */
+    .feedback {
+      font-size: .85rem; font-weight: 700;
+      text-align: center; margin-bottom: 10px; min-height: 1.3em;
+    }
+    .feedback.ok { color: var(--ok); }
+    .feedback.ko { color: var(--ko); }
+
+    /* ── SCORE PILL ── */
+    .score-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 14px; }
+    .score-pill {
+      background: white; border: 1.5px solid var(--border);
+      border-radius: 20px; padding: 5px 18px;
+      font-weight: 700; color: var(--indigo); font-size: .82rem;
+    }
+
+    /* ── VRAI/FAUX BUTTONS ── */
+    .vf-btns { display: flex; gap: 12px; margin-bottom: 12px; }
+    .btn-vrai {
+      flex: 1; background: #e8f5e9; border: 2px solid #66bb6a;
+      color: #2e7d32; border-radius: 12px; padding: 14px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      font-family: var(--font); transition: all .15s;
+    }
+    .btn-faux {
+      flex: 1; background: #fce8ec; border: 2px solid #ef5350;
+      color: #c62828; border-radius: 12px; padding: 14px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      font-family: var(--font); transition: all .15s;
+    }
+    .btn-vrai:hover:not(:disabled) { background: #66bb6a; color: white; }
+    .btn-faux:hover:not(:disabled) { background: #ef5350; color: white; }
+    .btn-vrai:disabled, .btn-faux:disabled { opacity: .4; cursor: default; }
+
+    /* ── MATCH-UP ── */
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .match-col-label {
+      font-size: .68rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); text-align: center;
+      margin-bottom: 8px;
+    }
+    .match-col { display: flex; flex-direction: column; gap: 7px; }
+    .match-item {
+      background: white; border: 2px solid var(--border);
+      border-radius: 10px; padding: 10px 12px;
+      text-align: center; cursor: pointer;
+      transition: all .15s; user-select: none; -webkit-user-select: none;
+      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .match-item.ar-item {
+      font-family: var(--ar); font-size: 1.8rem;
+      direction: rtl; color: var(--indigo);
+    }
+    .match-item.fr-item { font-size: .85rem; font-weight: 700; }
+    .match-item.selected { background: var(--pale); border-color: var(--indigo); }
+    .match-item.matched  { background: #fdf5e0; border-color: var(--gold); color: var(--ok); cursor: default; }
+    .match-item.matched.ar-item { color: var(--ok); }
+    .match-item.flash-err { animation: flash-red .4s ease; }
+    @keyframes flash-red {
+      0%   { background: #fce8ec; border-color: #c04060; }
+      100% { background: white;   border-color: var(--border); }
+    }
+    .match-score {
+      text-align: center; font-size: .9rem;
+      font-weight: 700; color: var(--ok); margin-top: 14px;
+    }
+
+    /* ── RESTART BUTTON ── */
+    .btn-restart {
+      background: var(--indigo); color: white; border: none;
+      border-radius: 10px; padding: 10px 28px;
+      font-size: .88rem; cursor: pointer; font-weight: 700;
+      font-family: var(--font);
+      box-shadow: 0 2px 10px rgba(30,45,90,.3);
+      transition: background .15s;
+      margin: 0 auto; display: block;
+    }
+    .btn-restart:hover { background: #2a3d7a; }
+
+    /* ── CELEBRATION ── */
+    .celebration {
+      display: none; position: fixed; inset: 0;
+      background: rgba(30,45,90,.94); z-index: 999;
+      flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 24px;
+    }
+    .celebration.visible { display: flex; }
+    .cel-icon {
+      font-size: 8rem;
+      animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards,
+                 wobble 1.2s ease-in-out .6s infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0);       opacity: 1; }
+    }
+    @keyframes wobble {
+      0%,100% { transform: rotate(-5deg) scale(1); }
+      50%     { transform: rotate(5deg)  scale(1.04); }
+    }
+    .cel-ar {
+      font-family: var(--ar); font-size: 2.8rem; direction: rtl;
+      color: var(--gold); font-weight: 700;
+      animation: fadeUp .5s ease .4s both; margin-bottom: 8px;
+    }
+    .cel-praise {
+      font-family: var(--ar); font-size: 1.4rem; direction: rtl;
+      color: white; animation: fadeUp .5s ease .6s both; margin-bottom: 6px;
+    }
+    .cel-fr {
+      font-size: .95rem; color: rgba(255,255,255,.8);
+      animation: fadeUp .5s ease .75s both; margin-bottom: 24px;
+    }
+    .cel-stars {
+      font-size: 1.6rem; letter-spacing: 8px;
+      animation: fadeUp .5s ease .9s both; margin-bottom: 24px;
+    }
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .btn-cel {
+      background: var(--gold); color: var(--indigo); border: none;
+      border-radius: 12px; padding: 13px 32px;
+      font-size: .95rem; font-weight: 800; cursor: pointer;
+      font-family: var(--font);
+      animation: fadeUp .5s ease 1s both;
+      transition: background .15s, transform .1s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    }
+    .btn-cel:hover { background: white; transform: scale(1.04); }
+
+    /* ── MINI-COURS ── */
+    .cours-wrap { width: 100%; max-width: 640px; margin-bottom: 16px; }
+    .cours-toggle {
+      width: 100%; background: var(--indigo); color: white; border: none;
+      border-radius: 10px; padding: 12px 18px;
+      font-family: var(--font); font-size: .85rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: space-between; transition: background .15s;
+    }
+    .cours-toggle:hover { background: #2a3d7a; }
+    .cours-arrow { transition: transform .28s; font-size: .85rem; display: inline-block; }
+    .cours-arrow.open { transform: rotate(180deg); }
+    .cours-body { overflow: hidden; transition: max-height .4s ease, opacity .3s ease; margin-top: 10px; }
+    .cours-body.visible { max-height: 3000px; opacity: 1; }
+    .cours-body.hidden  { max-height: 0; opacity: 0; pointer-events: none; margin-top: 0; }
+    .cours-intro {
+      background: var(--gold-lt); border: 1.5px solid var(--gold);
+      border-radius: 10px; padding: .8rem 1.1rem;
+      font-size: .86rem; color: #5a3d00; line-height: 1.7; margin-bottom: 14px;
+    }
+    .cours-ar-ref { font-family: var(--ar); font-size: 1.05rem; direction: rtl; }
+    .cours-table {
+      width: 100%; border-collapse: collapse; background: white;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 16px rgba(30,45,90,.1);
+    }
+    .cours-table thead th {
+      background: var(--indigo); color: white;
+      padding: .7rem 1rem; border: none;
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+    }
+    .cours-table thead th.th-ar {
+      font-family: var(--ar); font-size: 1.15rem;
+      direction: rtl; text-transform: none; letter-spacing: 0;
+    }
+    .cours-table tbody tr:nth-child(even) td { background: var(--pale); }
+    .cours-table td {
+      padding: .9rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .cours-table tr:last-child td { border-bottom: none; }
+    .td-pronom {
+      font-family: var(--ar); font-size: 2.5rem; direction: rtl;
+      font-weight: 700; text-align: center; width: 90px;
+    }
+    .td-trad { font-size: .92rem; font-weight: 800; width: 130px; color: var(--text); }
+    .td-ex { font-family: var(--ar); font-size: 1.08rem; direction: rtl; line-height: 1.6; }
+    .ex-row { margin-bottom: 2px; }
+    .ex-trad {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-size: .7rem; color: var(--muted); font-style: italic;
+      direction: ltr; text-align: left;
+      padding-left: 26px; margin-bottom: 6px; line-height: 1.3;
+    }
+    .ex-label {
+      font-family: var(--font); font-size: .6rem; font-weight: 800;
+      border-radius: 3px; padding: .08rem .32rem; direction: ltr;
+      text-transform: uppercase; letter-spacing: .04em;
+      vertical-align: middle; margin-left: 5px;
+    }
+    .ex-label-q { background: var(--pale); color: var(--muted); }
+    .ex-label-r { background: var(--gold-lt); color: #6b4c00; }
+    .ex-q { color: var(--text); }
+    .ex-r { color: var(--text); font-weight: 600; }
+
+    footer {
+      font-size: .68rem; color: var(--muted);
+      margin-top: 28px; text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .tabs { flex-wrap: wrap; }
+      .tab  { flex: 1 1 40%; }
+      .choices-grid { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<header>
+  <div class="h-brand">Al Bidayah · Niveau 1</div>
+  <div class="h-ar">أَدَوَاتُ الاسْتِفْهَام</div>
+  <div class="h-fr">Exercices — Pronoms interrogatifs</div>
+</header>
+
+<!-- ══ MINI-COURS ══ -->
+<div class="cours-wrap">
+  <button class="cours-toggle" onclick="toggleCours()">
+    <span>📖 Rappel de cours — Les pronoms interrogatifs</span>
+    <span class="cours-arrow open" id="cours-arrow">▲</span>
+  </button>
+  <div class="cours-body visible" id="cours-body">
+    <div class="cours-intro">
+      Chaque pronom interrogatif attend un <strong>type de réponse précis</strong>.
+      Exemples tirés du texte <span class="cours-ar-ref">التَّلْمِيذُ الْمُهَذَّبُ</span>.
+    </div>
+    <table class="cours-table">
+      <thead>
+        <tr>
+          <th class="th-ar">الأداة</th>
+          <th>Traduction</th>
+          <th>Exemple tiré du texte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-pronom" style="color:#1a4fa0">مَنْ</td>
+          <td class="td-trad">Qui ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#1a4fa0;font-weight:700">مَنْ</span> هُوَ رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Qui est Rachid ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">هُوَ تِلْمِيذٌ مُهَذَّبٌ.</span></div>
+            <div class="ex-trad">Il est un élève poli.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#2e7d52">مَاذَا</td>
+          <td class="td-trad">Que / Quoi ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#2e7d52;font-weight:700">مَاذَا</span> يَتْلُو رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Que récite Rachid ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">يَتْلُو نَصِيباً مِنَ الْقُرْآنِ.</span></div>
+            <div class="ex-trad">Il récite une partie du Coran.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#5c2d8a">أَيْنَ</td>
+          <td class="td-trad">Où ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#5c2d8a;font-weight:700">أَيْنَ</span> يَذْهَبُ رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Où va Rachid ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">يَذْهَبُ إِلَى الْمَدْرَسَةِ.</span></div>
+            <div class="ex-trad">Il va à l'école.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#b06a00">مَتَى</td>
+          <td class="td-trad">Quand ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#b06a00;font-weight:700">مَتَى</span> يَسْتَيْقِظُ رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Quand se réveille Rachid ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">يَسْتَيْقِظُ قَبْلَ شُرُوقِ الشَّمْسِ.</span></div>
+            <div class="ex-trad">Il se réveille avant le lever du soleil.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#b84000">كَيْفَ</td>
+          <td class="td-trad">Comment ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#b84000;font-weight:700">كَيْفَ</span> يَذْهَبُ رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Comment Rachid y va-t-il ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">يَذْهَبُ نَشِيطاً فَرِحاً.</span></div>
+            <div class="ex-trad">Il y va plein d'énergie et de joie.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#7a1a1a">لِمَاذَا</td>
+          <td class="td-trad">Pourquoi ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#7a1a1a;font-weight:700">لِمَاذَا</span> يَتَوَضَّأُ رَشِيدٌ ؟</span></div>
+            <div class="ex-trad">Pourquoi Rachid fait-il ses ablutions ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">لِأَنَّهُ يُرِيدُ أَنْ يُصَلِّيَ.</span></div>
+            <div class="ex-trad">Parce qu'il veut prier.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#1a6060">كَمْ</td>
+          <td class="td-trad">Combien ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#1a6060;font-weight:700">كَمْ</span> مَرَّةً يُصَلِّي الْمُسْلِمُ فِي الْيَوْمِ ؟</span></div>
+            <div class="ex-trad">Combien de fois le musulman prie-t-il par jour ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">يُصَلِّي خَمْسَ مَرَّاتٍ.</span></div>
+            <div class="ex-trad">Il prie cinq fois.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-pronom" style="color:#1a5c3a">هَلْ</td>
+          <td class="td-trad">Est-ce que ?</td>
+          <td class="td-ex">
+            <div class="ex-row"><span class="ex-label ex-label-q">Q</span> <span class="ex-q"><span style="color:#1a5c3a;font-weight:700">هَلْ</span> يَلْعَبُ رَشِيدٌ فِي الطَّرِيقِ ؟</span></div>
+            <div class="ex-trad">Est-ce que Rachid joue dans la rue ?</div>
+            <div class="ex-row"><span class="ex-label ex-label-r">R</span> <span class="ex-r">لَا، لَا يَلْعَبُ فِي الطَّرِيقِ.</span></div>
+            <div class="ex-trad">Non, il ne joue pas dans la rue.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('qcm')">
+    <span class="tab-icon">🎯</span>Complète
+  </div>
+  <div class="tab" onclick="switchTab('type')">
+    <span class="tab-icon">💬</span>Type de réponse
+  </div>
+  <div class="tab" onclick="switchTab('vf')">
+    <span class="tab-icon">✓✗</span>Vrai / Faux
+  </div>
+  <div class="tab" onclick="switchTab('match')">
+    <span class="tab-icon">🔗</span>Association
+  </div>
+</div>
+
+<!-- ══ PANEL 1 : Complète la question ══ -->
+<div class="panel active" id="panel-qcm">
+  <div class="progress-bar"><div class="progress-fill" id="qcm-prog"></div></div>
+  <div class="counter" id="qcm-ctr">Question 1 / 8</div>
+
+  <div class="q-card" id="qcm-card">
+    <div class="q-label">Choisis le bon pronom interrogatif</div>
+    <div class="q-ar" id="qcm-q"></div>
+    <div class="q-hint" id="qcm-hint"></div>
+  </div>
+
+  <div class="choices-grid" id="qcm-choices"></div>
+  <div class="feedback" id="qcm-fb"></div>
+
+  <div class="score-row">
+    <div class="score-pill">Score : <span id="qcm-score">0</span> / 8</div>
+  </div>
+  <button class="btn-restart" onclick="initQCM()">Recommencer</button>
+</div>
+
+<!-- ══ PANEL 2 : Type de réponse ══ -->
+<div class="panel" id="panel-type">
+  <div class="progress-bar"><div class="progress-fill" id="type-prog"></div></div>
+  <div class="counter" id="type-ctr">Question 1 / 8</div>
+
+  <div class="q-card" id="type-card">
+    <div class="q-label">Quel type de réponse attend cette question ?</div>
+    <div class="q-ar" id="type-q"></div>
+  </div>
+
+  <div class="choices-grid" id="type-choices"></div>
+  <div class="feedback" id="type-fb"></div>
+
+  <div class="score-row">
+    <div class="score-pill">Score : <span id="type-score">0</span> / 8</div>
+  </div>
+  <button class="btn-restart" onclick="initType()">Recommencer</button>
+</div>
+
+<!-- ══ PANEL 3 : Vrai / Faux ══ -->
+<div class="panel" id="panel-vf">
+  <div class="progress-bar"><div class="progress-fill" id="vf-prog"></div></div>
+  <div class="counter" id="vf-ctr">Question 1 / 8</div>
+
+  <div class="q-card" id="vf-card">
+    <div class="q-label">Ce pronom interrogatif est-il correct pour cette question ?</div>
+    <div class="q-ar" id="vf-q"></div>
+  </div>
+
+  <div class="vf-btns">
+    <button class="btn-vrai" id="vf-btn-v" onclick="answerVF(true)">Oui, correct</button>
+    <button class="btn-faux" id="vf-btn-f" onclick="answerVF(false)">Non, incorrect</button>
+  </div>
+  <div class="feedback" id="vf-fb"></div>
+
+  <div class="score-row">
+    <div class="score-pill">Correct : <span id="vf-good">0</span></div>
+    <div class="score-pill">Incorrect : <span id="vf-bad">0</span></div>
+  </div>
+  <button class="btn-restart" onclick="initVF()">Recommencer</button>
+</div>
+
+<!-- ══ PANEL 4 : Association ══ -->
+<div class="panel" id="panel-match">
+  <div class="match-grid">
+    <div>
+      <div class="match-col-label">Pronom arabe</div>
+      <div class="match-col" id="match-ar-col"></div>
+    </div>
+    <div>
+      <div class="match-col-label">Sens en français</div>
+      <div class="match-col" id="match-fr-col"></div>
+    </div>
+  </div>
+  <div class="match-score" id="match-score"></div>
+  <button class="btn-restart" onclick="initMatch()" style="margin-top:16px">Recommencer</button>
+</div>
+
+<!-- ══ CELEBRATION ══ -->
+<div class="celebration" id="celebration">
+  <div class="cel-icon">🍭</div>
+  <div class="cel-ar">مَا شَاءَ اللهُ</div>
+  <div class="cel-praise">أَحْسَنْتِ ! بَارَكَ اللهُ فِيكِ</div>
+  <div class="cel-fr">Bravo ! Tu as tout réussi !</div>
+  <div class="cel-stars">🍭 💕 🍬 💕 🍭</div>
+  <button class="btn-cel" id="btn-cel">Recommencer</button>
+</div>
+
+<footer>Al Bidayah · Niveau 1 · Exercices — أدوات الاستفهام</footer>
+
+<script>
+// ── DONNÉES ──────────────────────────────────────────────────────────────────
+
+const PRONOUNS = [
+  { ar:'مَنْ',     fr:'Qui ?',          color:'#1a4fa0', type:'un nom de personne'         },
+  { ar:'مَاذَا',   fr:'Que / Quoi ?',   color:'#2e7d52', type:'une action ou une chose'    },
+  { ar:'أَيْنَ',   fr:'Où ?',           color:'#5c2d8a', type:'un nom de lieu'             },
+  { ar:'مَتَى',    fr:'Quand ?',        color:'#b06a00', type:'un moment ou une durée'     },
+  { ar:'كَيْفَ',   fr:'Comment ?',      color:'#b84000', type:'une description ou un état' },
+  { ar:'لِمَاذَا', fr:'Pourquoi ?',     color:'#7a1a1a', type:'une cause (parce que)'      },
+  { ar:'كَمْ',     fr:'Combien ?',      color:'#1a6060', type:'un nombre'                  },
+  { ar:'هَلْ',     fr:'Est-ce que ?',   color:'#1a5c3a', type:'oui (نَعَمْ) ou non (لَا)'  },
+];
+
+// Exercice 1 : compléter la question
+const QCM = [
+  { blank:'_____ هُوَ رَشِيدٌ ؟',                             hint:'→ on cherche qui est cette personne',               answer:'مَنْ'     },
+  { blank:'_____ يَتْلُو رَشِيدٌ ؟',                          hint:'→ on cherche ce qu\'il fait ou récite',             answer:'مَاذَا'   },
+  { blank:'_____ يَذْهَبُ رَشِيدٌ ؟',                         hint:'→ on cherche un lieu',                              answer:'أَيْنَ'   },
+  { blank:'_____ يَسْتَيْقِظُ رَشِيدٌ ؟',                     hint:'→ on cherche un moment de la journée',             answer:'مَتَى'    },
+  { blank:'_____ يَذْهَبُ رَشِيدٌ إِلَى الْمَدْرَسَةِ ؟',    hint:'→ on cherche la manière dont il y va',             answer:'كَيْفَ'   },
+  { blank:'_____ يَتَوَضَّأُ رَشِيدٌ ؟',                      hint:'→ on cherche la raison, le pourquoi',              answer:'لِمَاذَا' },
+  { blank:'_____ مَرَّةً يُصَلِّي الْمُسْلِمُ فِي الْيَوْمِ ؟', hint:'→ on cherche un chiffre ou une quantité',       answer:'كَمْ'     },
+  { blank:'_____ يَلْعَبُ رَشِيدٌ فِي الطَّرِيقِ ؟',          hint:'→ la réponse sera oui ou non seulement',          answer:'هَلْ'     },
+];
+
+// Exercice 2 : type de réponse
+const TYPE = [
+  { ar:'مَنْ هُوَ رَشِيدٌ ؟',                              answer:'un nom de personne'         },
+  { ar:'مَاذَا يَتْلُو رَشِيدٌ ؟',                          answer:'une action ou une chose'    },
+  { ar:'أَيْنَ يَذْهَبُ رَشِيدٌ ؟',                         answer:'un nom de lieu'             },
+  { ar:'مَتَى يَسْتَيْقِظُ رَشِيدٌ ؟',                      answer:'un moment ou une durée'     },
+  { ar:'كَيْفَ يَذْهَبُ رَشِيدٌ إِلَى الْمَدْرَسَةِ ؟',     answer:'une description ou un état' },
+  { ar:'لِمَاذَا يَتَوَضَّأُ رَشِيدٌ ؟',                    answer:'une cause (parce que)'      },
+  { ar:'كَمْ مَرَّةً يُصَلِّي الْمُسْلِمُ ؟',                answer:'un nombre'                  },
+  { ar:'هَلْ يَلْعَبُ رَشِيدٌ فِي الطَّرِيقِ ؟',            answer:'oui (نَعَمْ) ou non (لَا)'  },
+];
+const ALL_TYPES = PRONOUNS.map(p => p.type);
+
+// Exercice 3 : vrai / faux
+const VF = [
+  { ar:'مَنْ هُوَ رَشِيدٌ ؟',                              correct:true,  expl:'Correct. مَنْ sert à poser une question sur une personne.' },
+  { ar:'أَيْنَ يَذْهَبُ رَشِيدٌ ؟',                        correct:true,  expl:'Correct. أَيْنَ sert à poser une question sur un lieu.' },
+  { ar:'هَلْ يَلْعَبُ رَشِيدٌ فِي الطَّرِيقِ ؟',           correct:true,  expl:'Correct. هَلْ attend seulement une réponse par oui ou non.' },
+  { ar:'لِمَاذَا يَتَوَضَّأُ رَشِيدٌ ؟',                   correct:true,  expl:'Correct. لِمَاذَا sert à demander une raison ou une cause.' },
+  { ar:'مَتَى يَتْلُو رَشِيدٌ ؟',                          correct:false, expl:'Incorrect. Pour demander ce qu\'il fait, il faut مَاذَا, pas مَتَى.' },
+  { ar:'كَمْ يَذْهَبُ رَشِيدٌ إِلَى الْمَدْرَسَةِ ؟',       correct:false, expl:'Incorrect. Pour demander un lieu, il faut أَيْنَ, pas كَمْ.' },
+  { ar:'مَاذَا يَسْتَيْقِظُ رَشِيدٌ ؟',                    correct:false, expl:'Incorrect. Pour demander un moment, il faut مَتَى, pas مَاذَا.' },
+  { ar:'كَيْفَ مَرَّةً يُصَلِّي الْمُسْلِمُ ؟',             correct:false, expl:'Incorrect. Pour demander une quantité, il faut كَمْ, pas كَيْفَ.' },
+];
+
+// ── UTILITAIRES ──────────────────────────────────────────────────────────────
+
+function shuffle(a) {
+  const b = [...a];
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
+  return b;
+}
+
+function switchTab(id) {
+  const ids = ['qcm','type','vf','match'];
+  document.querySelectorAll('.tab').forEach(function(t, i) {
+    if (ids[i] === id) { t.classList.add('active'); } else { t.classList.remove('active'); }
+  });
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+function showCelebration(restartFn) {
+  const cel = document.getElementById('celebration');
+  cel.classList.add('visible');
+  document.getElementById('btn-cel').onclick = () => {
+    cel.classList.remove('visible');
+    restartFn();
+  };
+}
+
+// ── EXERCICE 1 : COMPLÈTE ────────────────────────────────────────────────────
+
+let qQueue, qIdx, qScore;
+
+function initQCM() {
+  qQueue = shuffle(QCM); qIdx = 0; qScore = 0;
+  document.getElementById('qcm-score').textContent = '0';
+  document.getElementById('qcm-fb').textContent = '';
+  document.getElementById('qcm-fb').className = 'feedback';
+  showQCM();
+}
+
+function showQCM() {
+  const q = qQueue[qIdx];
+  document.getElementById('qcm-ctr').textContent = `Question ${qIdx + 1} / 8`;
+  document.getElementById('qcm-prog').style.width = `${(qIdx / 8) * 100}%`;
+  document.getElementById('qcm-q').textContent = q.blank;
+  document.getElementById('qcm-hint').textContent = q.hint;
+  document.getElementById('qcm-card').className = 'q-card';
+  document.getElementById('qcm-fb').textContent = '';
+  document.getElementById('qcm-fb').className = 'feedback';
+
+  const correct = PRONOUNS.find(p => p.ar === q.answer);
+  const wrongs  = shuffle(PRONOUNS.filter(p => p.ar !== q.answer)).slice(0, 3);
+  const opts    = shuffle([correct, ...wrongs]);
+
+  const box = document.getElementById('qcm-choices');
+  box.innerHTML = '';
+  opts.forEach(function(o) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choice';
+    btn.dataset.ar = o.ar;
+    btn.innerHTML = '<span class="ch-ar">' + o.ar + '</span><span class="ch-fr">' + o.fr + '</span>';
+    btn.addEventListener('click', function() { answerQCM(btn, o.ar === q.answer, q.answer); });
+    box.appendChild(btn);
+  });
+}
+
+function answerQCM(btn, correct, answer) {
+  document.querySelectorAll('#qcm-choices .choice').forEach(b => b.classList.add('locked'));
+  const fb   = document.getElementById('qcm-fb');
+  const card = document.getElementById('qcm-card');
+
+  if (correct) {
+    btn.classList.add('correct');
+    card.classList.add('correct');
+    qScore++;
+    document.getElementById('qcm-score').textContent = qScore;
+    fb.textContent = 'Bonne réponse !';
+    fb.className = 'feedback ok';
+  } else {
+    btn.classList.add('wrong');
+    card.classList.add('wrong');
+    const cb = [...document.querySelectorAll('#qcm-choices .choice')].find(b => b.dataset.ar === answer);
+    if (cb) cb.classList.add('correct');
+    fb.textContent = 'Incorrect. La bonne réponse est : ' + answer;
+    fb.className = 'feedback ko';
+  }
+
+  setTimeout(() => {
+    qIdx++;
+    if (qIdx >= QCM.length) {
+      document.getElementById('qcm-prog').style.width = '100%';
+      if (qScore === QCM.length) setTimeout(() => showCelebration(initQCM), 300);
+    } else {
+      showQCM();
+    }
+  }, 1100);
+}
+
+// ── EXERCICE 2 : TYPE DE RÉPONSE ─────────────────────────────────────────────
+
+let tQueue, tIdx, tScore;
+
+function initType() {
+  tQueue = shuffle(TYPE); tIdx = 0; tScore = 0;
+  document.getElementById('type-score').textContent = '0';
+  document.getElementById('type-fb').textContent = '';
+  document.getElementById('type-fb').className = 'feedback';
+  showType();
+}
+
+function showType() {
+  const q = tQueue[tIdx];
+  document.getElementById('type-ctr').textContent = `Question ${tIdx + 1} / 8`;
+  document.getElementById('type-prog').style.width = `${(tIdx / 8) * 100}%`;
+  document.getElementById('type-q').textContent = q.ar;
+  document.getElementById('type-card').className = 'q-card';
+  document.getElementById('type-fb').textContent = '';
+  document.getElementById('type-fb').className = 'feedback';
+
+  const wrongs = shuffle(ALL_TYPES.filter(t => t !== q.answer)).slice(0, 3);
+  const opts   = shuffle([q.answer, ...wrongs]);
+
+  const box = document.getElementById('type-choices');
+  box.innerHTML = '';
+  opts.forEach(function(o) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'choice';
+    btn.dataset.val = o;
+    btn.style.fontFamily = "-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif";
+    btn.style.fontSize = '.9rem';
+    btn.style.direction = 'ltr';
+    btn.style.lineHeight = '1.4';
+    btn.textContent = o;
+    btn.addEventListener('click', function() { answerType(btn, o === q.answer, q.answer); });
+    box.appendChild(btn);
+  });
+}
+
+function answerType(btn, correct, answer) {
+  document.querySelectorAll('#type-choices .choice').forEach(b => b.classList.add('locked'));
+  const fb   = document.getElementById('type-fb');
+  const card = document.getElementById('type-card');
+
+  if (correct) {
+    btn.classList.add('correct');
+    card.classList.add('correct');
+    tScore++;
+    document.getElementById('type-score').textContent = tScore;
+    fb.textContent = 'Bonne réponse !';
+    fb.className = 'feedback ok';
+  } else {
+    btn.classList.add('wrong');
+    card.classList.add('wrong');
+    const cb = [...document.querySelectorAll('#type-choices .choice')].find(b => b.dataset.val === answer);
+    if (cb) cb.classList.add('correct');
+    fb.textContent = 'Incorrect. La bonne réponse : ' + answer;
+    fb.className = 'feedback ko';
+  }
+
+  setTimeout(() => {
+    tIdx++;
+    if (tIdx >= TYPE.length) {
+      document.getElementById('type-prog').style.width = '100%';
+      if (tScore === TYPE.length) setTimeout(() => showCelebration(initType), 300);
+    } else {
+      showType();
+    }
+  }, 1200);
+}
+
+// ── EXERCICE 3 : VRAI / FAUX ─────────────────────────────────────────────────
+
+let vfQueue, vfIdx, vfGood, vfBad;
+
+function initVF() {
+  vfQueue = shuffle(VF); vfIdx = 0; vfGood = 0; vfBad = 0;
+  document.getElementById('vf-good').textContent = '0';
+  document.getElementById('vf-bad').textContent  = '0';
+  document.getElementById('vf-fb').textContent   = '';
+  document.getElementById('vf-fb').className     = 'feedback';
+  showVF();
+}
+
+function showVF() {
+  const q = vfQueue[vfIdx];
+  document.getElementById('vf-ctr').textContent = `Question ${vfIdx + 1} / 8`;
+  document.getElementById('vf-prog').style.width = `${(vfIdx / 8) * 100}%`;
+  document.getElementById('vf-q').textContent = q.ar;
+  document.getElementById('vf-card').className = 'q-card';
+  document.getElementById('vf-fb').textContent = '';
+  document.getElementById('vf-fb').className = 'feedback';
+  document.getElementById('vf-btn-v').disabled = false;
+  document.getElementById('vf-btn-f').disabled = false;
+}
+
+function answerVF(said) {
+  const q  = vfQueue[vfIdx];
+  const ok = said === q.correct;
+  document.getElementById('vf-btn-v').disabled = true;
+  document.getElementById('vf-btn-f').disabled = true;
+  const fb   = document.getElementById('vf-fb');
+  const card = document.getElementById('vf-card');
+
+  if (ok) {
+    vfGood++;
+    card.classList.add('correct');
+    fb.textContent = q.expl;
+    fb.className = 'feedback ok';
+    document.getElementById('vf-good').textContent = vfGood;
+  } else {
+    vfBad++;
+    card.classList.add('wrong');
+    fb.textContent = q.expl;
+    fb.className = 'feedback ko';
+    document.getElementById('vf-bad').textContent = vfBad;
+  }
+
+  setTimeout(() => {
+    vfIdx++;
+    if (vfIdx >= VF.length) {
+      document.getElementById('vf-prog').style.width = '100%';
+      if (vfGood === VF.length) setTimeout(() => showCelebration(initVF), 400);
+    } else {
+      showVF();
+    }
+  }, 1400);
+}
+
+// ── EXERCICE 4 : ASSOCIATION ─────────────────────────────────────────────────
+
+let matchSel = null;
+let matchDone = 0;
+
+function initMatch() {
+  matchSel = null; matchDone = 0;
+  document.getElementById('match-score').textContent = '';
+
+  const arItems = shuffle([...PRONOUNS]);
+  const frItems = shuffle([...PRONOUNS]);
+
+  const arCol = document.getElementById('match-ar-col');
+  const frCol = document.getElementById('match-fr-col');
+  arCol.innerHTML = '';
+  frCol.innerHTML = '';
+
+  arItems.forEach(function(p) {
+    const el = document.createElement('div');
+    el.className = 'match-item ar-item';
+    el.textContent = p.ar;
+    el.dataset.key  = p.ar;
+    el.dataset.side = 'ar';
+    el.addEventListener('click', function() { clickMatch(el); });
+    arCol.appendChild(el);
+  });
+
+  frItems.forEach(function(p) {
+    const el = document.createElement('div');
+    el.className = 'match-item fr-item';
+    el.textContent = p.fr;
+    el.dataset.key  = p.ar;
+    el.dataset.side = 'fr';
+    el.addEventListener('click', function() { clickMatch(el); });
+    frCol.appendChild(el);
+  });
+}
+
+function clickMatch(el) {
+  if (el.classList.contains('matched')) return;
+
+  if (!matchSel) {
+    el.classList.add('selected');
+    matchSel = el;
+    return;
+  }
+
+  if (el.dataset.side === matchSel.dataset.side) {
+    matchSel.classList.remove('selected');
+    el.classList.add('selected');
+    matchSel = el;
+    return;
+  }
+
+  if (el.dataset.key === matchSel.dataset.key) {
+    el.classList.remove('selected'); el.classList.add('matched');
+    matchSel.classList.remove('selected'); matchSel.classList.add('matched');
+    matchDone++;
+    if (matchDone === PRONOUNS.length) {
+      document.getElementById('match-score').textContent = 'Parfait ! Toutes les paires trouvées.';
+      setTimeout(() => showCelebration(initMatch), 500);
+    }
+  } else {
+    el.classList.add('flash-err');
+    matchSel.classList.add('flash-err');
+    setTimeout(() => { el.classList.remove('flash-err'); matchSel.classList.remove('flash-err'); }, 400);
+    matchSel.classList.remove('selected');
+  }
+  matchSel = null;
+}
+
+// ── MINI-COURS TOGGLE ────────────────────────────────────────────────────────
+
+function toggleCours() {
+  const body  = document.getElementById('cours-body');
+  const arrow = document.getElementById('cours-arrow');
+  const isOpen = body.classList.contains('visible');
+  if (isOpen) {
+    body.classList.remove('visible');
+    body.classList.add('hidden');
+    arrow.classList.remove('open');
+  } else {
+    body.classList.remove('hidden');
+    body.classList.add('visible');
+    arrow.classList.add('open');
+  }
+}
+
+// ── DÉMARRAGE ────────────────────────────────────────────────────────────────
+initQCM();
+initType();
+initVF();
+initMatch();
+</script>
+</body>
+</html>
