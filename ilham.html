@@ -6,105 +6,81 @@
   <title>Récap — ب et ت — Ilham</title>
   <style>
     :root {
-      --dark:  #1E1E2C;
-      --text:  #2A2A38;
-      --muted: #6B6B85;
-      --bg:    #F7F7FC;
-      --card:  #FFFFFF;
-      --bd:    #E4E4EE;
+      --brand:  #9B2535;
+      --brand2: #C84060;
+      --bg:     #F8F3F4;
+      --card:   #FFFFFF;
+      --bd:     #EAE0E2;
+      --text:   #2A1E20;
+      --muted:  #7A6060;
       --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
       --ar:   'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text); padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text);
+           padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
 
-    /* HEADER */
-    .strip { width: 100%; max-width: 660px; height: 5px; border-radius: 3px; margin-bottom: 16px;
-             background: linear-gradient(90deg, #D03A65, #C06800, #6535B0); }
-    header { width: 100%; max-width: 660px; background: #1E1E2C; color: white; border-radius: 18px;
-             padding: 24px 28px; text-align: center; margin-bottom: 32px; box-shadow: 0 6px 24px rgba(30,30,44,.22); }
+    /* ── HEADER ── */
+    .top-strip { width: 100%; max-width: 660px; height: 5px; border-radius: 3px; margin-bottom: 16px;
+                 background: linear-gradient(90deg, #C84060, #9B2535, #C84060); }
+    header { width: 100%; max-width: 660px; background: #9B2535; color: white; border-radius: 18px;
+             padding: 24px 28px; text-align: center; margin-bottom: 32px;
+             box-shadow: 0 6px 24px rgba(155,37,53,.28); position: relative; overflow: hidden; }
+    header::before { content: 'البداية'; font-family: var(--ar); font-size: 7rem; color: rgba(255,255,255,.05);
+                     position: absolute; right: -1rem; top: -1.5rem; line-height: 1; pointer-events: none; direction: rtl; }
     .h-brand { font-size: .62rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
-               color: rgba(255,255,255,.45); margin-bottom: 8px; }
-    .h-ar { font-family: var(--ar); font-size: 2.2rem; direction: rtl; margin-bottom: 6px; }
-    .h-fr { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.7); margin-bottom: 12px; }
-    .h-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .h-badge { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+               color: rgba(255,255,255,.5); margin-bottom: 8px; position: relative; }
+    .h-ar  { font-family: var(--ar); font-size: 2.2rem; direction: rtl; margin-bottom: 6px; position: relative; }
+    .h-fr  { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.75); margin-bottom: 12px; position: relative; }
+    .h-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .h-badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
                border-radius: 20px; padding: 4px 14px; font-size: .68rem; font-weight: 700;
-               color: rgba(255,255,255,.75); }
+               color: rgba(255,255,255,.85); }
 
-    /* SECTION HEADER */
+    /* ── SECTION ── */
     .section { width: 100%; max-width: 660px; margin-bottom: 36px; }
     .sec-title { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .15em;
                  color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
     .sec-title::before, .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--bd); }
 
-    /* LETTERS TABLE */
+    /* ── LETTER TABLE ── */
     .letter-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden;
-                    background: var(--card); box-shadow: 0 2px 14px rgba(30,30,44,.07); }
-    .letter-table thead th { background: #1E1E2C; color: white; padding: .75rem .5rem;
+                    background: var(--card); box-shadow: 0 2px 14px rgba(155,37,53,.08); }
+    .letter-table thead th { background: #9B2535; color: white; padding: .75rem .5rem;
                               font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
     .letter-table tbody tr { border-bottom: 1px solid var(--bd); }
     .letter-table tbody tr:last-child { border-bottom: none; }
     .letter-table tbody td { padding: .9rem .6rem; text-align: center; vertical-align: middle; }
-    .td-label { background: #F2F2F8; }
-    .lbl-ar { font-family: var(--ar); font-size: 1.5rem; direction: rtl; color: #1E1E2C; display: block; }
-    .lbl-fr { font-size: .65rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 700; }
+    .td-label { background: #F5EDEF; }
+    .lbl-ar  { font-family: var(--ar); font-size: 1.5rem; direction: rtl; color: #9B2535; display: block; }
+    .lbl-fr  { font-size: .65rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 700; }
     .lbl-sub { font-size: .58rem; color: var(--muted); display: block; margin-top: 4px; font-style: italic; }
-    .td-fin  { background: #EEF0FA; }
-    .td-mil  { background: #F2F4FB; }
-    .td-deb  { background: #F5F7FC; }
-    .td-seul { background: #F8F9FD; }
-    .ar-form { font-family: var(--ar); font-size: 2.6rem; direction: rtl; color: #1E1E2C; line-height: 1; }
+    .td-fin  { background: #F7ECEE; }
+    .td-mil  { background: #FAF2F4; }
+    .td-deb  { background: #FCF6F7; }
+    .td-seul { background: #FEF9FA; }
+    .ar-form { font-family: var(--ar); font-size: 2.6rem; direction: rtl; color: #9B2535; line-height: 1; }
 
-    /* VOWEL FAMILIES */
-    .family-block { background: var(--card); border-radius: 16px; overflow: hidden;
-                    box-shadow: 0 2px 14px rgba(30,30,44,.07); margin-bottom: 14px; }
+    /* ── VOYELLE FAMILLE ── */
+    .fam-block { background: var(--card); border-radius: 16px; overflow: hidden;
+                 box-shadow: 0 2px 14px rgba(155,37,53,.07); margin-bottom: 14px; }
     .fam-strip { height: 4px; }
     .fam-inner { display: flex; align-items: stretch; }
     .fam-cell { flex: 1; padding: 20px 16px; text-align: center; }
-    .fam-cell.has-border { border-right: 1px solid var(--bd); }
+    .fam-cell.has-bd { border-right: 1px solid var(--bd); }
     .fam-arrow { display: flex; align-items: center; justify-content: center; padding: 0 6px;
                  font-size: 1.3rem; flex-shrink: 0; }
     .v-ar { font-family: var(--ar); font-size: 3.2rem; direction: rtl; line-height: 1.2; margin-bottom: 8px; }
     .v-name { font-size: .82rem; font-weight: 800; margin-bottom: 4px; }
     .v-name-ar { font-family: var(--ar); font-size: .88rem; direction: rtl; color: var(--muted); margin-bottom: 8px; }
-    .v-tag { display: inline-block; border-radius: 12px; padding: 2px 12px;
-             font-size: .62rem; font-weight: 700; }
+    .v-tag { display: inline-block; border-radius: 12px; padding: 2px 12px; font-size: .62rem; font-weight: 700; }
     .tag-court { background: rgba(0,0,0,.06); color: var(--muted); }
     .v-desc { font-size: .63rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-    .v-formula { font-size: .7rem; color: var(--muted); margin-top: 8px; line-height: 1.6; }
 
-    /* fatha — rose */
-    .fa-c  { color: #D03A65; }
-    .fa-bg { background: #D03A65; }
-    .fa-str{ background: linear-gradient(90deg, #D03A65, #8A1535); }
-    .fa-arr{ color: #F5AABF; }
-    /* alif — rose foncé */
-    .al-c  { color: #8A1535; }
-    .al-bg { background: #8A1535; }
-
-    /* damma — amber */
-    .da-c  { color: #C06800; }
-    .da-bg { background: #C06800; }
-    .da-str{ background: linear-gradient(90deg, #C06800, #7A3E00); }
-    .da-arr{ color: #F5C87A; }
-    /* waw — amber foncé */
-    .wa-c  { color: #7A3E00; }
-    .wa-bg { background: #7A3E00; }
-
-    /* kasra — violet */
-    .ka-c  { color: #6535B0; }
-    .ka-bg { background: #6535B0; }
-    .ka-str{ background: linear-gradient(90deg, #6535B0, #3C1480); }
-    .ka-arr{ color: #C5AAED; }
-    /* ya — violet foncé */
-    .ya-c  { color: #3C1480; }
-    .ya-bg { background: #3C1480; }
-
-    /* TANWIN */
+    /* ── TANWIN ── */
     .tanwin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .tanwin-card { background: var(--card); border-radius: 16px; overflow: hidden;
-                   box-shadow: 0 2px 14px rgba(30,30,44,.07); }
+                   box-shadow: 0 2px 14px rgba(155,37,53,.07); }
     .tan-strip { height: 4px; }
     .tan-body  { padding: 20px 16px; text-align: center; }
     .tan-ar    { font-family: var(--ar); font-size: 3.6rem; direction: rtl; line-height: 1.2;
@@ -115,60 +91,58 @@
                  border-radius: 10px; padding: 8px 16px; margin-bottom: 6px; }
     .tan-ex-fr { font-size: .68rem; color: var(--muted); font-style: italic; margin-bottom: 10px; }
     .tan-note  { font-size: .63rem; color: var(--muted); line-height: 1.6; padding: 0 8px; }
-    .da-ex-bg  { background: #FFF4E0; color: #C06800; }
-    .ka-ex-bg  { background: #F2EDFE; color: #6535B0; }
 
-    /* WORDS */
+    /* ── MOTS ── */
     .words-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .word-card { background: var(--card); border: 1.5px solid var(--bd); border-radius: 14px;
-                 padding: 16px 14px; text-align: center; box-shadow: 0 1px 8px rgba(30,30,44,.05); }
-    .w-ar { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #1E1E2C; margin-bottom: 6px; }
+                 padding: 16px 14px; text-align: center; box-shadow: 0 1px 8px rgba(155,37,53,.05); }
+    .w-ar { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535; margin-bottom: 6px; }
     .w-fr { font-size: .8rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .w-note { font-size: .62rem; color: var(--muted); line-height: 1.4; font-style: italic; }
 
-    /* TABS */
+    /* ── TABS ── */
     .tabs { display: flex; gap: 8px; width: 100%; max-width: 660px; margin-bottom: 16px; }
     .tab { flex: 1; background: var(--card); border: 2px solid var(--bd); border-radius: 10px;
            padding: 11px 8px; text-align: center; cursor: pointer; font-size: .78rem; font-weight: 700;
            color: var(--muted); line-height: 1.4; touch-action: manipulation;
            -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-    .tab.active { background: #1E1E2C; color: white; border-color: #1E1E2C; }
+    .tab.active { background: #9B2535; color: white; border-color: #9B2535; }
     .tab-icon { font-size: 1.1rem; display: block; margin-bottom: 2px; }
     .panel { display: none; width: 100%; max-width: 660px; }
     .panel.active { display: block; }
 
-    /* QCM */
+    /* ── QCM ── */
     .progress-bar { height: 5px; background: var(--bd); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #D03A65, #6535B0); border-radius: 3px; transition: width .4s; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #C84060, #9B2535); border-radius: 3px; transition: width .4s; }
     .counter { font-size: .75rem; color: var(--muted); font-weight: 600; text-align: center; margin-bottom: 12px; }
     .q-card { background: var(--card); border: 2px solid var(--bd); border-radius: 16px; padding: 24px 20px;
-               text-align: center; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(30,30,44,.07);
+               text-align: center; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(155,37,53,.07);
                transition: border-color .2s, background .2s; }
-    .q-card.correct { background: #FFF8E0; border-color: #C06800; }
-    .q-card.wrong   { background: #FEF0F4; border-color: #D03A65; }
-    .q-label { font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
-    .q-word  { font-family: var(--ar); font-size: 3.2rem; direction: rtl; color: #1E1E2C; margin-bottom: 6px; }
+    .q-card.correct { background: #FFF5E0; border-color: #CC7A00; }
+    .q-card.wrong   { background: #FFF0F4; border-color: #C84060; }
+    .q-label    { font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
+    .q-word     { font-family: var(--ar); font-size: 3.2rem; direction: rtl; color: #9B2535; margin-bottom: 6px; }
     .q-question { font-size: .82rem; color: var(--text); }
     .choices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
     .choice { background: var(--card); border: 2px solid var(--bd); border-radius: 12px; padding: 14px 8px;
-               cursor: pointer; text-align: center; font-size: .82rem; font-weight: 700; color: #1E1E2C;
+               cursor: pointer; text-align: center; font-size: .82rem; font-weight: 700; color: #9B2535;
                transition: all .15s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-    .choice:hover:not(.locked) { border-color: #1E1E2C; background: #F4F4F8; }
-    .choice.correct { background: #FFF8E0; border-color: #C06800; color: #7A4A00; }
-    .choice.wrong   { background: #FEF0F4; border-color: #D03A65; animation: shake .3s; }
+    .choice:hover:not(.locked) { border-color: #9B2535; background: #FFF0F4; }
+    .choice.correct { background: #FFF5E0; border-color: #CC7A00; color: #7A4200; }
+    .choice.wrong   { background: #FFF0F4; border-color: #C84060; animation: shake .3s; }
     .choice.locked  { cursor: default; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
     .feedback { font-size: .82rem; font-weight: 700; text-align: center; margin-bottom: 8px; min-height: 1.2em; }
-    .feedback.ok { color: #7A4A00; }
-    .feedback.ko { color: #D03A65; }
+    .feedback.ok { color: #7A4200; }
+    .feedback.ko { color: #C84060; }
     .score-row { display: flex; justify-content: center; margin-bottom: 12px; }
     .score-pill { background: var(--card); border: 1.5px solid var(--bd); border-radius: 20px;
-                  padding: 4px 18px; font-weight: 700; color: #1E1E2C; font-size: .8rem; }
-    .btn-restart { background: #1E1E2C; color: white; border: none; border-radius: 10px; padding: 10px 28px;
+                  padding: 4px 18px; font-weight: 700; color: #9B2535; font-size: .8rem; }
+    .btn-restart { background: #9B2535; color: white; border: none; border-radius: 10px; padding: 10px 28px;
                    font-size: .85rem; cursor: pointer; font-weight: 700; font-family: var(--font);
-                   display: block; margin: 0 auto; box-shadow: 0 2px 10px rgba(30,30,44,.2); }
+                   display: block; margin: 0 auto; box-shadow: 0 2px 10px rgba(155,37,53,.25); }
 
-    /* MATCH */
+    /* ── MATCH ── */
     .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .match-col-label { font-size: .63rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
                        color: var(--muted); text-align: center; margin-bottom: 8px; }
@@ -177,33 +151,30 @@
                   text-align: center; cursor: pointer; transition: all .15s;
                   user-select: none; -webkit-user-select: none; touch-action: manipulation;
                   -webkit-tap-highlight-color: transparent; }
-    .match-item.ar-item { font-family: var(--ar); font-size: 1.9rem; direction: rtl; color: #1E1E2C; }
+    .match-item.ar-item { font-family: var(--ar); font-size: 1.9rem; direction: rtl; color: #9B2535; }
     .match-item.fr-item { font-size: .8rem; font-weight: 700; color: var(--text); line-height: 1.3; }
-    .match-item.selected { background: #F2EDFE; border-color: #6535B0; }
-    .match-item.matched  { background: #FFF8E0; border-color: #C06800; cursor: default; }
-    .match-item.matched.ar-item { color: #7A4A00; }
-    .match-item.matched.fr-item { color: #7A4A00; }
+    .match-item.selected { background: #FFF0F4; border-color: #C84060; }
+    .match-item.matched  { background: #FFF5E0; border-color: #CC7A00; cursor: default; }
+    .match-item.matched.ar-item, .match-item.matched.fr-item { color: #7A4200; }
     .match-item.flash-err { animation: flash-r .4s; }
-    @keyframes flash-r { 0%{background:#FEF0F4;border-color:#D03A65} 100%{background:var(--card);border-color:var(--bd)} }
-    .match-score { text-align: center; font-size: .9rem; font-weight: 700; color: #7A4A00; margin-top: 14px; }
+    @keyframes flash-r { 0%{background:#FFF0F4;border-color:#C84060} 100%{background:var(--card);border-color:var(--bd)} }
+    .match-score { text-align: center; font-size: .9rem; font-weight: 700; color: #7A4200; margin-top: 14px; }
 
-    /* CELEBRATION */
-    .celebration { display: none; position: fixed; inset: 0; background: rgba(30,30,44,.96); z-index: 999;
+    /* ── CELEBRATION ── */
+    .celebration { display: none; position: fixed; inset: 0; background: rgba(155,37,53,.96); z-index: 999;
                    flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
     .celebration.visible { display: flex; }
-    .cel-icon { font-size: 7rem; animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards, wobble 1.2s ease .6s infinite; margin-bottom: 14px; }
+    .cel-icon   { font-size: 7rem; animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards, wobble 1.2s ease .6s infinite; margin-bottom: 14px; }
     @keyframes popIn { 0%{transform:scale(0) rotate(-20deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
     @keyframes wobble { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg) scale(1.04)} }
-    .cel-ar { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #F5C870;
-              animation: fadeUp .5s ease .4s both; margin-bottom: 6px; }
-    .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white;
-                  animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
-    .cel-fr { font-size: .9rem; color: rgba(255,255,255,.8); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
+    .cel-ar     { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #FFE0C0; animation: fadeUp .5s ease .4s both; margin-bottom: 6px; }
+    .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white; animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
+    .cel-fr     { font-size: .9rem; color: rgba(255,255,255,.85); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
     .cel-emojis { font-size: 1.5rem; letter-spacing: 8px; animation: fadeUp .5s ease .9s both; margin-bottom: 22px; }
     @keyframes fadeUp { 0%{opacity:0;transform:translateY(18px)} 100%{opacity:1;transform:translateY(0)} }
-    .btn-cel { background: #F5C870; color: #1E1E2C; border: none; border-radius: 12px; padding: 12px 30px;
+    .btn-cel { background: white; color: #9B2535; border: none; border-radius: 12px; padding: 12px 30px;
                font-size: .9rem; font-weight: 800; cursor: pointer; font-family: var(--font);
-               animation: fadeUp .5s ease 1s both; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+               animation: fadeUp .5s ease 1s both; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
 
     footer { font-size: .64rem; color: var(--muted); margin-top: 24px; text-align: center; }
 
@@ -211,13 +182,13 @@
       .choices-grid { grid-template-columns: 1fr; }
       .fam-inner { flex-direction: column; }
       .fam-arrow { transform: rotate(90deg); padding: 4px 0; }
-      .fam-cell.has-border { border-right: none; border-bottom: 1px solid var(--bd); }
+      .fam-cell.has-bd { border-right: none; border-bottom: 1px solid var(--bd); }
     }
   </style>
 </head>
 <body>
 
-<div class="strip"></div>
+<div class="top-strip"></div>
 
 <header>
   <div class="h-brand">Al Bidayah · Niveau 1</div>
@@ -273,68 +244,68 @@
 <div class="section">
   <div class="sec-title">Les Voyelles</div>
 
-  <!-- FATHA family -->
-  <div class="family-block">
-    <div class="fam-strip fa-str"></div>
+  <!-- FATHA · ALIF — rose/bordeaux -->
+  <div class="fam-block">
+    <div class="fam-strip" style="background:linear-gradient(90deg,#C84060,#9B2535)"></div>
     <div class="fam-inner">
-      <div class="fam-cell has-border">
-        <div class="v-ar fa-c">بَ</div>
-        <div class="v-name fa-c">Fatha</div>
+      <div class="fam-cell has-bd">
+        <div class="v-ar" style="color:#C84060">بَ</div>
+        <div class="v-name" style="color:#C84060">Fatha</div>
         <div class="v-name-ar">فَتْحَة</div>
         <span class="v-tag tag-court">courte</span>
-        <div class="v-desc">trait au-dessus de la lettre<br>la bouche s'ouvre</div>
+        <div class="v-desc">trait au-dessus<br>la bouche s'ouvre</div>
       </div>
-      <div class="fam-arrow fa-arr">→</div>
+      <div class="fam-arrow" style="color:#F0A8BC">→</div>
       <div class="fam-cell">
-        <div class="v-ar al-c">بَا</div>
-        <div class="v-name al-c">Alif</div>
+        <div class="v-ar" style="color:#9B2535">بَا</div>
+        <div class="v-name" style="color:#9B2535">Alif</div>
         <div class="v-name-ar">أَلِف</div>
-        <span class="v-tag" style="color:white;background:#8A1535">longue</span>
-        <div class="v-formula">Fatha tenue longuement<br>le <strong>ا</strong> s'ecrit apres la lettre</div>
+        <span class="v-tag" style="background:#9B2535;color:white">longue</span>
+        <div class="v-desc">fatha tenue longuement<br>le ا s'ecrit apres</div>
       </div>
     </div>
   </div>
 
-  <!-- DAMMA family -->
-  <div class="family-block">
-    <div class="fam-strip da-str"></div>
+  <!-- DAMMA · WAW — amber -->
+  <div class="fam-block">
+    <div class="fam-strip" style="background:linear-gradient(90deg,#CC7A00,#7A4200)"></div>
     <div class="fam-inner">
-      <div class="fam-cell has-border">
-        <div class="v-ar da-c">بُ</div>
-        <div class="v-name da-c">Damma</div>
+      <div class="fam-cell has-bd">
+        <div class="v-ar" style="color:#CC7A00">بُ</div>
+        <div class="v-name" style="color:#CC7A00">Damma</div>
         <div class="v-name-ar">ضَمَّة</div>
         <span class="v-tag tag-court">courte</span>
-        <div class="v-desc">petit و au-dessus de la lettre<br>les levres s'arrondissent</div>
+        <div class="v-desc">petit و au-dessus<br>les levres s'arrondissent</div>
       </div>
-      <div class="fam-arrow da-arr">→</div>
+      <div class="fam-arrow" style="color:#F0C878">→</div>
       <div class="fam-cell">
-        <div class="v-ar wa-c">بُو</div>
-        <div class="v-name wa-c">Waw</div>
+        <div class="v-ar" style="color:#7A4200">بُو</div>
+        <div class="v-name" style="color:#7A4200">Waw</div>
         <div class="v-name-ar">وَاو</div>
-        <span class="v-tag" style="color:white;background:#7A3E00">longue</span>
-        <div class="v-formula">Damma tenue longuement<br>le <strong>و</strong> s'ecrit apres la lettre</div>
+        <span class="v-tag" style="background:#7A4200;color:white">longue</span>
+        <div class="v-desc">damma tenue longuement<br>le و s'ecrit apres</div>
       </div>
     </div>
   </div>
 
-  <!-- KASRA family -->
-  <div class="family-block">
-    <div class="fam-strip ka-str"></div>
+  <!-- KASRA · YA — vert sauge -->
+  <div class="fam-block">
+    <div class="fam-strip" style="background:linear-gradient(90deg,#3A8A70,#1A5040)"></div>
     <div class="fam-inner">
-      <div class="fam-cell has-border">
-        <div class="v-ar ka-c">بِ</div>
-        <div class="v-name ka-c">Kasra</div>
+      <div class="fam-cell has-bd">
+        <div class="v-ar" style="color:#3A8A70">بِ</div>
+        <div class="v-name" style="color:#3A8A70">Kasra</div>
         <div class="v-name-ar">كَسْرَة</div>
         <span class="v-tag tag-court">courte</span>
-        <div class="v-desc">trait en-dessous de la lettre<br>la bouche se ferme</div>
+        <div class="v-desc">trait en-dessous<br>la bouche se resserre</div>
       </div>
-      <div class="fam-arrow ka-arr">→</div>
+      <div class="fam-arrow" style="color:#90C8B0">→</div>
       <div class="fam-cell">
-        <div class="v-ar ya-c">بِي</div>
-        <div class="v-name ya-c">Ya</div>
+        <div class="v-ar" style="color:#1A5040">بِي</div>
+        <div class="v-name" style="color:#1A5040">Ya</div>
         <div class="v-name-ar">يَاء</div>
-        <span class="v-tag" style="color:white;background:#3C1480">longue</span>
-        <div class="v-formula">Kasra tenue longuement<br>le <strong>ي</strong> s'ecrit apres la lettre</div>
+        <span class="v-tag" style="background:#1A5040;color:white">longue</span>
+        <div class="v-desc">kasra tenue longuement<br>le ي s'ecrit apres</div>
       </div>
     </div>
   </div>
@@ -344,26 +315,28 @@
 <div class="section">
   <div class="sec-title">Le Tanwin</div>
   <div class="tanwin-grid">
+    <!-- damma — amber -->
     <div class="tanwin-card">
-      <div class="tan-strip da-bg"></div>
+      <div class="tan-strip" style="background:#CC7A00"></div>
       <div class="tan-body">
-        <div class="tan-ar da-c">رٌ</div>
-        <div class="tan-name da-c">Tanwin Damma</div>
+        <div class="tan-ar" style="color:#CC7A00">رٌ</div>
+        <div class="tan-name" style="color:#CC7A00">Tanwin Damma</div>
         <div class="tan-name-ar">تنوين الضم</div>
-        <div class="tan-ex da-ex-bg">بَابٌ</div>
+        <div class="tan-ex" style="background:#FFF5E0;color:#CC7A00">بَابٌ</div>
         <div class="tan-ex-fr">une porte</div>
-        <div class="tan-note">deux dammas superposees · se place a la fin d'un mot indefini</div>
+        <div class="tan-note">deux dammas superposees · fin de mot indefini</div>
       </div>
     </div>
+    <!-- kasra — vert -->
     <div class="tanwin-card">
-      <div class="tan-strip ka-bg"></div>
+      <div class="tan-strip" style="background:#3A8A70"></div>
       <div class="tan-body">
-        <div class="tan-ar ka-c">رٍ</div>
-        <div class="tan-name ka-c">Tanwin Kasra</div>
+        <div class="tan-ar" style="color:#3A8A70">رٍ</div>
+        <div class="tan-name" style="color:#3A8A70">Tanwin Kasra</div>
         <div class="tan-name-ar">تنوين الكسر</div>
-        <div class="tan-ex ka-ex-bg">كِتَابٍ</div>
+        <div class="tan-ex" style="background:#EDF7F3;color:#3A8A70">كِتَابٍ</div>
         <div class="tan-ex-fr">d'un livre</div>
-        <div class="tan-note">deux kasras superposees · se place a la fin d'un mot indefini</div>
+        <div class="tan-note">deux kasras superposees · fin de mot indefini</div>
       </div>
     </div>
   </div>
@@ -462,12 +435,12 @@
 
 <script>
 var QCM = [
-  { word:'بَابٌ',   q:'Quelle voyelle est sur le premier ب ?', answer:'Fatha',  opts:['Fatha','Damma','Kasra'] },
-  { word:'تِينٌ',   q:'Quelle voyelle est sur le ت ?',         answer:'Kasra',  opts:['Fatha','Damma','Kasra'] },
-  { word:'نُورٌ',   q:'Quelle voyelle est sur le ن ?',         answer:'Damma',  opts:['Fatha','Damma','Kasra'] },
-  { word:'كِتَابٌ', q:'Quelle voyelle est sur le ت ?',         answer:'Fatha',  opts:['Fatha','Damma','Kasra'] },
-  { word:'ذَهَبَ',  q:'Quelle voyelle est sur le ذ ?',         answer:'Fatha',  opts:['Fatha','Damma','Kasra'] },
-  { word:'تُرَابٌ', q:'Quelle voyelle est sur le ت ?',         answer:'Damma',  opts:['Fatha','Damma','Kasra'] },
+  { word:'بَابٌ',   q:'Quelle voyelle est sur le premier ب ?', answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
+  { word:'تِينٌ',   q:'Quelle voyelle est sur le ت ?',         answer:'Kasra', opts:['Fatha','Damma','Kasra'] },
+  { word:'نُورٌ',   q:'Quelle voyelle est sur le ن ?',         answer:'Damma', opts:['Fatha','Damma','Kasra'] },
+  { word:'كِتَابٌ', q:'Quelle voyelle est sur le ت ?',         answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
+  { word:'ذَهَبَ',  q:'Quelle voyelle est sur le ذ ?',         answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
+  { word:'تُرَابٌ', q:'Quelle voyelle est sur le ت ?',         answer:'Damma', opts:['Fatha','Damma','Kasra'] },
 ];
 var WORDS = [
   { ar:'بَابٌ',   fr:'une porte'    },
@@ -479,13 +452,11 @@ var WORDS = [
 ];
 function shuffle(a) {
   var b = a.slice();
-  for (var i = b.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t;
-  }
+  for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
   return b;
 }
 function switchTab(id) {
-  var ids = ['qcm', 'match'], tabs = document.querySelectorAll('.tab'), panels = document.querySelectorAll('.panel');
+  var ids = ['qcm','match'], tabs = document.querySelectorAll('.tab'), panels = document.querySelectorAll('.panel');
   for (var i = 0; i < tabs.length; i++) { if (ids[i] === id) { tabs[i].classList.add('active'); } else { tabs[i].classList.remove('active'); } }
   for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
   document.getElementById('panel-' + id).classList.add('active');
