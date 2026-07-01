@@ -252,7 +252,7 @@
     <div class="fam-strip" style="background:#C84060"></div>
     <div class="fam-inner">
       <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">َ</span></div>
+        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">َـ</span></div>
         <div class="v-name" style="color:#C84060">Fatha</div>
         <div class="v-name-ar">فَتْحَة</div>
         <span class="v-tag tag-court">voyelle courte</span>
@@ -274,7 +274,7 @@
     <div class="fam-strip" style="background:#CC7A00"></div>
     <div class="fam-inner">
       <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">ُ</span></div>
+        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">ُـ</span></div>
         <div class="v-name" style="color:#CC7A00">Damma</div>
         <div class="v-name-ar">ضَمَّة</div>
         <span class="v-tag tag-court">voyelle courte</span>
@@ -296,7 +296,7 @@
     <div class="fam-strip" style="background:#3A8A70"></div>
     <div class="fam-inner">
       <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">ِ</span></div>
+        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">ِـ</span></div>
         <div class="v-name" style="color:#3A8A70">Kasra</div>
         <div class="v-name-ar">كَسْرَة</div>
         <span class="v-tag tag-court">voyelle courte</span>
@@ -438,13 +438,14 @@
 
 <script>
 /* ── QCM voyelles courtes ── */
+var BLK = '#1E1E2C', FA = '#C84060', DA = '#CC7A00', KA = '#3A8A70';
 var QCM = [
-  { word:'بَ', answer:'Fatha',  opts:['Fatha','Damma','Kasra'] },
-  { word:'تُ', answer:'Damma',  opts:['Fatha','Damma','Kasra'] },
-  { word:'بِ', answer:'Kasra',  opts:['Fatha','Damma','Kasra'] },
-  { word:'تَ', answer:'Fatha',  opts:['Fatha','Damma','Kasra'] },
-  { word:'بُ', answer:'Damma',  opts:['Fatha','Damma','Kasra'] },
-  { word:'تِ', answer:'Kasra',  opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+FA+'">َـ</span>', answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+DA+'">ُـ</span>', answer:'Damma', opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+KA+'">ِـ</span>', answer:'Kasra', opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+FA+'">َـ</span>', answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+DA+'">ُـ</span>', answer:'Damma', opts:['Fatha','Damma','Kasra'] },
+  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+KA+'">ِـ</span>', answer:'Kasra', opts:['Fatha','Damma','Kasra'] },
 ];
 
 /* ── MATCH voyelles longues ── */
@@ -489,7 +490,7 @@ function showQCM() {
   var q = qQueue[qIdx];
   document.getElementById('qcm-ctr').textContent = 'Question ' + (qIdx + 1) + ' / 6';
   document.getElementById('qcm-prog').style.width = (qIdx / 6 * 100) + '%';
-  document.getElementById('qcm-word').textContent = q.word;
+  document.getElementById('qcm-word').innerHTML = q.html;
   document.getElementById('qcm-card').className = 'q-card';
   document.getElementById('qcm-fb').textContent = '';
   document.getElementById('qcm-fb').className = 'feedback';
