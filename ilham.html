@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Récap — ب et ت — Ilham</title>
+  <style>
+    :root {
+      --primary: #2C3E6B;
+      --gold:    #C4A84F;
+      --bg:      #F4F5F9;
+      --card:    #ffffff;
+      --pale:    #F0F3FA;
+      --border:  #D8DEEE;
+      --text:    #1a1a2e;
+      --muted:   #5a6a8a;
+      --ok:      #7a600a;
+      --ko:      #8b1a2e;
+      --font:    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      --ar:      'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
+
+    /* ── HEADER ── */
+    .top-strip { width: 100%; max-width: 660px; height: 4px; background: linear-gradient(90deg, var(--primary), #4a6fa5, var(--gold)); border-radius: 2px; margin-bottom: 16px; }
+    header { background: var(--primary); color: white; width: 100%; max-width: 660px; border-radius: 16px; padding: 22px 28px; text-align: center; margin-bottom: 24px; box-shadow: 0 6px 24px rgba(44,62,107,.28); position: relative; overflow: hidden; }
+    header::before { content: 'البداية'; font-family: var(--ar); font-size: 7rem; color: rgba(255,255,255,.05); position: absolute; right: -1rem; top: -1.5rem; line-height: 1; pointer-events: none; direction: rtl; }
+    .h-brand { font-size: .62rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; position: relative; }
+    .h-ar { font-family: var(--ar); font-size: 2rem; color: #fff; direction: rtl; line-height: 1.3; position: relative; margin-bottom: 4px; }
+    .h-fr { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.8); position: relative; }
+    .h-badge { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: 3px 14px; font-size: .7rem; font-weight: 700; color: rgba(255,255,255,.9); margin-top: 10px; position: relative; }
+
+    /* ── SECTIONS ── */
+    .section { width: 100%; max-width: 660px; margin-bottom: 28px; }
+    .section-title { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--primary); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .section-title::before { content: ''; flex: 1; height: 1.5px; background: var(--border); }
+    .section-title::after  { content: ''; flex: 1; height: 1.5px; background: var(--border); }
+
+    /* ── LETTRE TABLE ── */
+    .letter-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 14px rgba(44,62,107,.1); }
+    .letter-table thead th { background: var(--primary); color: white; padding: .7rem .8rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .letter-table thead th.th-ar { font-family: var(--ar); font-size: 1.1rem; direction: rtl; text-transform: none; letter-spacing: 0; }
+    .letter-table thead th.col-fin  { background: #1e3060; }
+    .letter-table thead th.col-mil  { background: #243570; }
+    .letter-table thead th.col-deb  { background: #2a3a78; }
+    .letter-table thead th.col-seul { background: #303f80; }
+    .letter-table tbody tr { border-bottom: 1px solid var(--border); }
+    .letter-table tbody tr:last-child { border-bottom: none; }
+    .letter-table tbody td { padding: .8rem; text-align: center; vertical-align: middle; }
+    .td-name { font-size: .78rem; font-weight: 800; color: var(--primary); background: var(--pale); width: 90px; }
+    .td-name .ar-name { font-family: var(--ar); font-size: 1.4rem; direction: rtl; display: block; color: var(--primary); }
+    .td-name .fr-name { font-size: .65rem; color: var(--muted); }
+    .td-fin  { background: #e4eaf7; }
+    .td-mil  { background: #eaeff9; }
+    .td-deb  { background: #eff3fb; }
+    .td-seul { background: var(--pale); }
+    .ar-form { font-family: var(--ar); font-size: 2.6rem; direction: rtl; color: var(--primary); line-height: 1; }
+    .badge-connect { display: inline-block; background: rgba(44,62,107,.15); border-radius: 20px; padding: 2px 10px; font-size: .62rem; font-weight: 800; color: var(--primary); margin-top: 8px; }
+
+    /* ── VOYELLES CARDS ── */
+    .voyelle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .voyelle-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 18px 12px; text-align: center; box-shadow: 0 2px 10px rgba(44,62,107,.07); }
+    .v-symbol { font-family: var(--ar); font-size: 3.2rem; direction: rtl; color: var(--primary); line-height: 1.2; margin-bottom: 6px; }
+    .v-name-ar { font-family: var(--ar); font-size: .95rem; direction: rtl; color: var(--muted); margin-bottom: 4px; }
+    .v-name-fr { font-size: .8rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .v-son { font-size: 1.3rem; font-weight: 800; color: var(--gold); }
+    .v-desc { font-size: .65rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    /* ── TANWIN CARDS ── */
+    .tanwin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .tanwin-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 20px 16px; text-align: center; box-shadow: 0 2px 10px rgba(44,62,107,.07); }
+    .t-symbol { font-family: var(--ar); font-size: 3.6rem; direction: rtl; color: var(--primary); line-height: 1.2; margin-bottom: 8px; }
+    .t-son { font-size: 1.5rem; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+    .t-ex { font-family: var(--ar); font-size: 1.8rem; direction: rtl; color: var(--primary); margin-top: 10px; }
+    .t-ex-fr { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: 3px; }
+
+    /* ── VOYELLES LONGUES ── */
+    .vlong-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .vlong-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 16px 12px; text-align: center; box-shadow: 0 2px 10px rgba(44,62,107,.07); }
+    .vl-rule { font-size: .68rem; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+    .vl-rule strong { color: var(--primary); }
+    .vl-formula { font-family: var(--ar); font-size: 1.6rem; direction: rtl; color: var(--primary); margin-bottom: 6px; }
+    .vl-arrow { color: var(--gold); font-weight: 800; font-size: .9rem; margin: 0 4px; }
+    .vl-son { font-size: 1.1rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+    .vl-ex { font-family: var(--ar); font-size: 2rem; direction: rtl; color: var(--primary); }
+    .vl-ex-fr { font-size: .7rem; color: var(--muted); font-style: italic; margin-top: 2px; }
+
+    /* ── EXEMPLES ── */
+    .exemples-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ex-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 16px 14px; text-align: center; box-shadow: 0 2px 10px rgba(44,62,107,.06); }
+    .ex-ar { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: var(--primary); margin-bottom: 4px; }
+    .ex-trans { font-size: .78rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ex-note { font-size: .63rem; color: var(--muted); line-height: 1.4; font-style: italic; }
+
+    /* ── EXERCICES TABS ── */
+    .tabs { display: flex; gap: 8px; width: 100%; max-width: 660px; margin-bottom: 18px; }
+    .tab { flex: 1; background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 11px 8px; text-align: center; cursor: pointer; font-size: .78rem; font-weight: 700; color: var(--muted); transition: all .15s; line-height: 1.4; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+    .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-icon { font-size: 1.1rem; display: block; margin-bottom: 2px; }
+    .panel { display: none; width: 100%; max-width: 660px; }
+    .panel.active { display: block; }
+
+    /* ── QCM EXERCICE ── */
+    .progress-bar { height: 6px; background: var(--border); border-radius: 4px; margin-bottom: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold)); border-radius: 4px; transition: width .4s ease; width: 0%; }
+    .counter { font-size: .78rem; color: var(--muted); font-weight: 600; margin-bottom: 12px; text-align: center; }
+    .q-card { background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 24px 20px; text-align: center; margin-bottom: 12px; box-shadow: 0 2px 14px rgba(44,62,107,.08); transition: border-color .2s, background .2s; }
+    .q-card.correct { background: #fdf5e0; border-color: var(--gold); }
+    .q-card.wrong   { background: #fce8ec; border-color: #c04060; }
+    .q-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
+    .q-word { font-family: var(--ar); font-size: 3rem; direction: rtl; color: var(--primary); line-height: 1.3; margin-bottom: 6px; }
+    .q-question { font-size: .82rem; color: var(--text); font-style: italic; }
+    .choices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+    .choice { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 12px 8px; cursor: pointer; text-align: center; transition: all .15s; font-size: .82rem; font-weight: 700; color: var(--primary); touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    .choice:hover:not(.locked) { border-color: var(--primary); background: var(--pale); }
+    .choice.correct { background: #fdf5e0; border-color: var(--gold); color: var(--ok); }
+    .choice.wrong   { background: #fce8ec; border-color: #c04060; animation: shake .3s ease; }
+    .choice.locked  { cursor: default; }
+    @keyframes shake { 0%,100% { transform: translateX(0) } 25% { transform: translateX(-4px) } 75% { transform: translateX(4px) } }
+    .feedback { font-size: .82rem; font-weight: 700; text-align: center; margin-bottom: 8px; min-height: 1.2em; }
+    .feedback.ok { color: var(--ok); }
+    .feedback.ko { color: var(--ko); }
+    .score-row { display: flex; justify-content: center; margin-bottom: 12px; }
+    .score-pill { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 4px 18px; font-weight: 700; color: var(--primary); font-size: .8rem; }
+    .btn-restart { background: var(--primary); color: white; border: none; border-radius: 10px; padding: 10px 28px; font-size: .86rem; cursor: pointer; font-weight: 700; font-family: var(--font); box-shadow: 0 2px 10px rgba(44,62,107,.3); transition: background .15s; margin: 0 auto; display: block; }
+    .btn-restart:hover { background: #3a4e82; }
+
+    /* ── MATCH-UP ── */
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .match-col-label { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); text-align: center; margin-bottom: 8px; }
+    .match-col { display: flex; flex-direction: column; gap: 7px; }
+    .match-item { background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 10px 10px; text-align: center; cursor: pointer; transition: all .15s; user-select: none; -webkit-user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    .match-item.ar-item { font-family: var(--ar); font-size: 1.9rem; direction: rtl; color: var(--primary); }
+    .match-item.fr-item { font-size: .82rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .match-item.selected { background: var(--pale); border-color: var(--primary); }
+    .match-item.matched  { background: #fdf5e0; border-color: var(--gold); color: var(--ok); cursor: default; }
+    .match-item.matched.ar-item { color: var(--ok); }
+    .match-item.flash-err { animation: flash-r .4s ease; }
+    @keyframes flash-r { 0% { background: #fce8ec; border-color: #c04060; } 100% { background: var(--card); border-color: var(--border); } }
+    .match-score { text-align: center; font-size: .88rem; font-weight: 700; color: var(--ok); margin-top: 14px; }
+
+    /* ── CELEBRATION ── */
+    .celebration { display: none; position: fixed; inset: 0; background: rgba(44,62,107,.94); z-index: 999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .celebration.visible { display: flex; }
+    .cel-icon { font-size: 8rem; animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards, wobble 1.2s ease-in-out .6s infinite; margin-bottom: 16px; }
+    @keyframes popIn { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+    @keyframes wobble { 0%,100% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.04); } }
+    .cel-ar { font-family: var(--ar); font-size: 2.6rem; direction: rtl; color: var(--gold); font-weight: 700; animation: fadeUp .5s ease .4s both; margin-bottom: 8px; }
+    .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white; animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
+    .cel-fr { font-size: .92rem; color: rgba(255,255,255,.8); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
+    .cel-stars { font-size: 1.6rem; letter-spacing: 8px; animation: fadeUp .5s ease .9s both; margin-bottom: 24px; }
+    @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    .btn-cel { background: var(--gold); color: var(--primary); border: none; border-radius: 12px; padding: 13px 32px; font-size: .95rem; font-weight: 800; cursor: pointer; font-family: var(--font); animation: fadeUp .5s ease 1s both; transition: background .15s, transform .1s; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+    .btn-cel:hover { background: white; transform: scale(1.04); }
+
+    footer { font-size: .66rem; color: var(--muted); margin-top: 28px; text-align: center; }
+
+    @media (max-width: 480px) {
+      .voyelle-grid, .vlong-grid { grid-template-columns: repeat(3,1fr); }
+      .exemples-grid { grid-template-columns: 1fr 1fr; }
+      .choices-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<header>
+  <div class="h-brand">Al Bidayah · Niveau 1</div>
+  <div class="h-ar">الباء وَالتاء</div>
+  <div class="h-fr">Fiche récap — Ilham</div>
+  <div class="h-badge">Séances 1 et 2</div>
+</header>
+
+<!-- ══ LETTRES ══ -->
+<div class="section">
+  <div class="section-title">Les Lettres — الحروف</div>
+  <table class="letter-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-fin">Fin du mot<br><small>ـب / ـت</small></th>
+        <th class="col-mil">Milieu<br><small>ـبـ / ـتـ</small></th>
+        <th class="col-deb">Début<br><small>بـ / تـ</small></th>
+        <th class="col-seul">Seule<br><small>ب / ت</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-name">
+          <span class="ar-name">ب</span>
+          <span class="fr-name">Ba · S'attache avant et après</span>
+          <br><span class="badge-connect">4 formes</span>
+        </td>
+        <td class="td-fin"><div class="ar-form">ـب</div></td>
+        <td class="td-mil"><div class="ar-form">ـبـ</div></td>
+        <td class="td-deb"><div class="ar-form">بـ</div></td>
+        <td class="td-seul"><div class="ar-form">ب</div></td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <span class="ar-name">ت</span>
+          <span class="fr-name">Ta · S'attache avant et après</span>
+          <br><span class="badge-connect">4 formes</span>
+        </td>
+        <td class="td-fin"><div class="ar-form">ـت</div></td>
+        <td class="td-mil"><div class="ar-form">ـتـ</div></td>
+        <td class="td-deb"><div class="ar-form">تـ</div></td>
+        <td class="td-seul"><div class="ar-form">ت</div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ VOYELLES COURTES ══ -->
+<div class="section">
+  <div class="section-title">Voyelles courtes — الحركات</div>
+  <div class="voyelle-grid">
+    <div class="voyelle-card">
+      <div class="v-symbol">بَ</div>
+      <div class="v-name-ar">فَتْحة</div>
+      <div class="v-name-fr">Fatha</div>
+      <div class="v-son">a</div>
+      <div class="v-desc">petit trait au-dessus</div>
+    </div>
+    <div class="voyelle-card">
+      <div class="v-symbol">بُ</div>
+      <div class="v-name-ar">ضَمَّة</div>
+      <div class="v-name-fr">Damma</div>
+      <div class="v-son">ou</div>
+      <div class="v-desc">petit و au-dessus</div>
+    </div>
+    <div class="voyelle-card">
+      <div class="v-symbol">بِ</div>
+      <div class="v-name-ar">كَسْرة</div>
+      <div class="v-name-fr">Kasra</div>
+      <div class="v-son">i</div>
+      <div class="v-desc">petit trait en-dessous</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TANWIN ══ -->
+<div class="section">
+  <div class="section-title">Tanwîn — تنوين</div>
+  <div class="tanwin-grid">
+    <div class="tanwin-card">
+      <div class="t-symbol">بٌ</div>
+      <div class="v-name-ar">تنوين الضم</div>
+      <div class="v-name-fr">Tanwin Damma</div>
+      <div class="t-son">oun</div>
+      <div class="v-desc">deux dammas · marque l'indéfini</div>
+      <div class="t-ex">بَابٌ</div>
+      <div class="t-ex-fr">baaboun (une porte)</div>
+    </div>
+    <div class="tanwin-card">
+      <div class="t-symbol">بٍ</div>
+      <div class="v-name-ar">تنوين الكسر</div>
+      <div class="v-name-fr">Tanwin Kasra</div>
+      <div class="t-son">in</div>
+      <div class="v-desc">deux kasras · marque l'indéfini</div>
+      <div class="t-ex">كِتَابٍ</div>
+      <div class="t-ex-fr">kitaabin (d'un livre)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VOYELLES LONGUES ══ -->
+<div class="section">
+  <div class="section-title">Voyelles longues — المدود</div>
+  <div class="vlong-grid">
+    <div class="vlong-card">
+      <div class="vl-rule"><strong>Fatha</strong> + Alif</div>
+      <div class="vl-formula">بَ + ا</div>
+      <div class="vl-son">â (long)</div>
+      <div class="vl-ex">بَابٌ</div>
+      <div class="vl-ex-fr">baaboun</div>
+    </div>
+    <div class="vlong-card">
+      <div class="vl-rule"><strong>Damma</strong> + Waw</div>
+      <div class="vl-formula">بُ + و</div>
+      <div class="vl-son">û (long)</div>
+      <div class="vl-ex">نُورٌ</div>
+      <div class="vl-ex-fr">nuuroun</div>
+    </div>
+    <div class="vlong-card">
+      <div class="vl-rule"><strong>Kasra</strong> + Ya</div>
+      <div class="vl-formula">تِ + ي</div>
+      <div class="vl-son">î (long)</div>
+      <div class="vl-ex">تِينٌ</div>
+      <div class="vl-ex-fr">tiinoun</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXEMPLES ══ -->
+<div class="section">
+  <div class="section-title">Exemples de mots</div>
+  <div class="exemples-grid">
+    <div class="ex-card">
+      <div class="ex-ar">بَابٌ</div>
+      <div class="ex-trans">une porte</div>
+      <div class="ex-note">ب initial + alif + ب final + tanwin damma</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ar">كِتَابٌ</div>
+      <div class="ex-trans">un livre</div>
+      <div class="ex-note">ت au milieu · kasra · alif · tanwin damma</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ar">تِينٌ</div>
+      <div class="ex-trans">figue</div>
+      <div class="ex-note">ت initial · kasra + ya (voyelle longue i)</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ar">نُورٌ</div>
+      <div class="ex-trans">lumière</div>
+      <div class="ex-note">damma + waw (voyelle longue ou)</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ar">ذَهَبَ</div>
+      <div class="ex-trans">il est parti</div>
+      <div class="ex-note">ب en position finale · 3 fathas</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ar">كَتَبَ</div>
+      <div class="ex-trans">il a écrit</div>
+      <div class="ex-note">ت au milieu · ب en finale · 3 fathas</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXERCICES ══ -->
+<div class="section-title" style="width:100%;max-width:660px;margin-bottom:14px;">Exercices</div>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('qcm')">
+    <span class="tab-icon">🎯</span>Voyelles courtes
+  </div>
+  <div class="tab" onclick="switchTab('match')">
+    <span class="tab-icon">🔗</span>Association
+  </div>
+</div>
+
+<!-- PANEL QCM -->
+<div class="panel active" id="panel-qcm">
+  <div class="progress-bar"><div class="progress-fill" id="qcm-prog"></div></div>
+  <div class="counter" id="qcm-ctr">Question 1 / 6</div>
+  <div class="q-card" id="qcm-card">
+    <div class="q-label">Identifie la voyelle courte</div>
+    <div class="q-word" id="qcm-word"></div>
+    <div class="q-question" id="qcm-q"></div>
+  </div>
+  <div class="choices-grid" id="qcm-choices"></div>
+  <div class="feedback" id="qcm-fb"></div>
+  <div class="score-row"><div class="score-pill">Score : <span id="qcm-score">0</span> / 6</div></div>
+  <button class="btn-restart" onclick="initQCM()">Recommencer</button>
+</div>
+
+<!-- PANEL MATCH -->
+<div class="panel" id="panel-match">
+  <div class="match-grid">
+    <div>
+      <div class="match-col-label">Mot arabe</div>
+      <div class="match-col" id="match-ar-col"></div>
+    </div>
+    <div>
+      <div class="match-col-label">Traduction</div>
+      <div class="match-col" id="match-fr-col"></div>
+    </div>
+  </div>
+  <div class="match-score" id="match-score"></div>
+  <button class="btn-restart" onclick="initMatch()" style="margin-top:16px">Recommencer</button>
+</div>
+
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+  <div class="cel-icon">🍬</div>
+  <div class="cel-ar">مَا شَاءَ اللهُ</div>
+  <div class="cel-praise">أَحْسَنْتِ ! بَارَكَ اللهُ فِيكِ</div>
+  <div class="cel-fr">Bravo Ilham ! Tu as tout réussi !</div>
+  <div class="cel-stars">🍭 💕 🍬 💕 🍭</div>
+  <button class="btn-cel" id="btn-cel">Recommencer</button>
+</div>
+
+<footer>Al Bidayah · Niveau 1 · Séances 1 et 2 · Ilham</footer>
+
+<script>
+var QCM = [
+  { word:'بَابٌ',    q:'Quelle est la voyelle sur le ب du début ?',  answer:'Fatha — a',  opts:['Fatha — a','Damma — ou','Kasra — i'] },
+  { word:'تِينٌ',    q:'Quelle est la voyelle sur le ت ?',           answer:'Kasra — i',  opts:['Fatha — a','Damma — ou','Kasra — i'] },
+  { word:'نُورٌ',    q:'Quelle est la voyelle sur le ن ?',           answer:'Damma — ou', opts:['Fatha — a','Damma — ou','Kasra — i'] },
+  { word:'كِتَابٌ',  q:'Quelle est la voyelle sur le ت ?',           answer:'Fatha — a',  opts:['Fatha — a','Damma — ou','Kasra — i'] },
+  { word:'ذَهَبَ',   q:'Quelle est la voyelle sur le ب final ?',     answer:'Fatha — a',  opts:['Fatha — a','Damma — ou','Kasra — i'] },
+  { word:'تُرَابٌ',  q:'Quelle est la voyelle sur le ت ?',           answer:'Damma — ou', opts:['Fatha — a','Damma — ou','Kasra — i'] },
+];
+
+var WORDS = [
+  { ar:'بَابٌ',   fr:'une porte' },
+  { ar:'كِتَابٌ', fr:'un livre'  },
+  { ar:'تِينٌ',   fr:'figue'     },
+  { ar:'نُورٌ',   fr:'lumière'   },
+  { ar:'ذَهَبَ',  fr:'il est parti' },
+  { ar:'كَتَبَ',  fr:'il a écrit' },
+];
+
+function shuffle(a) {
+  var b = a.slice();
+  for (var i = b.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = b[i]; b[i] = b[j]; b[j] = t;
+  }
+  return b;
+}
+
+function switchTab(id) {
+  var ids = ['qcm','match'];
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) {
+    if (ids[i] === id) { tabs[i].classList.add('active'); } else { tabs[i].classList.remove('active'); }
+  }
+  var panels = document.querySelectorAll('.panel');
+  for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+function showCelebration(fn) {
+  var cel = document.getElementById('celebration');
+  cel.classList.add('visible');
+  document.getElementById('btn-cel').onclick = function() { cel.classList.remove('visible'); fn(); };
+}
+
+/* ── QCM ── */
+var qQueue, qIdx, qScore;
+function initQCM() {
+  qQueue = shuffle(QCM); qIdx = 0; qScore = 0;
+  document.getElementById('qcm-score').textContent = '0';
+  document.getElementById('qcm-fb').textContent = '';
+  document.getElementById('qcm-fb').className = 'feedback';
+  showQCM();
+}
+function showQCM() {
+  var q = qQueue[qIdx];
+  document.getElementById('qcm-ctr').textContent = 'Question ' + (qIdx + 1) + ' / 6';
+  document.getElementById('qcm-prog').style.width = (qIdx / 6 * 100) + '%';
+  document.getElementById('qcm-word').textContent = q.word;
+  document.getElementById('qcm-q').textContent = q.q;
+  document.getElementById('qcm-card').className = 'q-card';
+  document.getElementById('qcm-fb').textContent = '';
+  document.getElementById('qcm-fb').className = 'feedback';
+  var opts = shuffle(q.opts.slice());
+  var box = document.getElementById('qcm-choices');
+  box.innerHTML = '';
+  opts.forEach(function(o) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'choice'; btn.dataset.val = o;
+    btn.style.fontFamily = 'Arial, sans-serif';
+    btn.textContent = o;
+    btn.addEventListener('click', (function(b, c, a) { return function() { answerQCM(b, c, a); }; })(btn, o === q.answer, q.answer));
+    box.appendChild(btn);
+  });
+}
+function answerQCM(btn, correct, answer) {
+  var choices = document.querySelectorAll('#qcm-choices .choice');
+  for (var i = 0; i < choices.length; i++) { choices[i].classList.add('locked'); }
+  var fb = document.getElementById('qcm-fb');
+  var card = document.getElementById('qcm-card');
+  if (correct) {
+    btn.classList.add('correct'); card.classList.add('correct');
+    qScore++; document.getElementById('qcm-score').textContent = qScore;
+    fb.textContent = 'Bonne reponse !'; fb.className = 'feedback ok';
+  } else {
+    btn.classList.add('wrong'); card.classList.add('wrong');
+    var all = document.querySelectorAll('#qcm-choices .choice');
+    for (var i = 0; i < all.length; i++) { if (all[i].dataset.val === answer) { all[i].classList.add('correct'); break; } }
+    fb.textContent = 'Incorrect. La reponse est : ' + answer; fb.className = 'feedback ko';
+  }
+  setTimeout(function() {
+    qIdx++;
+    if (qIdx >= QCM.length) {
+      document.getElementById('qcm-prog').style.width = '100%';
+      if (qScore === QCM.length) { setTimeout(function() { showCelebration(initQCM); }, 300); }
+    } else { showQCM(); }
+  }, 1200);
+}
+
+/* ── MATCH ── */
+var matchSel = null, matchDone = 0;
+function initMatch() {
+  matchSel = null; matchDone = 0;
+  document.getElementById('match-score').textContent = '';
+  var arItems = shuffle(WORDS.slice());
+  var frItems = shuffle(WORDS.slice());
+  var arCol = document.getElementById('match-ar-col');
+  var frCol = document.getElementById('match-fr-col');
+  arCol.innerHTML = ''; frCol.innerHTML = '';
+  arItems.forEach(function(w) {
+    var el = document.createElement('div');
+    el.className = 'match-item ar-item'; el.textContent = w.ar;
+    el.dataset.key = w.ar; el.dataset.side = 'ar';
+    el.addEventListener('click', (function(e) { return function() { clickMatch(e); }; })(el));
+    arCol.appendChild(el);
+  });
+  frItems.forEach(function(w) {
+    var el = document.createElement('div');
+    el.className = 'match-item fr-item'; el.textContent = w.fr;
+    el.dataset.key = w.ar; el.dataset.side = 'fr';
+    el.addEventListener('click', (function(e) { return function() { clickMatch(e); }; })(el));
+    frCol.appendChild(el);
+  });
+}
+function clickMatch(el) {
+  if (el.classList.contains('matched')) return;
+  if (!matchSel) { el.classList.add('selected'); matchSel = el; return; }
+  if (el.dataset.side === matchSel.dataset.side) {
+    matchSel.classList.remove('selected'); el.classList.add('selected'); matchSel = el; return;
+  }
+  if (el.dataset.key === matchSel.dataset.key) {
+    el.classList.remove('selected'); el.classList.add('matched');
+    matchSel.classList.remove('selected'); matchSel.classList.add('matched');
+    matchDone++;
+    if (matchDone === WORDS.length) {
+      document.getElementById('match-score').textContent = 'Parfait ! Toutes les paires trouvees.';
+      setTimeout(function() { showCelebration(initMatch); }, 500);
+    }
+  } else {
+    el.classList.add('flash-err'); matchSel.classList.add('flash-err');
+    var e1 = el, e2 = matchSel;
+    setTimeout(function() { e1.classList.remove('flash-err'); e2.classList.remove('flash-err'); }, 400);
+    matchSel.classList.remove('selected');
+  }
+  matchSel = null;
+}
+
+initQCM(); initMatch();
+</script>
+</body>
+</html>
