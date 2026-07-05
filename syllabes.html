@@ -177,8 +177,9 @@
   <div class="progress-bar"><div class="progress-fill" id="l-prog" style="width:0%"></div></div>
   <div class="counter" id="l-counter">Mot 1 / 10</div>
   <div class="ex-card">
-    <div class="section-label">Remets les lettres dans l'ordre :</div>
-    <div class="letters-grid" id="l-grid" style="margin-bottom:20px;margin-top:8px"></div>
+    <div class="section-label">Remets les lettres de ce mot dans l'ordre :</div>
+    <div class="target-word" id="l-target"></div>
+    <div class="letters-grid" id="l-grid" style="margin-bottom:20px;margin-top:4px"></div>
     <div class="result-zone" id="l-zone">
       <span class="result-empty">clique les lettres dans le bon ordre</span>
     </div>
@@ -377,6 +378,7 @@ function loadLire() {
 
   document.getElementById('l-counter').textContent = 'Mot ' + (lIdx+1) + ' / ' + WORDS.length;
   document.getElementById('l-prog').style.width = (lIdx / WORDS.length * 100) + '%';
+  document.getElementById('l-target').textContent = w.ar;
   document.getElementById('l-fb').textContent = '';
   document.getElementById('l-fb').className = 'feedback';
   document.getElementById('l-zone').innerHTML =
