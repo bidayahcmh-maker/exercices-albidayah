@@ -13,10 +13,6 @@
       --bd:     #EDD8DC;
       --text:   #2A1A1E;
       --muted:  #7A5A60;
-      --ok-bg:  #FFF7E0;
-      --ok-bd:  #CC7A00;
-      --ko-bg:  #FFF0F4;
-      --ko-bd:  #C84060;
       --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
       --ar:   'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
     }
@@ -24,7 +20,7 @@
     body { font-family: var(--font); background: var(--bg); color: var(--text);
            padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
 
-    /* ── HEADER ── */
+    /* HEADER */
     .top-bar { width: 100%; max-width: 660px; height: 5px; border-radius: 3px; margin-bottom: 16px;
                background: linear-gradient(90deg, #C84060, #9B2535, #C84060); }
     header { width: 100%; max-width: 660px; background: #FEF4F6;
@@ -36,7 +32,7 @@
     .h-ar  { font-family: var(--ar); font-size: 1.8rem; direction: rtl; color: #9B2535; margin-bottom: 4px; }
     .h-fr  { font-size: .88rem; font-weight: 600; color: #9B2535; }
 
-    /* ── TABS ── */
+    /* TABS */
     .tabs { display: flex; gap: 8px; width: 100%; max-width: 660px; margin-bottom: 20px; }
     .tab { flex: 1; background: var(--card); border: 2px solid var(--bd); border-radius: 12px;
            padding: 13px 8px; text-align: center; cursor: pointer; font-size: .8rem; font-weight: 700;
@@ -47,100 +43,86 @@
     .panel { display: none; width: 100%; max-width: 660px; }
     .panel.active { display: block; }
 
-    /* ── SHARED EXERCISE ELEMENTS ── */
+    /* SHARED */
     .ex-card { background: var(--card); border: 1.5px solid var(--bd); border-radius: 18px;
                padding: 24px 20px; margin-bottom: 16px; box-shadow: 0 2px 14px rgba(155,37,53,.07); }
     .progress-bar { height: 5px; background: var(--bd); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #C84060, #9B2535); border-radius: 3px; transition: width .4s; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #C84060, #9B2535);
+                     border-radius: 3px; transition: width .4s; }
     .counter { font-size: .72rem; color: var(--muted); font-weight: 600; text-align: center; margin-bottom: 16px; }
     .btn-restart { background: #9B2535; color: white; border: none; border-radius: 10px; padding: 10px 28px;
                    font-size: .85rem; cursor: pointer; font-weight: 700; font-family: var(--font);
                    display: block; margin: 16px auto 0; box-shadow: 0 2px 10px rgba(155,37,53,.25);
                    touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    .section-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em;
+                     color: var(--muted); text-align: center; margin-bottom: 10px; }
 
-    /* ── COMPOSE TAB ── */
-    .hint-fr { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase;
-               letter-spacing: .1em; margin-bottom: 6px; text-align: center; }
-    .hint-word { font-size: 1.1rem; font-weight: 800; color: #9B2535; text-align: center; margin-bottom: 20px; }
+    /* MOT CIBLE (grand) */
+    .target-word { font-family: var(--ar); font-size: 4rem; direction: rtl; color: #9B2535;
+                   text-align: center; margin-bottom: 20px; line-height: 1.3; }
 
-    /* Result zone — shows syllables as tapped */
+    /* ZONE DE RESULTAT */
     .result-zone { display: flex; flex-direction: row-reverse; justify-content: center;
                    align-items: center; gap: 6px; min-height: 80px;
                    background: #F7EEF0; border: 2px dashed var(--bd); border-radius: 14px;
                    padding: 12px 16px; margin-bottom: 8px; flex-wrap: wrap; }
     .result-slot { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
                    background: var(--card); border: 2px solid #EDD8DC; border-radius: 10px;
-                   min-width: 60px; padding: 6px 10px; text-align: center; line-height: 1.2;
+                   min-width: 58px; padding: 6px 10px; text-align: center; line-height: 1.2;
                    animation: popIn .2s ease; }
-    .result-plus { font-size: 1.2rem; color: var(--bd); font-weight: 300; }
-    .result-empty { font-size: .75rem; color: var(--muted); font-style: italic; }
-    @keyframes popIn { 0%{transform:scale(0.7);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .result-plus { font-size: 1.1rem; color: var(--bd); font-weight: 300; }
+    .result-empty { font-size: .74rem; color: var(--muted); font-style: italic; }
+    .result-word-big { font-family: var(--ar); font-size: 3.4rem; direction: rtl; color: #9B2535;
+                       text-align: center; min-height: 80px; line-height: 1.3;
+                       animation: wordReveal .4s cubic-bezier(.175,.885,.32,1.275); }
+    @keyframes popIn      { 0%{transform:scale(.7);opacity:0} 100%{transform:scale(1);opacity:1} }
+    @keyframes wordReveal { 0%{transform:scale(.5);opacity:0} 100%{transform:scale(1);opacity:1} }
 
-    .result-word { font-family: var(--ar); font-size: 3.4rem; direction: rtl; color: #9B2535;
-                   text-align: center; min-height: 80px; line-height: 1.3;
-                   animation: wordReveal .4s cubic-bezier(.175,.885,.32,1.275); }
-    @keyframes wordReveal { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
-
-    .syllable-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em;
-                      color: var(--muted); text-align: center; margin-bottom: 10px; margin-top: 16px; }
-    .syllables-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 12px; }
-    .syl-card { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
+    /* GRILLE DE LETTRES */
+    .letters-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+                    margin-bottom: 4px; }
+    .ltr-card { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
                 background: var(--card); border: 2.5px solid var(--bd); border-radius: 14px;
-                min-width: 70px; padding: 10px 14px; text-align: center; cursor: pointer;
-                line-height: 1.2; transition: all .15s; touch-action: manipulation;
-                -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-    .syl-card:hover:not(.used) { border-color: #9B2535; background: #FEF4F6; }
-    .syl-card.used { opacity: .25; cursor: default; transform: scale(.9); }
-    .syl-card.flash-ok { animation: flashOk .3s ease; }
-    .syl-card.flash-ko { animation: flashKo .4s ease; }
-    @keyframes flashOk { 0%{background:#FFF7E0;border-color:#CC7A00} 100%{background:var(--card);border-color:var(--bd)} }
-    @keyframes flashKo { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+                min-width: 68px; padding: 10px 12px; text-align: center; cursor: pointer;
+                line-height: 1.2; transition: border-color .1s, background .1s;
+                touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+                user-select: none; -webkit-user-select: none; }
+    .ltr-card:hover:not(.used) { border-color: #9B2535; background: #FEF4F6; }
+    .ltr-card.used  { opacity: .22; cursor: default; transform: scale(.88); }
+    .ltr-card.piege { border-color: #EDD8DC; color: #BCA0A8; }
+    .ltr-card.flash-ok { animation: fOk .3s ease; }
+    .ltr-card.flash-ko { animation: fKo .4s ease; }
+    @keyframes fOk { 0%{background:#FFF7E0;border-color:#CC7A00} 100%{background:#fff;border-color:#EDD8DC} }
+    @keyframes fKo { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
 
-    .compose-feedback { font-size: .82rem; font-weight: 700; text-align: center; min-height: 1.4em;
-                        color: var(--muted); margin-bottom: 4px; }
-    .compose-feedback.ok { color: #7A4200; }
-    .compose-feedback.ko { color: #C84060; }
+    /* FEEDBACK */
+    .feedback { font-size: .82rem; font-weight: 700; text-align: center; min-height: 1.4em;
+                color: var(--muted); margin-top: 6px; }
+    .feedback.ok { color: #7A4200; }
+    .feedback.ko { color: #C84060; }
 
-    /* ── DECOMPOSE TAB ── */
-    .deco-word { font-family: var(--ar); font-size: 3.6rem; direction: rtl; color: #9B2535;
-                 text-align: center; margin-bottom: 8px; }
-    .deco-fr { font-size: .88rem; font-weight: 700; color: var(--muted); text-align: center; margin-bottom: 20px; }
-    .deco-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em;
-                  color: var(--muted); margin-bottom: 12px; text-align: center; }
-    .deco-opts { display: flex; flex-direction: column; gap: 10px; }
-    .deco-opt { background: var(--card); border: 2.5px solid var(--bd); border-radius: 14px;
-                padding: 14px 16px; cursor: pointer; display: flex; flex-direction: row-reverse;
-                align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
-                transition: all .15s; touch-action: manipulation;
-                -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-    .deco-opt:hover:not(.locked) { border-color: #9B2535; background: #FEF4F6; }
-    .deco-opt.correct { background: var(--ok-bg); border-color: var(--ok-bd); }
-    .deco-opt.wrong   { background: var(--ko-bg); border-color: var(--ko-bd); animation: shakeOpt .35s; }
-    .deco-opt.locked  { cursor: default; }
-    @keyframes shakeOpt { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-    .deco-syl { font-family: var(--ar); font-size: 2rem; direction: rtl; color: #9B2535; }
-    .deco-plus { font-size: 1rem; color: var(--bd); font-weight: 300; }
-    .deco-opt.correct .deco-syl { color: #7A4200; }
-
-    /* ── CELEBRATION ── */
+    /* CELEBRATION */
     .celebration { display: none; position: fixed; inset: 0; background: rgba(155,37,53,.96); z-index: 999;
                    flex-direction: column; align-items: center; justify-content: center;
                    text-align: center; padding: 24px; }
     .celebration.visible { display: flex; }
-    .cel-icon   { font-size: 7rem; animation: celIn .6s cubic-bezier(.175,.885,.32,1.275) forwards,
-                  celWob 1.2s ease .6s infinite; margin-bottom: 14px; }
+    .cel-icon   { font-size: 7rem; margin-bottom: 14px;
+                  animation: celIn .6s cubic-bezier(.175,.885,.32,1.275) forwards,
+                             celWob 1.2s ease .6s infinite; }
     @keyframes celIn  { 0%{transform:scale(0) rotate(-20deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
     @keyframes celWob { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg) scale(1.04)} }
     .cel-ar     { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #FFE0C0;
-                  animation: fadeUp .5s ease .4s both; margin-bottom: 6px; }
+                  margin-bottom: 6px; animation: fadeUp .5s ease .4s both; }
     .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white;
-                  animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
-    .cel-fr     { font-size: .9rem; color: rgba(255,255,255,.85); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
-    .cel-stars  { font-size: 1.5rem; letter-spacing: 8px; animation: fadeUp .5s ease .9s both; margin-bottom: 22px; }
+                  margin-bottom: 6px; animation: fadeUp .5s ease .6s both; }
+    .cel-fr     { font-size: .9rem; color: rgba(255,255,255,.85); margin-bottom: 20px;
+                  animation: fadeUp .5s ease .75s both; }
+    .cel-stars  { font-size: 1.5rem; letter-spacing: 8px; margin-bottom: 22px;
+                  animation: fadeUp .5s ease .9s both; }
     @keyframes fadeUp { 0%{opacity:0;transform:translateY(18px)} 100%{opacity:1;transform:translateY(0)} }
     .btn-cel { background: white; color: #9B2535; border: none; border-radius: 12px; padding: 12px 30px;
                font-size: .9rem; font-weight: 800; cursor: pointer; font-family: var(--font);
-               animation: fadeUp .5s ease 1s both; box-shadow: 0 4px 16px rgba(0,0,0,.2);
+               box-shadow: 0 4px 16px rgba(0,0,0,.2); animation: fadeUp .5s ease 1s both;
                touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
     footer { font-size: .64rem; color: var(--muted); margin-top: 24px; text-align: center; }
@@ -153,48 +135,56 @@
 <header>
   <div class="h-brand">Al Bidayah · Exercices de lecture</div>
   <div class="h-ar">تَرْكِيبٌ وَتَحْلِيلٌ</div>
-  <div class="h-fr">Lettres — Composer et Decomposer</div>
+  <div class="h-fr">Ecrire et Lire</div>
 </header>
 
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('compose')">
-    <span class="tab-icon">🔧</span>
-    Composer<br><small>lettres → mot</small>
+  <div class="tab active" onclick="switchTab('ecrire')">
+    <span class="tab-icon">✏️</span>
+    Ecrire<br><small>mot affiché → lettres</small>
   </div>
-  <div class="tab" onclick="switchTab('decompose')">
-    <span class="tab-icon">🔍</span>
-    Decomposer<br><small>mot → lettres</small>
+  <div class="tab" onclick="switchTab('lire')">
+    <span class="tab-icon">📖</span>
+    Lire<br><small>lettres melangees → mot</small>
   </div>
 </div>
 
-<!-- ══ COMPOSE ══ -->
-<div class="panel active" id="panel-compose">
-  <div class="progress-bar"><div class="progress-fill" id="c-prog" style="width:0%"></div></div>
-  <div class="counter" id="c-counter">Mot 1 / 10</div>
+<!-- ══ ÉCRIRE ══
+     Le mot arabe est affiché.
+     L'élève choisit les bonnes lettres
+     (parmi les correctes + 2 pièges) dans l'ordre. -->
+<div class="panel active" id="panel-ecrire">
+  <div class="progress-bar"><div class="progress-fill" id="e-prog" style="width:0%"></div></div>
+  <div class="counter" id="e-counter">Mot 1 / 10</div>
   <div class="ex-card">
-    <div class="hint-fr">Forme ce mot en arabe :</div>
-    <div class="hint-word" id="c-hint"></div>
-    <div class="result-zone" id="c-result-zone">
-      <span class="result-empty">clique sur les lettres dans le bon ordre</span>
+    <div class="section-label">Ecris ce mot :</div>
+    <div class="target-word" id="e-target"></div>
+    <div class="result-zone" id="e-zone">
+      <span class="result-empty">clique les bonnes lettres dans l'ordre</span>
     </div>
-    <div class="compose-feedback" id="c-feedback"></div>
-    <div class="syllable-label">Lettres disponibles :</div>
-    <div class="syllables-grid" id="c-syllables"></div>
+    <div class="feedback" id="e-fb"></div>
+    <div class="section-label" style="margin-top:18px">Lettres :</div>
+    <div class="letters-grid" id="e-grid"></div>
   </div>
-  <button class="btn-restart" onclick="initCompose()">Recommencer</button>
+  <button class="btn-restart" onclick="initEcrire()">Recommencer</button>
 </div>
 
-<!-- ══ DECOMPOSE ══ -->
-<div class="panel" id="panel-decompose">
-  <div class="progress-bar"><div class="progress-fill" id="d-prog" style="width:0%"></div></div>
-  <div class="counter" id="d-counter">Mot 1 / 10</div>
+<!-- ══ LIRE ══
+     Les lettres du mot sont affichées mélangées.
+     L'élève les remet dans l'ordre.
+     Le mot complet se révèle à la fin. -->
+<div class="panel" id="panel-lire">
+  <div class="progress-bar"><div class="progress-fill" id="l-prog" style="width:0%"></div></div>
+  <div class="counter" id="l-counter">Mot 1 / 10</div>
   <div class="ex-card">
-    <div class="deco-word" id="d-word"></div>
-    <div class="deco-fr" id="d-fr"></div>
-    <div class="deco-label">Choisir le bon ordre des lettres :</div>
-    <div class="deco-opts" id="d-opts"></div>
+    <div class="section-label">Remets les lettres dans l'ordre :</div>
+    <div class="letters-grid" id="l-grid" style="margin-bottom:20px;margin-top:8px"></div>
+    <div class="result-zone" id="l-zone">
+      <span class="result-empty">clique les lettres dans le bon ordre</span>
+    </div>
+    <div class="feedback" id="l-fb"></div>
   </div>
-  <button class="btn-restart" onclick="initDecompose()">Recommencer</button>
+  <button class="btn-restart" onclick="initLire()">Recommencer</button>
 </div>
 
 <!-- CELEBRATION -->
@@ -207,70 +197,37 @@
   <button class="btn-cel" id="btn-cel">Encore !</button>
 </div>
 
-<footer>Al Bidayah · Exercices de lecture · Syllabes</footer>
+<footer>Al Bidayah · Exercices de lecture · Lettres</footer>
 
 <script>
 /* ══════════════════════════════════════
-   DONNÉES — mots du livre la Madrassah
+   DONNÉES
    Lettres étudiées : ب ت د ر ك س ل ج م ه خ ء
-   Décomposition LETTRE PAR LETTRE
 ══════════════════════════════════════ */
 var WORDS = [
-  {
-    ar: 'بَابٌ', fr: 'porte',
-    parts: ['بَ','ا','بٌ'],
-    wrongs: [['ا','بَ','بٌ'], ['بٌ','ا','بَ']]
-  },
-  {
-    ar: 'دَارٌ', fr: 'maison',
-    parts: ['دَ','ا','رٌ'],
-    wrongs: [['ا','دَ','رٌ'], ['دَ','رٌ','ا']]
-  },
-  {
-    ar: 'جَمَلٌ', fr: 'chameau',
-    parts: ['جَ','مَ','لٌ'],
-    wrongs: [['جَ','لٌ','مَ'], ['مَ','جَ','لٌ']]
-  },
-  {
-    ar: 'أَسَدٌ', fr: 'lion',
-    parts: ['أَ','سَ','دٌ'],
-    wrongs: [['أَ','دٌ','سَ'], ['سَ','أَ','دٌ']]
-  },
-  {
-    ar: 'مَلِكٌ', fr: 'roi',
-    parts: ['مَ','لِ','كٌ'],
-    wrongs: [['مَ','كٌ','لِ'], ['لِ','مَ','كٌ']]
-  },
-  {
-    ar: 'جَبَلٌ', fr: 'montagne',
-    parts: ['جَ','بَ','لٌ'],
-    wrongs: [['جَ','لٌ','بَ'], ['بَ','جَ','لٌ']]
-  },
-  {
-    ar: 'كِتَابٌ', fr: 'livre',
-    parts: ['كِ','تَ','ا','بٌ'],
-    wrongs: [['كِ','ا','تَ','بٌ'], ['كِ','تَ','بٌ','ا']]
-  },
-  {
-    ar: 'مَسْجِدٌ', fr: 'mosquee',
-    parts: ['مَ','سْ','جِ','دٌ'],
-    wrongs: [['مَ','جِ','سْ','دٌ'], ['مَ','سْ','دٌ','جِ']]
-  },
-  {
-    ar: 'كَتَبَ', fr: 'il a ecrit',
-    parts: ['كَ','تَ','بَ'],
-    wrongs: [['كَ','بَ','تَ'], ['تَ','كَ','بَ']]
-  },
-  {
-    ar: 'دَخَلَ', fr: 'il est entre',
-    parts: ['دَ','خَ','لَ'],
-    wrongs: [['دَ','لَ','خَ'], ['خَ','دَ','لَ']]
-  }
+  { ar: 'بَابٌ',    parts: ['بَ','ا','بٌ']      },
+  { ar: 'دَارٌ',    parts: ['دَ','ا','رٌ']       },
+  { ar: 'جَمَلٌ',   parts: ['جَ','مَ','لٌ']      },
+  { ar: 'أَسَدٌ',   parts: ['أَ','سَ','دٌ']      },
+  { ar: 'مَلِكٌ',   parts: ['مَ','لِ','كٌ']      },
+  { ar: 'جَبَلٌ',   parts: ['جَ','بَ','لٌ']      },
+  { ar: 'كِتَابٌ',  parts: ['كِ','تَ','ا','بٌ']  },
+  { ar: 'مَسْجِدٌ', parts: ['مَ','سْ','جِ','دٌ'] },
+  { ar: 'كَتَبَ',   parts: ['كَ','تَ','بَ']      },
+  { ar: 'دَخَلَ',   parts: ['دَ','خَ','لَ']      }
 ];
 
-/* ══════════════════════════════════════
-   UTILITAIRES
-══════════════════════════════════════ */
+/* Pool de lettres étudiées pour générer les pièges */
+var POOL = [
+  'بَ','بِ','بُ','بٌ','تَ','تِ','تُ','تٌ',
+  'دَ','دِ','دُ','دٌ','رَ','رِ','رُ','رٌ',
+  'كَ','كِ','كُ','كٌ','سَ','سِ','سُ','سٌ',
+  'لَ','لِ','لُ','لٌ','جَ','جِ','جُ','جٌ',
+  'مَ','مِ','مُ','مٌ','هَ','هِ','هُ','هٌ',
+  'خَ','خِ','خُ','خٌ','أَ','أِ','أُ','أٌ'
+];
+
+/* ══ UTILITAIRES ══ */
 function shuffle(a) {
   var b = a.slice();
   for (var i = b.length - 1; i > 0; i--) {
@@ -279,98 +236,39 @@ function shuffle(a) {
   }
   return b;
 }
+
+function distractors(parts, n) {
+  var cands = shuffle(POOL.filter(function(l) { return parts.indexOf(l) === -1; }));
+  return cands.slice(0, n);
+}
+
 function switchTab(id) {
-  var tabs = document.querySelectorAll('.tab'), panels = document.querySelectorAll('.panel');
-  var ids = ['compose','decompose'];
-  for (var i = 0; i < tabs.length; i++) { tabs[i].classList[ids[i] === id ? 'add' : 'remove']('active'); }
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  var ids = ['ecrire','lire'];
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList[ids[i] === id ? 'add' : 'remove']('active');
+  }
   for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
   document.getElementById('panel-' + id).classList.add('active');
 }
+
 function showCelebration(fn) {
   var cel = document.getElementById('celebration');
   cel.classList.add('visible');
-  document.getElementById('btn-cel').onclick = function () { cel.classList.remove('visible'); fn(); };
+  document.getElementById('btn-cel').onclick = function() {
+    cel.classList.remove('visible'); fn();
+  };
 }
 
-/* ══════════════════════════════════════
-   TAB 1 — COMPOSER
-   Le student clique les syllabes dans
-   le bon ordre pour former le mot.
-══════════════════════════════════════ */
-var cOrder, cIdx, cTapped, cShuffled;
-
-function initCompose() {
-  cOrder = shuffle(WORDS.slice().map(function(w,i){return i;}));
-  cIdx = 0; cTapped = 0;
-  loadComposeWord();
-}
-
-function loadComposeWord() {
-  cTapped = 0;
-  var w = WORDS[cOrder[cIdx]];
-  cShuffled = shuffle(w.parts.slice());
-
-  /* header */
-  document.getElementById('c-counter').textContent = 'Mot ' + (cIdx + 1) + ' / ' + WORDS.length;
-  document.getElementById('c-prog').style.width = (cIdx / WORDS.length * 100) + '%';
-  document.getElementById('c-hint').textContent = w.fr;
-  document.getElementById('c-feedback').textContent = '';
-  document.getElementById('c-feedback').className = 'compose-feedback';
-
-  /* result zone — empty */
-  document.getElementById('c-result-zone').innerHTML = '<span class="result-empty">clique sur les syllabes dans le bon ordre</span>';
-
-  /* syllable cards */
-  var grid = document.getElementById('c-syllables');
-  grid.innerHTML = '';
-  cShuffled.forEach(function (syl, si) {
-    var card = document.createElement('div');
-    card.className = 'syl-card';
-    card.textContent = syl;
-    card.dataset.syl = syl;
-    card.dataset.idx = si;
-    card.addEventListener('click', (function (el, s) {
-      return function () { tapComposeSyl(el, s); };
-    })(card, syl));
-    grid.appendChild(card);
-  });
-}
-
-function tapComposeSyl(card, syl) {
-  if (card.classList.contains('used')) return;
-  var w = WORDS[cOrder[cIdx]];
-  if (syl === w.parts[cTapped]) {
-    /* correct syllable */
-    card.classList.add('used');
-    card.classList.add('flash-ok');
-    setTimeout(function () { card.classList.remove('flash-ok'); }, 300);
-    cTapped++;
-    updateComposeResult(w);
-    if (cTapped === w.parts.length) {
-      /* word complete */
-      document.getElementById('c-feedback').textContent = 'Parfait !';
-      document.getElementById('c-feedback').className = 'compose-feedback ok';
-      setTimeout(function () { nextComposeWord(w); }, 900);
-    }
-  } else {
-    /* wrong syllable */
-    card.classList.add('flash-ko');
-    setTimeout(function () { card.classList.remove('flash-ko'); }, 400);
-    var fb = document.getElementById('c-feedback');
-    fb.textContent = 'Pas encore — cherche la bonne lettre !';
-    fb.className = 'compose-feedback ko';
-    setTimeout(function () { fb.textContent = ''; fb.className = 'compose-feedback'; }, 1000);
-  }
-}
-
-function updateComposeResult(w) {
-  var zone = document.getElementById('c-result-zone');
+/* Construit la zone de résultat (lettres déjà tapées) */
+function buildResult(zoneId, parts, tapped) {
+  var zone = document.getElementById(zoneId);
   zone.innerHTML = '';
-  /* show tapped syllables in RTL order (last on right = first tapped appears rightmost) */
-  for (var i = cTapped - 1; i >= 0; i--) {
+  for (var i = tapped - 1; i >= 0; i--) {
     var slot = document.createElement('div');
     slot.className = 'result-slot';
-    slot.textContent = w.parts[i];
+    slot.textContent = parts[i];
     zone.appendChild(slot);
     if (i > 0) {
       var plus = document.createElement('span');
@@ -381,98 +279,151 @@ function updateComposeResult(w) {
   }
 }
 
-function nextComposeWord(w) {
-  /* show full word briefly */
-  var zone = document.getElementById('c-result-zone');
-  zone.innerHTML = '<div class="result-word">' + w.ar + '</div>';
-  cIdx++;
-  if (cIdx >= WORDS.length) {
-    document.getElementById('c-prog').style.width = '100%';
-    setTimeout(function () { showCelebration(initCompose); }, 600);
+/* Crée les cartes de lettres dans une grille */
+function buildGrid(gridId, letters, onTap) {
+  var grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  letters.forEach(function(ltr) {
+    var card = document.createElement('div');
+    card.className = 'ltr-card';
+    card.textContent = ltr;
+    card.addEventListener('click', (function(el, l) {
+      return function() { onTap(el, l); };
+    })(card, ltr));
+    grid.appendChild(card);
+  });
+}
+
+/* ══════════════════════════════════════
+   EXERCICE 1 — ÉCRIRE
+   Le mot est affiché en grand.
+   L'élève clique les bonnes lettres
+   (correctes + 2 pièges) dans l'ordre.
+══════════════════════════════════════ */
+var eOrder, eIdx, eTapped;
+
+function initEcrire() {
+  eOrder = shuffle(WORDS.map(function(w,i){ return i; }));
+  eIdx = 0;
+  loadEcrire();
+}
+
+function loadEcrire() {
+  eTapped = 0;
+  var w = WORDS[eOrder[eIdx]];
+
+  document.getElementById('e-counter').textContent = 'Mot ' + (eIdx+1) + ' / ' + WORDS.length;
+  document.getElementById('e-prog').style.width = (eIdx / WORDS.length * 100) + '%';
+  document.getElementById('e-target').textContent = w.ar;
+  document.getElementById('e-fb').textContent = '';
+  document.getElementById('e-fb').className = 'feedback';
+  document.getElementById('e-zone').innerHTML =
+    '<span class="result-empty">clique les bonnes lettres dans l\'ordre</span>';
+
+  /* lettres correctes + 2 pièges, tout mélangé */
+  var pool = shuffle(w.parts.concat(distractors(w.parts, 2)));
+  buildGrid('e-grid', pool, tapEcrire);
+}
+
+function tapEcrire(card, ltr) {
+  if (card.classList.contains('used')) return;
+  var w = WORDS[eOrder[eIdx]];
+
+  if (ltr === w.parts[eTapped]) {
+    card.classList.add('used');
+    card.classList.add('flash-ok');
+    setTimeout(function() { card.classList.remove('flash-ok'); }, 300);
+    eTapped++;
+    buildResult('e-zone', w.parts, eTapped);
+
+    if (eTapped === w.parts.length) {
+      document.getElementById('e-fb').textContent = 'Parfait !';
+      document.getElementById('e-fb').className = 'feedback ok';
+      eIdx++;
+      if (eIdx >= WORDS.length) {
+        document.getElementById('e-prog').style.width = '100%';
+        setTimeout(function() { showCelebration(initEcrire); }, 800);
+      } else {
+        setTimeout(function() { loadEcrire(); }, 1200);
+      }
+    }
   } else {
-    setTimeout(function () { loadComposeWord(); }, 1200);
+    card.classList.add('flash-ko');
+    setTimeout(function() { card.classList.remove('flash-ko'); }, 400);
+    var fb = document.getElementById('e-fb');
+    fb.textContent = 'Ce n\'est pas la bonne lettre.';
+    fb.className = 'feedback ko';
+    setTimeout(function() { fb.textContent = ''; fb.className = 'feedback'; }, 900);
   }
 }
 
 /* ══════════════════════════════════════
-   TAB 2 — DECOMPOSER
-   Le student voit un mot complet et
-   choisit la bonne decomposition.
+   EXERCICE 2 — LIRE
+   Les lettres du mot sont affichées
+   en désordre. L'élève les remet dans
+   l'ordre. Le mot se révèle à la fin.
 ══════════════════════════════════════ */
-var dOrder, dIdx;
+var lOrder, lIdx, lTapped;
 
-function initDecompose() {
-  dOrder = shuffle(WORDS.slice().map(function(w,i){return i;}));
-  dIdx = 0;
-  loadDecomposeWord();
+function initLire() {
+  lOrder = shuffle(WORDS.map(function(w,i){ return i; }));
+  lIdx = 0;
+  loadLire();
 }
 
-function loadDecomposeWord() {
-  var w = WORDS[dOrder[dIdx]];
-  document.getElementById('d-counter').textContent = 'Mot ' + (dIdx + 1) + ' / ' + WORDS.length;
-  document.getElementById('d-prog').style.width = (dIdx / WORDS.length * 100) + '%';
-  document.getElementById('d-word').textContent = w.ar;
-  document.getElementById('d-fr').textContent = w.fr;
+function loadLire() {
+  lTapped = 0;
+  var w = WORDS[lOrder[lIdx]];
 
-  /* build 3 options */
-  var opts = shuffle([
-    { parts: w.parts,      correct: true  },
-    { parts: w.wrongs[0],  correct: false },
-    { parts: w.wrongs[1],  correct: false }
-  ]);
+  document.getElementById('l-counter').textContent = 'Mot ' + (lIdx+1) + ' / ' + WORDS.length;
+  document.getElementById('l-prog').style.width = (lIdx / WORDS.length * 100) + '%';
+  document.getElementById('l-fb').textContent = '';
+  document.getElementById('l-fb').className = 'feedback';
+  document.getElementById('l-zone').innerHTML =
+    '<span class="result-empty">clique les lettres dans le bon ordre</span>';
 
-  var box = document.getElementById('d-opts');
-  box.innerHTML = '';
-  opts.forEach(function (opt) {
-    var el = document.createElement('div');
-    el.className = 'deco-opt';
-    /* build the parts display RTL: part1 + part2 + part3 */
-    for (var i = opt.parts.length - 1; i >= 0; i--) {
-      var sEl = document.createElement('span');
-      sEl.className = 'deco-syl';
-      sEl.textContent = opt.parts[i];
-      el.appendChild(sEl);
-      if (i > 0) {
-        var pEl = document.createElement('span');
-        pEl.className = 'deco-plus';
-        pEl.textContent = '+';
-        el.appendChild(pEl);
+  /* lettres correctes mélangées — pas de pièges ici */
+  buildGrid('l-grid', shuffle(w.parts.slice()), tapLire);
+}
+
+function tapLire(card, ltr) {
+  if (card.classList.contains('used')) return;
+  var w = WORDS[lOrder[lIdx]];
+
+  if (ltr === w.parts[lTapped]) {
+    card.classList.add('used');
+    card.classList.add('flash-ok');
+    setTimeout(function() { card.classList.remove('flash-ok'); }, 300);
+    lTapped++;
+    buildResult('l-zone', w.parts, lTapped);
+
+    if (lTapped === w.parts.length) {
+      /* révèle le mot complet */
+      document.getElementById('l-zone').innerHTML =
+        '<div class="result-word-big">' + w.ar + '</div>';
+      document.getElementById('l-fb').textContent = 'Parfait !';
+      document.getElementById('l-fb').className = 'feedback ok';
+      lIdx++;
+      if (lIdx >= WORDS.length) {
+        document.getElementById('l-prog').style.width = '100%';
+        setTimeout(function() { showCelebration(initLire); }, 800);
+      } else {
+        setTimeout(function() { loadLire(); }, 1400);
       }
     }
-    el.addEventListener('click', (function (optEl, isCorrect) {
-      return function () { tapDecomposeOpt(optEl, isCorrect); };
-    })(el, opt.correct));
-    box.appendChild(el);
-  });
-}
-
-function tapDecomposeOpt(optEl, isCorrect) {
-  /* lock all options */
-  var all = document.querySelectorAll('.deco-opt');
-  for (var i = 0; i < all.length; i++) { all[i].classList.add('locked'); }
-
-  if (isCorrect) {
-    optEl.classList.add('correct');
-    dIdx++;
-    if (dIdx >= WORDS.length) {
-      document.getElementById('d-prog').style.width = '100%';
-      setTimeout(function () { showCelebration(initDecompose); }, 700);
-    } else {
-      setTimeout(function () { loadDecomposeWord(); }, 1000);
-    }
   } else {
-    optEl.classList.add('wrong');
-    /* unlock after flash so student can retry */
-    setTimeout(function () {
-      optEl.classList.remove('wrong');
-      for (var i = 0; i < all.length; i++) { all[i].classList.remove('locked'); }
-    }, 600);
+    card.classList.add('flash-ko');
+    setTimeout(function() { card.classList.remove('flash-ko'); }, 400);
+    var fb = document.getElementById('l-fb');
+    fb.textContent = 'Ce n\'est pas la bonne lettre.';
+    fb.className = 'feedback ko';
+    setTimeout(function() { fb.textContent = ''; fb.className = 'feedback'; }, 900);
   }
 }
 
 /* INIT */
-initCompose();
-initDecompose();
+initEcrire();
+initLire();
 </script>
 </body>
 </html>
