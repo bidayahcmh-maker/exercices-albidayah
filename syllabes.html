@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercices — Syllabes</title>
+  <style>
+    :root {
+      --brand:  #9B2535;
+      --rose:   #C84060;
+      --bg:     #FBF2F4;
+      --card:   #FFFFFF;
+      --bd:     #EDD8DC;
+      --text:   #2A1A1E;
+      --muted:  #7A5A60;
+      --ok-bg:  #FFF7E0;
+      --ok-bd:  #CC7A00;
+      --ko-bg:  #FFF0F4;
+      --ko-bd:  #C84060;
+      --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      --ar:   'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text);
+           padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
+
+    /* ── HEADER ── */
+    .top-bar { width: 100%; max-width: 660px; height: 5px; border-radius: 3px; margin-bottom: 16px;
+               background: linear-gradient(90deg, #C84060, #9B2535, #C84060); }
+    header { width: 100%; max-width: 660px; background: #FEF4F6;
+             border: 1.5px solid #EDD8DC; border-top: 5px solid #9B2535;
+             border-radius: 16px; padding: 20px 24px; text-align: center; margin-bottom: 24px;
+             box-shadow: 0 3px 16px rgba(155,37,53,.1); }
+    .h-brand { font-size: .62rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+               color: #C84060; margin-bottom: 6px; }
+    .h-ar  { font-family: var(--ar); font-size: 1.8rem; direction: rtl; color: #9B2535; margin-bottom: 4px; }
+    .h-fr  { font-size: .88rem; font-weight: 600; color: #9B2535; }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 8px; width: 100%; max-width: 660px; margin-bottom: 20px; }
+    .tab { flex: 1; background: var(--card); border: 2px solid var(--bd); border-radius: 12px;
+           padding: 13px 8px; text-align: center; cursor: pointer; font-size: .8rem; font-weight: 700;
+           color: var(--muted); line-height: 1.4; touch-action: manipulation;
+           -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+    .tab.active { background: #9B2535; color: white; border-color: #9B2535; }
+    .tab-icon { font-size: 1.3rem; display: block; margin-bottom: 3px; }
+    .panel { display: none; width: 100%; max-width: 660px; }
+    .panel.active { display: block; }
+
+    /* ── SHARED EXERCISE ELEMENTS ── */
+    .ex-card { background: var(--card); border: 1.5px solid var(--bd); border-radius: 18px;
+               padding: 24px 20px; margin-bottom: 16px; box-shadow: 0 2px 14px rgba(155,37,53,.07); }
+    .progress-bar { height: 5px; background: var(--bd); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #C84060, #9B2535); border-radius: 3px; transition: width .4s; }
+    .counter { font-size: .72rem; color: var(--muted); font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .btn-restart { background: #9B2535; color: white; border: none; border-radius: 10px; padding: 10px 28px;
+                   font-size: .85rem; cursor: pointer; font-weight: 700; font-family: var(--font);
+                   display: block; margin: 16px auto 0; box-shadow: 0 2px 10px rgba(155,37,53,.25);
+                   touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
+    /* ── COMPOSE TAB ── */
+    .hint-fr { font-size: .7rem; font-weight: 700; color: var(--muted); text-transform: uppercase;
+               letter-spacing: .1em; margin-bottom: 6px; text-align: center; }
+    .hint-word { font-size: 1.1rem; font-weight: 800; color: #9B2535; text-align: center; margin-bottom: 20px; }
+
+    /* Result zone — shows syllables as tapped */
+    .result-zone { display: flex; flex-direction: row-reverse; justify-content: center;
+                   align-items: center; gap: 6px; min-height: 80px;
+                   background: #F7EEF0; border: 2px dashed var(--bd); border-radius: 14px;
+                   padding: 12px 16px; margin-bottom: 8px; flex-wrap: wrap; }
+    .result-slot { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
+                   background: var(--card); border: 2px solid #EDD8DC; border-radius: 10px;
+                   min-width: 60px; padding: 6px 10px; text-align: center; line-height: 1.2;
+                   animation: popIn .2s ease; }
+    .result-plus { font-size: 1.2rem; color: var(--bd); font-weight: 300; }
+    .result-empty { font-size: .75rem; color: var(--muted); font-style: italic; }
+    @keyframes popIn { 0%{transform:scale(0.7);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+    .result-word { font-family: var(--ar); font-size: 3.4rem; direction: rtl; color: #9B2535;
+                   text-align: center; min-height: 80px; line-height: 1.3;
+                   animation: wordReveal .4s cubic-bezier(.175,.885,.32,1.275); }
+    @keyframes wordReveal { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+    .syllable-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em;
+                      color: var(--muted); text-align: center; margin-bottom: 10px; margin-top: 16px; }
+    .syllables-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 12px; }
+    .syl-card { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
+                background: var(--card); border: 2.5px solid var(--bd); border-radius: 14px;
+                min-width: 70px; padding: 10px 14px; text-align: center; cursor: pointer;
+                line-height: 1.2; transition: all .15s; touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+    .syl-card:hover:not(.used) { border-color: #9B2535; background: #FEF4F6; }
+    .syl-card.used { opacity: .25; cursor: default; transform: scale(.9); }
+    .syl-card.flash-ok { animation: flashOk .3s ease; }
+    .syl-card.flash-ko { animation: flashKo .4s ease; }
+    @keyframes flashOk { 0%{background:#FFF7E0;border-color:#CC7A00} 100%{background:var(--card);border-color:var(--bd)} }
+    @keyframes flashKo { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+    .compose-feedback { font-size: .82rem; font-weight: 700; text-align: center; min-height: 1.4em;
+                        color: var(--muted); margin-bottom: 4px; }
+    .compose-feedback.ok { color: #7A4200; }
+    .compose-feedback.ko { color: #C84060; }
+
+    /* ── DECOMPOSE TAB ── */
+    .deco-word { font-family: var(--ar); font-size: 3.6rem; direction: rtl; color: #9B2535;
+                 text-align: center; margin-bottom: 8px; }
+    .deco-fr { font-size: .88rem; font-weight: 700; color: var(--muted); text-align: center; margin-bottom: 20px; }
+    .deco-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em;
+                  color: var(--muted); margin-bottom: 12px; text-align: center; }
+    .deco-opts { display: flex; flex-direction: column; gap: 10px; }
+    .deco-opt { background: var(--card); border: 2.5px solid var(--bd); border-radius: 14px;
+                padding: 14px 16px; cursor: pointer; display: flex; flex-direction: row-reverse;
+                align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+                transition: all .15s; touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+    .deco-opt:hover:not(.locked) { border-color: #9B2535; background: #FEF4F6; }
+    .deco-opt.correct { background: var(--ok-bg); border-color: var(--ok-bd); }
+    .deco-opt.wrong   { background: var(--ko-bg); border-color: var(--ko-bd); animation: shakeOpt .35s; }
+    .deco-opt.locked  { cursor: default; }
+    @keyframes shakeOpt { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+    .deco-syl { font-family: var(--ar); font-size: 2rem; direction: rtl; color: #9B2535; }
+    .deco-plus { font-size: 1rem; color: var(--bd); font-weight: 300; }
+    .deco-opt.correct .deco-syl { color: #7A4200; }
+
+    /* ── CELEBRATION ── */
+    .celebration { display: none; position: fixed; inset: 0; background: rgba(155,37,53,.96); z-index: 999;
+                   flex-direction: column; align-items: center; justify-content: center;
+                   text-align: center; padding: 24px; }
+    .celebration.visible { display: flex; }
+    .cel-icon   { font-size: 7rem; animation: celIn .6s cubic-bezier(.175,.885,.32,1.275) forwards,
+                  celWob 1.2s ease .6s infinite; margin-bottom: 14px; }
+    @keyframes celIn  { 0%{transform:scale(0) rotate(-20deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
+    @keyframes celWob { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg) scale(1.04)} }
+    .cel-ar     { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #FFE0C0;
+                  animation: fadeUp .5s ease .4s both; margin-bottom: 6px; }
+    .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white;
+                  animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
+    .cel-fr     { font-size: .9rem; color: rgba(255,255,255,.85); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
+    .cel-stars  { font-size: 1.5rem; letter-spacing: 8px; animation: fadeUp .5s ease .9s both; margin-bottom: 22px; }
+    @keyframes fadeUp { 0%{opacity:0;transform:translateY(18px)} 100%{opacity:1;transform:translateY(0)} }
+    .btn-cel { background: white; color: #9B2535; border: none; border-radius: 12px; padding: 12px 30px;
+               font-size: .9rem; font-weight: 800; cursor: pointer; font-family: var(--font);
+               animation: fadeUp .5s ease 1s both; box-shadow: 0 4px 16px rgba(0,0,0,.2);
+               touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
+    footer { font-size: .64rem; color: var(--muted); margin-top: 24px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<header>
+  <div class="h-brand">Al Bidayah · Exercices de lecture</div>
+  <div class="h-ar">تَرْكِيبٌ وَتَحْلِيلٌ</div>
+  <div class="h-fr">Syllabes — Composer et Decomposer</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('compose')">
+    <span class="tab-icon">🔧</span>
+    Composer<br><small>syllabes → mot</small>
+  </div>
+  <div class="tab" onclick="switchTab('decompose')">
+    <span class="tab-icon">🔍</span>
+    Decomposer<br><small>mot → syllabes</small>
+  </div>
+</div>
+
+<!-- ══ COMPOSE ══ -->
+<div class="panel active" id="panel-compose">
+  <div class="progress-bar"><div class="progress-fill" id="c-prog" style="width:0%"></div></div>
+  <div class="counter" id="c-counter">Mot 1 / 10</div>
+  <div class="ex-card">
+    <div class="hint-fr">Forme ce mot en arabe :</div>
+    <div class="hint-word" id="c-hint"></div>
+    <div class="result-zone" id="c-result-zone">
+      <span class="result-empty">clique sur les syllabes dans le bon ordre</span>
+    </div>
+    <div class="compose-feedback" id="c-feedback"></div>
+    <div class="syllable-label">Syllabes disponibles :</div>
+    <div class="syllables-grid" id="c-syllables"></div>
+  </div>
+  <button class="btn-restart" onclick="initCompose()">Recommencer</button>
+</div>
+
+<!-- ══ DECOMPOSE ══ -->
+<div class="panel" id="panel-decompose">
+  <div class="progress-bar"><div class="progress-fill" id="d-prog" style="width:0%"></div></div>
+  <div class="counter" id="d-counter">Mot 1 / 10</div>
+  <div class="ex-card">
+    <div class="deco-word" id="d-word"></div>
+    <div class="deco-fr" id="d-fr"></div>
+    <div class="deco-label">Choisir la bonne decomposition :</div>
+    <div class="deco-opts" id="d-opts"></div>
+  </div>
+  <button class="btn-restart" onclick="initDecompose()">Recommencer</button>
+</div>
+
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+  <div class="cel-icon">🌟</div>
+  <div class="cel-ar">مَا شَاءَ اللهُ</div>
+  <div class="cel-praise">أَحْسَنْتِ ! بَارَكَ اللهُ فِيكِ</div>
+  <div class="cel-fr">Excellent ! Tu as tout reussi !</div>
+  <div class="cel-stars">🍭 💕 🌸 💕 🍭</div>
+  <button class="btn-cel" id="btn-cel">Encore !</button>
+</div>
+
+<footer>Al Bidayah · Exercices de lecture · Syllabes</footer>
+
+<script>
+/* ══════════════════════════════════════
+   DONNÉES — mots du livre la Madrassah
+   (lettres apprises jusqu'à la hamza)
+══════════════════════════════════════ */
+var WORDS = [
+  {
+    ar: 'قَلَمٌ', fr: 'stylo',
+    parts: ['قَ','لَ','مٌ'],
+    wrongs: [['قَلَ','مٌ'], ['قَ','لَمٌ']]
+  },
+  {
+    ar: 'جَمَلٌ', fr: 'chameau',
+    parts: ['جَ','مَ','لٌ'],
+    wrongs: [['جَمَ','لٌ'], ['جَ','مَلٌ']]
+  },
+  {
+    ar: 'كِتَابٌ', fr: 'livre',
+    parts: ['كِ','تَا','بٌ'],
+    wrongs: [['كِتَ','ابٌ'], ['كِ','تَابٌ']]
+  },
+  {
+    ar: 'فِيلٌ', fr: 'elephant',
+    parts: ['فِي','لٌ'],
+    wrongs: [['فِ','يلٌ'], ['فِيلُ','نْ']]
+  },
+  {
+    ar: 'شَجَرَةٌ', fr: 'arbre',
+    parts: ['شَ','جَ','رَ','ةٌ'],
+    wrongs: [['شَجَ','رَةٌ'], ['شَ','جَرَ','ةٌ']]
+  },
+  {
+    ar: 'أَسَدٌ', fr: 'lion',
+    parts: ['أَ','سَ','دٌ'],
+    wrongs: [['أَسَ','دٌ'], ['أَ','سَدٌ']]
+  },
+  {
+    ar: 'ذَهَبَ', fr: 'il est parti',
+    parts: ['ذَ','هَ','بَ'],
+    wrongs: [['ذَهَ','بَ'], ['ذَ','هَبَ']]
+  },
+  {
+    ar: 'عَسَلٌ', fr: 'miel',
+    parts: ['عَ','سَ','لٌ'],
+    wrongs: [['عَسَ','لٌ'], ['عَ','سَلٌ']]
+  },
+  {
+    ar: 'مَسْجِدٌ', fr: 'mosquee',
+    parts: ['مَسْ','جِ','دٌ'],
+    wrongs: [['مَ','سْجِ','دٌ'], ['مَسْجِ','دٌ']]
+  },
+  {
+    ar: 'خُبْزٌ', fr: 'pain',
+    parts: ['خُبْ','زٌ'],
+    wrongs: [['خُ','بْزٌ'], ['خُبْزُ','نْ']]
+  }
+];
+
+/* ══════════════════════════════════════
+   UTILITAIRES
+══════════════════════════════════════ */
+function shuffle(a) {
+  var b = a.slice();
+  for (var i = b.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = b[i]; b[i] = b[j]; b[j] = t;
+  }
+  return b;
+}
+function switchTab(id) {
+  var tabs = document.querySelectorAll('.tab'), panels = document.querySelectorAll('.panel');
+  var ids = ['compose','decompose'];
+  for (var i = 0; i < tabs.length; i++) { tabs[i].classList[ids[i] === id ? 'add' : 'remove']('active'); }
+  for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
+  document.getElementById('panel-' + id).classList.add('active');
+}
+function showCelebration(fn) {
+  var cel = document.getElementById('celebration');
+  cel.classList.add('visible');
+  document.getElementById('btn-cel').onclick = function () { cel.classList.remove('visible'); fn(); };
+}
+
+/* ══════════════════════════════════════
+   TAB 1 — COMPOSER
+   Le student clique les syllabes dans
+   le bon ordre pour former le mot.
+══════════════════════════════════════ */
+var cOrder, cIdx, cTapped, cShuffled;
+
+function initCompose() {
+  cOrder = shuffle(WORDS.slice().map(function(w,i){return i;}));
+  cIdx = 0; cTapped = 0;
+  loadComposeWord();
+}
+
+function loadComposeWord() {
+  cTapped = 0;
+  var w = WORDS[cOrder[cIdx]];
+  cShuffled = shuffle(w.parts.slice());
+
+  /* header */
+  document.getElementById('c-counter').textContent = 'Mot ' + (cIdx + 1) + ' / ' + WORDS.length;
+  document.getElementById('c-prog').style.width = (cIdx / WORDS.length * 100) + '%';
+  document.getElementById('c-hint').textContent = w.fr;
+  document.getElementById('c-feedback').textContent = '';
+  document.getElementById('c-feedback').className = 'compose-feedback';
+
+  /* result zone — empty */
+  document.getElementById('c-result-zone').innerHTML = '<span class="result-empty">clique sur les syllabes dans le bon ordre</span>';
+
+  /* syllable cards */
+  var grid = document.getElementById('c-syllables');
+  grid.innerHTML = '';
+  cShuffled.forEach(function (syl, si) {
+    var card = document.createElement('div');
+    card.className = 'syl-card';
+    card.textContent = syl;
+    card.dataset.syl = syl;
+    card.dataset.idx = si;
+    card.addEventListener('click', (function (el, s) {
+      return function () { tapComposeSyl(el, s); };
+    })(card, syl));
+    grid.appendChild(card);
+  });
+}
+
+function tapComposeSyl(card, syl) {
+  if (card.classList.contains('used')) return;
+  var w = WORDS[cOrder[cIdx]];
+  if (syl === w.parts[cTapped]) {
+    /* correct syllable */
+    card.classList.add('used');
+    card.classList.add('flash-ok');
+    setTimeout(function () { card.classList.remove('flash-ok'); }, 300);
+    cTapped++;
+    updateComposeResult(w);
+    if (cTapped === w.parts.length) {
+      /* word complete */
+      document.getElementById('c-feedback').textContent = 'Parfait !';
+      document.getElementById('c-feedback').className = 'compose-feedback ok';
+      setTimeout(function () { nextComposeWord(w); }, 900);
+    }
+  } else {
+    /* wrong syllable */
+    card.classList.add('flash-ko');
+    setTimeout(function () { card.classList.remove('flash-ko'); }, 400);
+    var fb = document.getElementById('c-feedback');
+    fb.textContent = 'Pas encore — cherche la bonne syllabe !';
+    fb.className = 'compose-feedback ko';
+    setTimeout(function () { fb.textContent = ''; fb.className = 'compose-feedback'; }, 1000);
+  }
+}
+
+function updateComposeResult(w) {
+  var zone = document.getElementById('c-result-zone');
+  zone.innerHTML = '';
+  /* show tapped syllables in RTL order (last on right = first tapped appears rightmost) */
+  for (var i = cTapped - 1; i >= 0; i--) {
+    var slot = document.createElement('div');
+    slot.className = 'result-slot';
+    slot.textContent = w.parts[i];
+    zone.appendChild(slot);
+    if (i > 0) {
+      var plus = document.createElement('span');
+      plus.className = 'result-plus';
+      plus.textContent = '+';
+      zone.appendChild(plus);
+    }
+  }
+}
+
+function nextComposeWord(w) {
+  /* show full word briefly */
+  var zone = document.getElementById('c-result-zone');
+  zone.innerHTML = '<div class="result-word">' + w.ar + '</div>';
+  cIdx++;
+  if (cIdx >= WORDS.length) {
+    document.getElementById('c-prog').style.width = '100%';
+    setTimeout(function () { showCelebration(initCompose); }, 600);
+  } else {
+    setTimeout(function () { loadComposeWord(); }, 1200);
+  }
+}
+
+/* ══════════════════════════════════════
+   TAB 2 — DECOMPOSER
+   Le student voit un mot complet et
+   choisit la bonne decomposition.
+══════════════════════════════════════ */
+var dOrder, dIdx;
+
+function initDecompose() {
+  dOrder = shuffle(WORDS.slice().map(function(w,i){return i;}));
+  dIdx = 0;
+  loadDecomposeWord();
+}
+
+function loadDecomposeWord() {
+  var w = WORDS[dOrder[dIdx]];
+  document.getElementById('d-counter').textContent = 'Mot ' + (dIdx + 1) + ' / ' + WORDS.length;
+  document.getElementById('d-prog').style.width = (dIdx / WORDS.length * 100) + '%';
+  document.getElementById('d-word').textContent = w.ar;
+  document.getElementById('d-fr').textContent = w.fr;
+
+  /* build 3 options */
+  var opts = shuffle([
+    { parts: w.parts,      correct: true  },
+    { parts: w.wrongs[0],  correct: false },
+    { parts: w.wrongs[1],  correct: false }
+  ]);
+
+  var box = document.getElementById('d-opts');
+  box.innerHTML = '';
+  opts.forEach(function (opt) {
+    var el = document.createElement('div');
+    el.className = 'deco-opt';
+    /* build the parts display RTL: part1 + part2 + part3 */
+    for (var i = opt.parts.length - 1; i >= 0; i--) {
+      var sEl = document.createElement('span');
+      sEl.className = 'deco-syl';
+      sEl.textContent = opt.parts[i];
+      el.appendChild(sEl);
+      if (i > 0) {
+        var pEl = document.createElement('span');
+        pEl.className = 'deco-plus';
+        pEl.textContent = '+';
+        el.appendChild(pEl);
+      }
+    }
+    el.addEventListener('click', (function (optEl, isCorrect) {
+      return function () { tapDecomposeOpt(optEl, isCorrect); };
+    })(el, opt.correct));
+    box.appendChild(el);
+  });
+}
+
+function tapDecomposeOpt(optEl, isCorrect) {
+  /* lock all options */
+  var all = document.querySelectorAll('.deco-opt');
+  for (var i = 0; i < all.length; i++) { all[i].classList.add('locked'); }
+
+  if (isCorrect) {
+    optEl.classList.add('correct');
+    dIdx++;
+    if (dIdx >= WORDS.length) {
+      document.getElementById('d-prog').style.width = '100%';
+      setTimeout(function () { showCelebration(initDecompose); }, 700);
+    } else {
+      setTimeout(function () { loadDecomposeWord(); }, 1000);
+    }
+  } else {
+    optEl.classList.add('wrong');
+    /* unlock after flash so student can retry */
+    setTimeout(function () {
+      optEl.classList.remove('wrong');
+      for (var i = 0; i < all.length; i++) { all[i].classList.remove('locked'); }
+    }, 600);
+  }
+}
+
+/* INIT */
+initCompose();
+initDecompose();
+</script>
+</body>
+</html>
