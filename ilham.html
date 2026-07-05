@@ -3,183 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Récap — ب et ت — Ilham</title>
+  <title>Récap — Ilham</title>
   <style>
-    :root {
-      --brand:   #9B2535;
-      --rose:    #C84060;
-      --bg:      #FBF2F4;
-      --card:    #FFFFFF;
-      --bd:      #EDD8DC;
-      --text:    #2A1A1E;
-      --muted:   #7A5A60;
-      --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-      --ar:   'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text);
-           padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
+    /* ── PALETTE ── */
+    /* Bordeaux: #9B2535 | Rose: #C84060 | Fond: #FBF2F4 */
+    /* Fatha/Alif : #C84060 | Damma/Waw : #CC7A00 | Kasra/Ya : #3A8A70 */
+    /* Lettres base : #1E1E2C */
 
-    /* ── HEADER (clair, pas foncé) ── */
-    .top-bar { width: 100%; max-width: 660px; height: 5px; border-radius: 3px; margin-bottom: 16px;
-               background: linear-gradient(90deg, #C84060, #9B2535, #C84060); }
-    header { width: 100%; max-width: 660px; background: #FEF4F6;
-             border: 1.5px solid #EDD8DC; border-top: 5px solid #9B2535;
-             border-radius: 16px; padding: 22px 28px; text-align: center; margin-bottom: 28px;
-             box-shadow: 0 3px 16px rgba(155,37,53,.1); }
-    .h-brand { font-size: .62rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      background: #FBF2F4;
+      color: #2A1A1E;
+      padding: 20px 14px 60px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* ── HEADER ── */
+    .top-bar { width: 100%; max-width: 700px; height: 5px; border-radius: 3px; margin-bottom: 16px;
+               background: linear-gradient(90deg,#C84060,#9B2535,#C84060); }
+    header {
+      width: 100%; max-width: 700px;
+      background: #FEF4F6; border: 1.5px solid #EDD8DC; border-top: 5px solid #9B2535;
+      border-radius: 16px; padding: 20px 24px; text-align: center; margin-bottom: 28px;
+      box-shadow: 0 3px 16px rgba(155,37,53,.10);
+    }
+    .h-brand { font-size: .6rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase;
                color: #C84060; margin-bottom: 6px; }
-    .h-ar  { font-family: var(--ar); font-size: 2.2rem; direction: rtl; color: #9B2535; margin-bottom: 4px; }
-    .h-fr  { font-size: .88rem; font-weight: 600; color: #9B2535; margin-bottom: 10px; }
-    .h-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .h-badge { background: rgba(155,37,53,.08); border: 1px solid #EDD8DC;
-               border-radius: 20px; padding: 3px 14px; font-size: .68rem; font-weight: 700; color: #9B2535; }
+    .h-name  { font-size: 1rem; font-weight: 800; color: #9B2535; margin-bottom: 4px; }
+    .h-ar    { font-family: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+               font-size: 1.5rem; direction: rtl; color: #9B2535; }
 
     /* ── SECTION ── */
-    .section { width: 100%; max-width: 660px; margin-bottom: 32px; }
-    .sec-title { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .15em;
-                 color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-    .sec-title::before, .sec-title::after { content: ''; flex: 1; height: 1px; background: var(--bd); }
-
-    /* ── TABLE LETTRES ── */
-    .letter-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden;
-                    background: var(--card); box-shadow: 0 2px 14px rgba(155,37,53,.08); }
-    .letter-table thead th { background: #9B2535; color: white; padding: .75rem .5rem;
-                              font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
-    .letter-table tbody tr { border-bottom: 1px solid var(--bd); }
-    .letter-table tbody tr:last-child { border-bottom: none; }
-    .letter-table tbody td { padding: .9rem .6rem; text-align: center; vertical-align: middle; }
-    .td-label { background: #F7EEF0; }
-    .lbl-ar  { font-family: var(--ar); font-size: 1.6rem; direction: rtl; color: #9B2535; display: block; }
-    .lbl-fr  { font-size: .68rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 700; }
-    .lbl-sub { font-size: .58rem; color: var(--muted); display: block; margin-top: 4px; font-style: italic; }
-    .td-fin  { background: #F5EAEc; }
-    .td-mil  { background: #F9F1F3; }
-    .td-deb  { background: #FBF4F6; }
-    .td-seul { background: #FEF8F9; }
-    .ar-form { font-family: var(--ar); font-size: 2.6rem; direction: rtl; color: #9B2535; line-height: 1; }
-
-    /* ── VOYELLES — FAMILLES (court → long) ── */
-    .fam-block { background: var(--card); border-radius: 16px; overflow: hidden;
-                 box-shadow: 0 2px 14px rgba(155,37,53,.07); margin-bottom: 12px; }
-    .fam-strip { height: 4px; }
-    .fam-inner { display: flex; align-items: stretch; }
-    .fam-cell { flex: 1; padding: 18px 14px; text-align: center; }
-    .fam-cell.side-bd { border-right: 1px solid var(--bd); }
-    .fam-arrow { display: flex; align-items: center; justify-content: center; padding: 0 6px; font-size: 1.3rem; flex-shrink: 0; }
-    .v-ar { font-family: var(--ar); font-size: 3.2rem; direction: rtl; line-height: 1.2; margin-bottom: 8px; }
-    .v-name { font-size: .82rem; font-weight: 800; margin-bottom: 3px; }
-    .v-name-ar { font-family: var(--ar); font-size: .88rem; direction: rtl; color: var(--muted); margin-bottom: 8px; }
-    .v-tag { display: inline-block; border-radius: 12px; padding: 2px 12px; font-size: .62rem; font-weight: 700; }
-    .tag-court { background: rgba(0,0,0,.06); color: var(--muted); }
-    .v-rule { font-size: .63rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-
-    /* ── GRILLE LETTRES LONGUES ── */
-    .vlong-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-    .vlong-card { background: var(--card); border: 1.5px solid var(--bd); border-radius: 14px;
-                  padding: 16px 12px; text-align: center; box-shadow: 0 1px 8px rgba(155,37,53,.05); }
-    .vl-ar { font-family: var(--ar); font-size: 2.8rem; direction: rtl; line-height: 1.1; margin-bottom: 6px; }
-    .vl-name { font-size: .8rem; font-weight: 800; margin-bottom: 3px; }
-    .vl-name-ar { font-family: var(--ar); font-size: .82rem; direction: rtl; color: var(--muted); margin-bottom: 6px; }
-    .vl-note { font-size: .62rem; color: var(--muted); line-height: 1.4; }
-
-    /* ── TANWIN ── */
-    .tanwin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .tanwin-card { background: var(--card); border-radius: 16px; overflow: hidden;
-                   box-shadow: 0 2px 14px rgba(155,37,53,.07); }
-    .tan-strip { height: 4px; }
-    .tan-body  { padding: 18px 14px; text-align: center; }
-    .tan-ar    { font-family: var(--ar); font-size: 3.6rem; direction: rtl; line-height: 1.2;
-                 margin-bottom: 8px; display: inline-block; }
-    .tan-name  { font-size: .8rem; font-weight: 800; margin-bottom: 3px; }
-    .tan-name-ar { font-family: var(--ar); font-size: .85rem; direction: rtl; color: var(--muted); margin-bottom: 12px; }
-    .tan-note  { font-size: .62rem; color: var(--muted); line-height: 1.6; }
-
-    /* ── TABS + PANELS ── */
-    .tabs { display: flex; gap: 8px; width: 100%; max-width: 660px; margin-bottom: 16px; }
-    .tab { flex: 1; background: var(--card); border: 2px solid var(--bd); border-radius: 10px;
-           padding: 11px 8px; text-align: center; cursor: pointer; font-size: .78rem; font-weight: 700;
-           color: var(--muted); line-height: 1.4; touch-action: manipulation;
-           -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-    .tab.active { background: #9B2535; color: white; border-color: #9B2535; }
-    .tab-icon { font-size: 1.1rem; display: block; margin-bottom: 2px; }
-    .panel { display: none; width: 100%; max-width: 660px; }
-    .panel.active { display: block; }
-
-    /* ── QCM ── */
-    .progress-bar { height: 5px; background: var(--bd); border-radius: 3px; margin-bottom: 10px; overflow: hidden; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #C84060, #9B2535); border-radius: 3px; transition: width .4s; }
-    .counter { font-size: .75rem; color: var(--muted); font-weight: 600; text-align: center; margin-bottom: 12px; }
-    .q-card { background: var(--card); border: 2px solid var(--bd); border-radius: 16px; padding: 24px 20px;
-               text-align: center; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(155,37,53,.07);
-               transition: border-color .2s, background .2s; }
-    .q-card.correct { background: #FFF7E0; border-color: #CC7A00; }
-    .q-card.wrong   { background: #FFF0F4; border-color: #C84060; }
-    .q-label { font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
-    .q-word  { font-family: var(--ar); font-size: 4rem; direction: rtl; color: #9B2535; margin-bottom: 4px; }
-    .q-question { font-size: .82rem; color: var(--text); }
-    .choices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
-    .choice { background: var(--card); border: 2px solid var(--bd); border-radius: 12px; padding: 13px 6px;
-               cursor: pointer; text-align: center; font-size: .8rem; font-weight: 700; color: #9B2535;
-               transition: all .15s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-    .choice:hover:not(.locked) { border-color: #9B2535; background: #FEF4F6; }
-    .choice.correct { background: #FFF7E0; border-color: #CC7A00; color: #7A4200; }
-    .choice.wrong   { background: #FFF0F4; border-color: #C84060; animation: shake .3s; }
-    .choice.locked  { cursor: default; }
-    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
-    .feedback { font-size: .82rem; font-weight: 700; text-align: center; margin-bottom: 8px; min-height: 1.2em; }
-    .feedback.ok { color: #7A4200; }
-    .feedback.ko { color: #C84060; }
-    .score-row { display: flex; justify-content: center; margin-bottom: 12px; }
-    .score-pill { background: var(--card); border: 1.5px solid var(--bd); border-radius: 20px;
-                  padding: 4px 18px; font-weight: 700; color: #9B2535; font-size: .8rem; }
-    .btn-restart { background: #9B2535; color: white; border: none; border-radius: 10px; padding: 10px 28px;
-                   font-size: .85rem; cursor: pointer; font-weight: 700; font-family: var(--font);
-                   display: block; margin: 0 auto; box-shadow: 0 2px 10px rgba(155,37,53,.25); }
-
-    /* ── MATCH ── */
-    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .match-col-label { font-size: .63rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
-                       color: var(--muted); text-align: center; margin-bottom: 8px; }
-    .match-col { display: flex; flex-direction: column; gap: 7px; }
-    .match-item { background: var(--card); border: 2px solid var(--bd); border-radius: 10px; padding: 10px 8px;
-                  text-align: center; cursor: pointer; transition: all .15s;
-                  user-select: none; -webkit-user-select: none; touch-action: manipulation;
-                  -webkit-tap-highlight-color: transparent; }
-    .match-item.ar-side { font-family: var(--ar); font-size: 2.2rem; direction: rtl; color: #9B2535; }
-    .match-item.fr-side { font-size: .82rem; font-weight: 700; color: var(--text); }
-    .match-item.selected { background: #FEF4F6; border-color: #C84060; }
-    .match-item.matched  { background: #FFF7E0; border-color: #CC7A00; cursor: default; }
-    .match-item.matched.ar-side, .match-item.matched.fr-side { color: #7A4200; }
-    .match-item.flash-err { animation: flash-r .4s; }
-    @keyframes flash-r { 0%{background:#FFF0F4;border-color:#C84060} 100%{background:var(--card);border-color:var(--bd)} }
-    .match-score { text-align: center; font-size: .9rem; font-weight: 700; color: #7A4200; margin-top: 14px; }
-
-    /* ── CELEBRATION ── */
-    .celebration { display: none; position: fixed; inset: 0; background: rgba(155,37,53,.95); z-index: 999;
-                   flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
-    .celebration.visible { display: flex; }
-    .cel-icon   { font-size: 7rem; animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards, wobble 1.2s ease .6s infinite; margin-bottom: 14px; }
-    @keyframes popIn { 0%{transform:scale(0) rotate(-20deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
-    @keyframes wobble { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg) scale(1.04)} }
-    .cel-ar     { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #FFE0C0; animation: fadeUp .5s ease .4s both; margin-bottom: 6px; }
-    .cel-praise { font-family: var(--ar); font-size: 1.4rem; direction: rtl; color: white; animation: fadeUp .5s ease .6s both; margin-bottom: 6px; }
-    .cel-fr     { font-size: .9rem; color: rgba(255,255,255,.85); animation: fadeUp .5s ease .75s both; margin-bottom: 20px; }
-    .cel-emojis { font-size: 1.5rem; letter-spacing: 8px; animation: fadeUp .5s ease .9s both; margin-bottom: 22px; }
-    @keyframes fadeUp { 0%{opacity:0;transform:translateY(18px)} 100%{opacity:1;transform:translateY(0)} }
-    .btn-cel { background: white; color: #9B2535; border: none; border-radius: 12px; padding: 12px 30px;
-               font-size: .9rem; font-weight: 800; cursor: pointer; font-family: var(--font);
-               animation: fadeUp .5s ease 1s both; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
-
-    footer { font-size: .64rem; color: var(--muted); margin-top: 24px; text-align: center; }
-
-    @media (max-width: 420px) {
-      .choices-grid { grid-template-columns: 1fr; }
-      .fam-inner { flex-direction: column; }
-      .fam-arrow { transform: rotate(90deg); padding: 4px 0; }
-      .fam-cell.side-bd { border-right: none; border-bottom: 1px solid var(--bd); }
-      .vlong-grid { grid-template-columns: repeat(3,1fr); }
+    .section { width: 100%; max-width: 700px; margin-bottom: 28px; }
+    .section-title {
+      font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .15em;
+      color: #9B2535; border-left: 4px solid #9B2535; padding-left: 10px; margin-bottom: 14px;
     }
+
+    /* ══ TABLEAU 1 — LES LETTRES ══ */
+    .tbl-wrap { overflow-x: auto; border-radius: 14px; box-shadow: 0 2px 14px rgba(155,37,53,.07); }
+    table {
+      border-collapse: collapse; background: #fff;
+      width: 100%; min-width: 520px;
+    }
+    thead tr { background: #9B2535; }
+    thead th {
+      color: white; font-size: .63rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .1em; padding: 10px 8px; text-align: center;
+    }
+    thead th.th-ar {
+      font-family: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+      font-size: .95rem; text-transform: none; letter-spacing: 0; font-weight: 700;
+    }
+    tbody tr { border-bottom: 1px solid #EDD8DC; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:nth-child(even) { background: #FEF4F6; }
+    td { padding: 12px 8px; text-align: center; vertical-align: middle; }
+    td.td-nom {
+      font-size: .78rem; font-weight: 700; color: #7A5A60; text-align: left;
+      padding-left: 14px; white-space: nowrap;
+    }
+    td.td-form {
+      font-family: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+      font-size: 2.2rem; color: #1E1E2C; direction: rtl; line-height: 1.2;
+    }
+    td.td-att { white-space: nowrap; }
+    .badge {
+      display: inline-block; font-size: .63rem; font-weight: 800; border-radius: 20px;
+      padding: 4px 10px; letter-spacing: .04em;
+    }
+    .badge-yes { background: #E8F7F1; color: #276952; border: 1.5px solid #3A8A70; }
+    .badge-no  { background: #FEF4F6; color: #9B2535; border: 1.5px solid #C84060; }
+
+    /* ══ TABLEAU 2 — VOYELLES ══ */
+    .vowel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .vowel-card {
+      background: #fff; border: 1.5px solid #EDD8DC; border-radius: 14px;
+      padding: 16px 12px; box-shadow: 0 2px 10px rgba(155,37,53,.06);
+    }
+    .vc-title {
+      font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+      color: #7A5A60; margin-bottom: 12px; text-align: center;
+      border-bottom: 1px solid #EDD8DC; padding-bottom: 8px;
+    }
+    .vc-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+    .vc-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .vc-ar {
+      font-family: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+      font-size: 2.8rem; direction: rtl; line-height: 1.2;
+    }
+    .vc-label {
+      font-size: .6rem; font-weight: 700; color: #7A5A60;
+      text-transform: uppercase; letter-spacing: .08em; text-align: center;
+    }
+    .vc-sep {
+      display: flex; align-items: center; gap: 8px;
+      color: #C0A0A8; font-size: .6rem; font-weight: 700;
+      letter-spacing: .08em; margin: 10px 0 6px;
+    }
+    .vc-sep::before, .vc-sep::after { content:''; flex:1; height:1px; background:#EDD8DC; }
+
+    .tan-ar {
+      font-family: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+      font-size: 3rem; direction: rtl; line-height: 1.2;
+    }
+
+    /* ── NOTE ── */
+    .note {
+      width: 100%; max-width: 700px;
+      background: #FEF4F6; border: 1px solid #EDD8DC; border-left: 4px solid #C84060;
+      border-radius: 10px; padding: 12px 16px;
+      font-size: .75rem; color: #7A5A60; line-height: 1.65; margin-top: 4px;
+    }
+    .note strong { color: #9B2535; }
+
+    footer { font-size: .62rem; color: #C0A0A8; margin-top: 24px; text-align: center; }
   </style>
 </head>
 <body>
@@ -187,387 +130,169 @@
 <div class="top-bar"></div>
 
 <header>
-  <div class="h-brand">Al Bidayah · Niveau 1</div>
-  <div class="h-ar">الباء والتاء</div>
-  <div class="h-fr">Fiche Recapitulative - Ilham</div>
-  <div class="h-badges">
-    <span class="h-badge">Seances 1 et 2</span>
-    <span class="h-badge">Lettres · Voyelles · Tanwin</span>
-  </div>
+  <div class="h-brand">Al Bidayah · Fiche Récap</div>
+  <div class="h-name">Ilham — Cours 1 &amp; 2</div>
+  <div class="h-ar">الْبَاءُ · التَّاءُ · الْيَاءُ · الْأَلِفُ · الْوَاوُ</div>
 </header>
 
 
-<!-- ══════════════════════════════
-     1. LES LETTRES Ba et Ta
-════════════════════════════════ -->
+<!-- ══════════════════════════════════
+     TABLEAU 1 — LES LETTRES
+══════════════════════════════════════ -->
 <div class="section">
-  <div class="sec-title">Les Lettres — ب et ت</div>
-  <table class="letter-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Fin du mot</th>
-        <th>Milieu</th>
-        <th>Debut</th>
-        <th>Seule</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="td-label">
-          <span class="lbl-ar">ب</span>
-          <span class="lbl-fr">Ba</span>
-          <span class="lbl-sub">S'attache avant et apres</span>
-        </td>
-        <td class="td-fin"><div class="ar-form">ـب</div></td>
-        <td class="td-mil"><div class="ar-form">ـبـ</div></td>
-        <td class="td-deb"><div class="ar-form">بـ</div></td>
-        <td class="td-seul"><div class="ar-form">ب</div></td>
-      </tr>
-      <tr>
-        <td class="td-label">
-          <span class="lbl-ar">ت</span>
-          <span class="lbl-fr">Ta</span>
-          <span class="lbl-sub">S'attache avant et apres</span>
-        </td>
-        <td class="td-fin"><div class="ar-form">ـت</div></td>
-        <td class="td-mil"><div class="ar-form">ـتـ</div></td>
-        <td class="td-deb"><div class="ar-form">تـ</div></td>
-        <td class="td-seul"><div class="ar-form">ت</div></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!-- ══════════════════════════════
-     2. LES VOYELLES COURTES + LONGUES
-     (par famille, court → long)
-════════════════════════════════ -->
-<div class="section">
-  <div class="sec-title">Les Voyelles</div>
-
-  <!-- FATHA → ALIF (rose / bordeaux) -->
-  <div class="fam-block">
-    <div class="fam-strip" style="background:#C84060"></div>
-    <div class="fam-inner">
-      <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">َـ</span></div>
-        <div class="v-name" style="color:#C84060">Fatha</div>
-        <div class="v-name-ar">فَتْحَة</div>
-        <span class="v-tag tag-court">voyelle courte</span>
-        <div class="v-rule">trait au-dessus de la lettre</div>
-      </div>
-      <div class="fam-arrow" style="color:#F0A8BC">→</div>
-      <div class="fam-cell">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">َا</span></div>
-        <div class="v-name" style="color:#C84060">Alif — ا</div>
-        <div class="v-name-ar">أَلِف</div>
-        <span class="v-tag" style="background:#C84060;color:white">voyelle longue</span>
-        <div class="v-rule">fatha tenue longuement<br>on ecrit ا apres</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAMMA → WAW (amber) -->
-  <div class="fam-block">
-    <div class="fam-strip" style="background:#CC7A00"></div>
-    <div class="fam-inner">
-      <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">ُـ</span></div>
-        <div class="v-name" style="color:#CC7A00">Damma</div>
-        <div class="v-name-ar">ضَمَّة</div>
-        <span class="v-tag tag-court">voyelle courte</span>
-        <div class="v-rule">petit و au-dessus de la lettre</div>
-      </div>
-      <div class="fam-arrow" style="color:#F0C878">→</div>
-      <div class="fam-cell">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">ُو</span></div>
-        <div class="v-name" style="color:#CC7A00">Waw — و</div>
-        <div class="v-name-ar">وَاو</div>
-        <span class="v-tag" style="background:#CC7A00;color:white">voyelle longue</span>
-        <div class="v-rule">damma tenue longuement<br>on ecrit و apres</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- KASRA → YA (vert sauge) -->
-  <div class="fam-block">
-    <div class="fam-strip" style="background:#3A8A70"></div>
-    <div class="fam-inner">
-      <div class="fam-cell side-bd">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">ِـ</span></div>
-        <div class="v-name" style="color:#3A8A70">Kasra</div>
-        <div class="v-name-ar">كَسْرَة</div>
-        <span class="v-tag tag-court">voyelle courte</span>
-        <div class="v-rule">trait en-dessous de la lettre</div>
-      </div>
-      <div class="fam-arrow" style="color:#90C8B0">→</div>
-      <div class="fam-cell">
-        <div class="v-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">ِي</span></div>
-        <div class="v-name" style="color:#3A8A70">Ya — ي</div>
-        <div class="v-name-ar">يَاء</div>
-        <span class="v-tag" style="background:#3A8A70;color:white">voyelle longue</span>
-        <div class="v-rule">kasra tenue longuement<br>on ecrit ي apres</div>
-      </div>
-    </div>
+  <div class="section-title">Les lettres — 4 formes d'écriture</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Lettre</th>
+          <th class="th-ar">آخِر<br><span style="font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;font-family:inherit;font-weight:400">Fin</span></th>
+          <th class="th-ar">وَسَط<br><span style="font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;font-family:inherit;font-weight:400">Milieu</span></th>
+          <th class="th-ar">أَوَّل<br><span style="font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;font-family:inherit;font-weight:400">Début</span></th>
+          <th class="th-ar">مُنْفَرِد<br><span style="font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;font-family:inherit;font-weight:400">Seule</span></th>
+          <th>S'attache<br>après ?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-nom">Ba — بَاء</td>
+          <td class="td-form">ـبْ</td>
+          <td class="td-form">ـبـ</td>
+          <td class="td-form">بـ</td>
+          <td class="td-form">بْ</td>
+          <td class="td-att"><span class="badge badge-yes">✓ Oui</span></td>
+        </tr>
+        <tr>
+          <td class="td-nom">Ta — تَاء</td>
+          <td class="td-form">ـتْ</td>
+          <td class="td-form">ـتـ</td>
+          <td class="td-form">تـ</td>
+          <td class="td-form">تْ</td>
+          <td class="td-att"><span class="badge badge-yes">✓ Oui</span></td>
+        </tr>
+        <tr>
+          <td class="td-nom">Ya — يَاء</td>
+          <td class="td-form">ـيْ</td>
+          <td class="td-form">ـيـ</td>
+          <td class="td-form">يـ</td>
+          <td class="td-form">يْ</td>
+          <td class="td-att"><span class="badge badge-yes">✓ Oui</span></td>
+        </tr>
+        <tr>
+          <td class="td-nom">Alif — أَلِف</td>
+          <td class="td-form">ـا</td>
+          <td class="td-form">ـا</td>
+          <td class="td-form">ا</td>
+          <td class="td-form">ا</td>
+          <td class="td-att"><span class="badge badge-no">✗ Non</span></td>
+        </tr>
+        <tr>
+          <td class="td-nom">Waw — وَاو</td>
+          <td class="td-form">ـوْ</td>
+          <td class="td-form">ـوْ</td>
+          <td class="td-form">وْ</td>
+          <td class="td-form">وْ</td>
+          <td class="td-att"><span class="badge badge-no">✗ Non</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════
-     3. LES LETTRES LONGUES
-     (comment elles s'ecrivent)
-════════════════════════════════ -->
-<div class="section">
-  <div class="sec-title">Comment s'ecrit chaque lettre longue</div>
-  <div class="vlong-grid">
-
-    <div class="vlong-card">
-      <div class="vl-ar" style="color:#C84060">ا</div>
-      <div class="vl-name" style="color:#C84060">Alif</div>
-      <div class="vl-name-ar">أَلِف</div>
-      <div class="vl-note">une seule forme · ne s'attache pas apres</div>
-    </div>
-
-    <div class="vlong-card">
-      <div class="vl-ar" style="color:#CC7A00">و</div>
-      <div class="vl-name" style="color:#CC7A00">Waw</div>
-      <div class="vl-name-ar">وَاو</div>
-      <div class="vl-note">une seule forme · ne s'attache pas apres</div>
-    </div>
-
-    <div class="vlong-card">
-      <div class="vl-ar" style="color:#3A8A70">ي</div>
-      <div class="vl-name" style="color:#3A8A70">Ya</div>
-      <div class="vl-name-ar">يَاء</div>
-      <div class="vl-note">4 formes · s'attache avant et apres</div>
-    </div>
-
-  </div>
+<div class="note">
+  <strong>S'attache après :</strong> en arabe, certaines lettres se connectent à la lettre suivante (Ba, Ta, Ya…), d'autres ne se connectent jamais à ce qui vient après (Alif, Waw). C'est pour ça que leur forme ne change pas au début ou au milieu d'un mot.
 </div>
 
 
-<!-- ══════════════════════════════
-     4. LE TANWIN — oun et in
-════════════════════════════════ -->
-<div class="section">
-  <div class="sec-title">Le Tanwin — تنوين</div>
-  <div class="tanwin-grid">
+<!-- ══════════════════════════════════
+     TABLEAU 2 — VOYELLES ET TANWIN
+══════════════════════════════════════ -->
+<div class="section" style="margin-top:28px">
+  <div class="section-title">Les voyelles et le tanwin</div>
+  <div class="vowel-grid">
 
-    <!-- Tanwin Damma — amber -->
-    <div class="tanwin-card">
-      <div class="tan-strip" style="background:#CC7A00"></div>
-      <div class="tan-body">
-        <div class="tan-ar" style="color:#CC7A00">تٌ</div>
-        <div class="tan-name" style="color:#CC7A00">Tanwin Damma</div>
-        <div class="tan-name-ar">تنوين الضم</div>
-        <div class="tan-note">deux dammas superposees<br>se place a la fin d'un mot indefini<br>exemple : بَابٌ (une porte)</div>
+    <!-- FATHA + ALIF -->
+    <div class="vowel-card">
+      <div class="vc-title" style="color:#C84060">Fatha &amp; Alif</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">&#x064E;&#x0640;</span></div>
+          <div class="vc-label" style="color:#C84060">Courte<br>fatha</div>
+        </div>
+      </div>
+      <div class="vc-sep">prolongée par</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#C84060">&#x064E;ا</span></div>
+          <div class="vc-label" style="color:#C84060">Longue<br>alif</div>
+        </div>
       </div>
     </div>
 
-    <!-- Tanwin Kasra — vert -->
-    <div class="tanwin-card">
-      <div class="tan-strip" style="background:#3A8A70"></div>
-      <div class="tan-body">
-        <div class="tan-ar" style="color:#3A8A70">تٍ</div>
-        <div class="tan-name" style="color:#3A8A70">Tanwin Kasra</div>
-        <div class="tan-name-ar">تنوين الكسر</div>
-        <div class="tan-note">deux kasras superposees<br>se place a la fin d'un mot indefini</div>
+    <!-- DAMMA + WAW -->
+    <div class="vowel-card">
+      <div class="vc-title" style="color:#CC7A00">Damma &amp; Waw</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">&#x064F;&#x0640;</span></div>
+          <div class="vc-label" style="color:#CC7A00">Courte<br>damma</div>
+        </div>
+      </div>
+      <div class="vc-sep">prolongée par</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#CC7A00">&#x064F;و</span></div>
+          <div class="vc-label" style="color:#CC7A00">Longue<br>waw</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KASRA + YA -->
+    <div class="vowel-card">
+      <div class="vc-title" style="color:#3A8A70">Kasra &amp; Ya</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">&#x0650;&#x0640;</span></div>
+          <div class="vc-label" style="color:#3A8A70">Courte<br>kasra</div>
+        </div>
+      </div>
+      <div class="vc-sep">prolongée par</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="vc-ar"><span style="color:#1E1E2C">ب</span><span style="color:#3A8A70">&#x0650;ي</span></div>
+          <div class="vc-label" style="color:#3A8A70">Longue<br>ya</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TANWIN -->
+    <div class="vowel-card">
+      <div class="vc-title">Tanwin</div>
+      <div class="vc-row">
+        <div class="vc-item">
+          <div class="tan-ar" style="color:#CC7A00">تٌ</div>
+          <div class="vc-label" style="color:#CC7A00">Damma<br>— oun —</div>
+        </div>
+        <div style="width:1px;background:#EDD8DC;margin:0 4px;align-self:stretch"></div>
+        <div class="vc-item">
+          <div class="tan-ar" style="color:#3A8A70">تٍ</div>
+          <div class="vc-label" style="color:#3A8A70">Kasra<br>— in —</div>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
 
-
-<!-- ══════════════════════════════
-     5. EXERCICES
-════════════════════════════════ -->
-<div class="sec-title" style="width:100%;max-width:660px;margin-bottom:14px;">S'entrainer</div>
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('qcm')">
-    <span class="tab-icon">🎯</span>Voyelles courtes
-  </div>
-  <div class="tab" onclick="switchTab('match')">
-    <span class="tab-icon">🔗</span>Voyelles longues
-  </div>
+<div class="note">
+  <strong>Règle des couleurs :</strong> la voyelle courte et la voyelle longue qui lui correspond ont toujours la même couleur.
+  La fatha et le alif sont en <strong style="color:#C84060">rose</strong>,
+  la damma et le waw en <strong style="color:#CC7A00">orange</strong>,
+  la kasra et le ya en <strong style="color:#3A8A70">vert</strong>.
+  Les lettres de base restent toujours en noir.
 </div>
 
-<!-- QCM — identifier la voyelle courte -->
-<div class="panel active" id="panel-qcm">
-  <div class="progress-bar"><div class="progress-fill" id="qcm-prog" style="width:0%"></div></div>
-  <div class="counter" id="qcm-ctr">Question 1 / 6</div>
-  <div class="q-card" id="qcm-card">
-    <div class="q-label">Quelle voyelle courte est sur cette lettre ?</div>
-    <div class="q-word" id="qcm-word"></div>
-  </div>
-  <div class="choices-grid" id="qcm-choices"></div>
-  <div class="feedback" id="qcm-fb"></div>
-  <div class="score-row"><div class="score-pill">Score : <span id="qcm-score">0</span> / 6</div></div>
-  <button class="btn-restart" onclick="initQCM()">Recommencer</button>
-</div>
+<footer>Al Bidayah · Récap Ilham · Cours 1 &amp; 2</footer>
 
-<!-- MATCH — relier lettre longue a son nom -->
-<div class="panel" id="panel-match">
-  <div class="match-grid">
-    <div>
-      <div class="match-col-label">Lettre</div>
-      <div class="match-col" id="match-ar-col"></div>
-    </div>
-    <div>
-      <div class="match-col-label">Nom</div>
-      <div class="match-col" id="match-fr-col"></div>
-    </div>
-  </div>
-  <div class="match-score" id="match-score"></div>
-  <button class="btn-restart" onclick="initMatch()" style="margin-top:16px">Recommencer</button>
-</div>
-
-<!-- CELEBRATION -->
-<div class="celebration" id="celebration">
-  <div class="cel-icon">🍬</div>
-  <div class="cel-ar">مَا شَاءَ اللهُ</div>
-  <div class="cel-praise">أَحْسَنْتِ ! بَارَكَ اللهُ فِيكِ</div>
-  <div class="cel-fr">Bravo Ilham ! Tu as tout reussi !</div>
-  <div class="cel-emojis">🍭 💕 🍬 💕 🍭</div>
-  <button class="btn-cel" id="btn-cel">Recommencer</button>
-</div>
-
-<footer>Al Bidayah · Niveau 1 · Seances 1 et 2 · Ilham</footer>
-
-<script>
-/* ── QCM voyelles courtes ── */
-var BLK = '#1E1E2C', FA = '#C84060', DA = '#CC7A00', KA = '#3A8A70';
-var QCM = [
-  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+FA+'">َـ</span>', answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
-  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+DA+'">ُـ</span>', answer:'Damma', opts:['Fatha','Damma','Kasra'] },
-  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+KA+'">ِـ</span>', answer:'Kasra', opts:['Fatha','Damma','Kasra'] },
-  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+FA+'">َـ</span>', answer:'Fatha', opts:['Fatha','Damma','Kasra'] },
-  { html:'<span style="color:'+BLK+'">ب</span><span style="color:'+DA+'">ُـ</span>', answer:'Damma', opts:['Fatha','Damma','Kasra'] },
-  { html:'<span style="color:'+BLK+'">ت</span><span style="color:'+KA+'">ِـ</span>', answer:'Kasra', opts:['Fatha','Damma','Kasra'] },
-];
-
-/* ── MATCH voyelles longues ── */
-var PAIRS = [
-  { ar:'بَا', fr:'Alif' },
-  { ar:'بُو', fr:'Waw'  },
-  { ar:'بِي', fr:'Ya'   },
-  { ar:'ا',   fr:'Alif — ne s\'attache pas apres' },
-  { ar:'و',   fr:'Waw — ne s\'attache pas apres'  },
-  { ar:'ي',   fr:'Ya — s\'attache avant et apres' },
-];
-/* On prend les 3 premiers pour le match */
-var MATCH_PAIRS = PAIRS.slice(0, 3);
-
-function shuffle(a) {
-  var b = a.slice();
-  for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
-  return b;
-}
-function switchTab(id) {
-  var ids = ['qcm','match'], tabs = document.querySelectorAll('.tab'), panels = document.querySelectorAll('.panel');
-  for (var i = 0; i < tabs.length; i++) { tabs[i].classList[ids[i] === id ? 'add' : 'remove']('active'); }
-  for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
-  document.getElementById('panel-' + id).classList.add('active');
-}
-function showCelebration(fn) {
-  var cel = document.getElementById('celebration');
-  cel.classList.add('visible');
-  document.getElementById('btn-cel').onclick = function () { cel.classList.remove('visible'); fn(); };
-}
-
-/* QCM */
-var qQueue, qIdx, qScore;
-function initQCM() {
-  qQueue = shuffle(QCM); qIdx = 0; qScore = 0;
-  document.getElementById('qcm-score').textContent = '0';
-  document.getElementById('qcm-fb').textContent = '';
-  document.getElementById('qcm-fb').className = 'feedback';
-  showQCM();
-}
-function showQCM() {
-  var q = qQueue[qIdx];
-  document.getElementById('qcm-ctr').textContent = 'Question ' + (qIdx + 1) + ' / 6';
-  document.getElementById('qcm-prog').style.width = (qIdx / 6 * 100) + '%';
-  document.getElementById('qcm-word').innerHTML = q.html;
-  document.getElementById('qcm-card').className = 'q-card';
-  document.getElementById('qcm-fb').textContent = '';
-  document.getElementById('qcm-fb').className = 'feedback';
-  var opts = shuffle(q.opts.slice()), box = document.getElementById('qcm-choices');
-  box.innerHTML = '';
-  opts.forEach(function (o) {
-    var btn = document.createElement('button');
-    btn.type = 'button'; btn.className = 'choice'; btn.dataset.val = o; btn.textContent = o;
-    btn.addEventListener('click', (function (b, c, a) { return function () { answerQCM(b, c, a); }; })(btn, o === q.answer, q.answer));
-    box.appendChild(btn);
-  });
-}
-function answerQCM(btn, correct, answer) {
-  var choices = document.querySelectorAll('#qcm-choices .choice');
-  for (var i = 0; i < choices.length; i++) { choices[i].classList.add('locked'); }
-  var fb = document.getElementById('qcm-fb'), card = document.getElementById('qcm-card');
-  if (correct) {
-    btn.classList.add('correct'); card.classList.add('correct');
-    qScore++; document.getElementById('qcm-score').textContent = qScore;
-    fb.textContent = 'Bonne reponse !'; fb.className = 'feedback ok';
-  } else {
-    btn.classList.add('wrong'); card.classList.add('wrong');
-    var all = document.querySelectorAll('#qcm-choices .choice');
-    for (var k = 0; k < all.length; k++) { if (all[k].dataset.val === answer) { all[k].classList.add('correct'); break; } }
-    fb.textContent = 'Incorrect. La bonne reponse est : ' + answer; fb.className = 'feedback ko';
-  }
-  setTimeout(function () {
-    qIdx++;
-    if (qIdx >= QCM.length) {
-      document.getElementById('qcm-prog').style.width = '100%';
-      if (qScore === QCM.length) { setTimeout(function () { showCelebration(initQCM); }, 300); }
-    } else { showQCM(); }
-  }, 1200);
-}
-
-/* MATCH */
-var matchSel = null, matchDone = 0;
-function initMatch() {
-  matchSel = null; matchDone = 0; document.getElementById('match-score').textContent = '';
-  var arItems = shuffle(MATCH_PAIRS.slice()), frItems = shuffle(MATCH_PAIRS.slice());
-  var arCol = document.getElementById('match-ar-col'), frCol = document.getElementById('match-fr-col');
-  arCol.innerHTML = ''; frCol.innerHTML = '';
-  arItems.forEach(function (p) {
-    var el = document.createElement('div');
-    el.className = 'match-item ar-side'; el.textContent = p.ar; el.dataset.key = p.ar; el.dataset.side = 'ar';
-    el.addEventListener('click', (function (e) { return function () { clickMatch(e); }; })(el));
-    arCol.appendChild(el);
-  });
-  frItems.forEach(function (p) {
-    var el = document.createElement('div');
-    el.className = 'match-item fr-side'; el.textContent = p.fr; el.dataset.key = p.ar; el.dataset.side = 'fr';
-    el.addEventListener('click', (function (e) { return function () { clickMatch(e); }; })(el));
-    frCol.appendChild(el);
-  });
-}
-function clickMatch(el) {
-  if (el.classList.contains('matched')) return;
-  if (!matchSel) { el.classList.add('selected'); matchSel = el; return; }
-  if (el.dataset.side === matchSel.dataset.side) { matchSel.classList.remove('selected'); el.classList.add('selected'); matchSel = el; return; }
-  if (el.dataset.key === matchSel.dataset.key) {
-    el.classList.remove('selected'); el.classList.add('matched');
-    matchSel.classList.remove('selected'); matchSel.classList.add('matched');
-    matchDone++;
-    if (matchDone === MATCH_PAIRS.length) {
-      document.getElementById('match-score').textContent = 'Parfait ! Toutes les paires trouvees.';
-      setTimeout(function () { showCelebration(initMatch); }, 500);
-    }
-  } else {
-    el.classList.add('flash-err'); matchSel.classList.add('flash-err');
-    var e1 = el, e2 = matchSel;
-    setTimeout(function () { e1.classList.remove('flash-err'); e2.classList.remove('flash-err'); }, 400);
-    matchSel.classList.remove('selected');
-  }
-  matchSel = null;
-}
-
-initQCM(); initMatch();
-</script>
 </body>
 </html>
