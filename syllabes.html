@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercices — Syllabes</title>
+  <title>Exercices — Lettres</title>
   <style>
     :root {
       --brand:  #9B2535;
@@ -153,17 +153,17 @@
 <header>
   <div class="h-brand">Al Bidayah · Exercices de lecture</div>
   <div class="h-ar">تَرْكِيبٌ وَتَحْلِيلٌ</div>
-  <div class="h-fr">Syllabes — Composer et Decomposer</div>
+  <div class="h-fr">Lettres — Composer et Decomposer</div>
 </header>
 
 <div class="tabs">
   <div class="tab active" onclick="switchTab('compose')">
     <span class="tab-icon">🔧</span>
-    Composer<br><small>syllabes → mot</small>
+    Composer<br><small>lettres → mot</small>
   </div>
   <div class="tab" onclick="switchTab('decompose')">
     <span class="tab-icon">🔍</span>
-    Decomposer<br><small>mot → syllabes</small>
+    Decomposer<br><small>mot → lettres</small>
   </div>
 </div>
 
@@ -175,10 +175,10 @@
     <div class="hint-fr">Forme ce mot en arabe :</div>
     <div class="hint-word" id="c-hint"></div>
     <div class="result-zone" id="c-result-zone">
-      <span class="result-empty">clique sur les syllabes dans le bon ordre</span>
+      <span class="result-empty">clique sur les lettres dans le bon ordre</span>
     </div>
     <div class="compose-feedback" id="c-feedback"></div>
-    <div class="syllable-label">Syllabes disponibles :</div>
+    <div class="syllable-label">Lettres disponibles :</div>
     <div class="syllables-grid" id="c-syllables"></div>
   </div>
   <button class="btn-restart" onclick="initCompose()">Recommencer</button>
@@ -191,7 +191,7 @@
   <div class="ex-card">
     <div class="deco-word" id="d-word"></div>
     <div class="deco-fr" id="d-fr"></div>
-    <div class="deco-label">Choisir la bonne decomposition :</div>
+    <div class="deco-label">Choisir le bon ordre des lettres :</div>
     <div class="deco-opts" id="d-opts"></div>
   </div>
   <button class="btn-restart" onclick="initDecompose()">Recommencer</button>
@@ -213,58 +213,58 @@
 /* ══════════════════════════════════════
    DONNÉES — mots du livre la Madrassah
    Lettres étudiées : ب ت د ر ك س ل ج م ه خ ء
-   (+ ا و ي comme voyelles longues)
+   Décomposition LETTRE PAR LETTRE
 ══════════════════════════════════════ */
 var WORDS = [
   {
     ar: 'بَابٌ', fr: 'porte',
-    parts: ['بَا','بٌ'],
-    wrongs: [['بَ','ابٌ'], ['بَابُ','نْ']]
+    parts: ['بَ','ا','بٌ'],
+    wrongs: [['ا','بَ','بٌ'], ['بٌ','ا','بَ']]
   },
   {
     ar: 'دَارٌ', fr: 'maison',
-    parts: ['دَا','رٌ'],
-    wrongs: [['دَ','ارٌ'], ['دَارُ','نْ']]
+    parts: ['دَ','ا','رٌ'],
+    wrongs: [['ا','دَ','رٌ'], ['دَ','رٌ','ا']]
   },
   {
     ar: 'جَمَلٌ', fr: 'chameau',
     parts: ['جَ','مَ','لٌ'],
-    wrongs: [['جَمَ','لٌ'], ['جَ','مَلٌ']]
+    wrongs: [['جَ','لٌ','مَ'], ['مَ','جَ','لٌ']]
   },
   {
     ar: 'أَسَدٌ', fr: 'lion',
     parts: ['أَ','سَ','دٌ'],
-    wrongs: [['أَسَ','دٌ'], ['أَ','سَدٌ']]
+    wrongs: [['أَ','دٌ','سَ'], ['سَ','أَ','دٌ']]
   },
   {
     ar: 'مَلِكٌ', fr: 'roi',
     parts: ['مَ','لِ','كٌ'],
-    wrongs: [['مَلِ','كٌ'], ['مَ','لِكٌ']]
+    wrongs: [['مَ','كٌ','لِ'], ['لِ','مَ','كٌ']]
   },
   {
     ar: 'جَبَلٌ', fr: 'montagne',
     parts: ['جَ','بَ','لٌ'],
-    wrongs: [['جَبَ','لٌ'], ['جَ','بَلٌ']]
+    wrongs: [['جَ','لٌ','بَ'], ['بَ','جَ','لٌ']]
   },
   {
     ar: 'كِتَابٌ', fr: 'livre',
-    parts: ['كِ','تَا','بٌ'],
-    wrongs: [['كِتَ','ابٌ'], ['كِ','تَابٌ']]
+    parts: ['كِ','تَ','ا','بٌ'],
+    wrongs: [['كِ','ا','تَ','بٌ'], ['كِ','تَ','بٌ','ا']]
   },
   {
     ar: 'مَسْجِدٌ', fr: 'mosquee',
-    parts: ['مَسْ','جِ','دٌ'],
-    wrongs: [['مَ','سْجِ','دٌ'], ['مَسْجِ','دٌ']]
+    parts: ['مَ','سْ','جِ','دٌ'],
+    wrongs: [['مَ','جِ','سْ','دٌ'], ['مَ','سْ','دٌ','جِ']]
   },
   {
     ar: 'كَتَبَ', fr: 'il a ecrit',
     parts: ['كَ','تَ','بَ'],
-    wrongs: [['كَتَ','بَ'], ['كَ','تَبَ']]
+    wrongs: [['كَ','بَ','تَ'], ['تَ','كَ','بَ']]
   },
   {
     ar: 'دَخَلَ', fr: 'il est entre',
     parts: ['دَ','خَ','لَ'],
-    wrongs: [['دَخَ','لَ'], ['دَ','خَلَ']]
+    wrongs: [['دَ','لَ','خَ'], ['خَ','دَ','لَ']]
   }
 ];
 
@@ -357,7 +357,7 @@ function tapComposeSyl(card, syl) {
     card.classList.add('flash-ko');
     setTimeout(function () { card.classList.remove('flash-ko'); }, 400);
     var fb = document.getElementById('c-feedback');
-    fb.textContent = 'Pas encore — cherche la bonne syllabe !';
+    fb.textContent = 'Pas encore — cherche la bonne lettre !';
     fb.className = 'compose-feedback ko';
     setTimeout(function () { fb.textContent = ''; fb.className = 'compose-feedback'; }, 1000);
   }
