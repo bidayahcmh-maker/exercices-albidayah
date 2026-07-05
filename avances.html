@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercices avancés</title>
+  <style>
+    :root {
+      --brand: #9B2535; --rose: #C84060;
+      --bg: #FBF2F4; --card: #fff; --bd: #EDD8DC; --muted: #7A5A60;
+      --fa: #C84060; --da: #CC7A00; --ka: #3A8A70;
+      --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      --ar: 'Noto Naskh Arabic','Arabic Typesetting','Geeza Pro',serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: #2A1A1E;
+           padding: 18px 14px 60px; display: flex; flex-direction: column; align-items: center; }
+
+    /* HEADER */
+    .top-bar { width:100%; max-width:680px; height:4px; border-radius:2px; margin-bottom:14px;
+               background:linear-gradient(90deg,#C84060,#9B2535,#C84060); }
+    header { width:100%; max-width:680px; background:#FEF4F6;
+             border:1.5px solid #EDD8DC; border-top:5px solid #9B2535;
+             border-radius:14px; padding:16px 22px; text-align:center; margin-bottom:20px;
+             box-shadow:0 2px 12px rgba(155,37,53,.09); }
+    .h-brand { font-size:.6rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
+               color:#C84060; margin-bottom:4px; }
+    .h-ar { font-family:var(--ar); font-size:1.5rem; direction:rtl; color:#9B2535; margin-bottom:2px; }
+    .h-fr { font-size:.84rem; font-weight:600; color:#9B2535; }
+
+    /* TABS */
+    .tabs { display:flex; gap:6px; width:100%; max-width:680px; margin-bottom:18px; flex-wrap:wrap; }
+    .tab { flex:1; min-width:120px; background:var(--card); border:2px solid var(--bd); border-radius:10px;
+           padding:10px 6px; text-align:center; cursor:pointer; font-size:.72rem; font-weight:700;
+           color:var(--muted); line-height:1.35; touch-action:manipulation;
+           -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none; }
+    .tab.active { background:#9B2535; color:white; border-color:#9B2535; }
+    .tab-num { font-size:.9rem; font-weight:800; display:block; margin-bottom:2px; }
+    .panel { display:none; width:100%; max-width:680px; }
+    .panel.active { display:block; }
+
+    /* SHARED */
+    .ex-card { background:var(--card); border:1.5px solid var(--bd); border-radius:16px;
+               padding:22px 18px 18px; box-shadow:0 2px 12px rgba(155,37,53,.06); margin-bottom:12px; }
+    .prog-bar { height:4px; background:var(--bd); border-radius:2px; margin-bottom:8px; overflow:hidden; }
+    .prog-fill { height:100%; background:linear-gradient(90deg,#C84060,#9B2535); border-radius:2px; transition:width .4s; }
+    .score-line { font-size:.7rem; color:var(--muted); font-weight:600; text-align:center; margin-bottom:14px; }
+    .lbl { font-size:.62rem; text-transform:uppercase; letter-spacing:.1em;
+           color:var(--muted); text-align:center; margin-bottom:8px; }
+    .feedback { font-size:.8rem; font-weight:700; text-align:center; min-height:1.2em;
+                margin-top:8px; color:var(--muted); }
+    .feedback.ok { color:#276952; }
+    .feedback.ko { color:#9B2535; }
+    .btn-next { background:#9B2535; color:white; border:none; border-radius:9px; padding:9px 26px;
+                font-size:.82rem; cursor:pointer; font-weight:700; font-family:var(--font);
+                display:block; margin:14px auto 0; box-shadow:0 2px 8px rgba(155,37,53,.2);
+                touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+    .btn-restart { background:transparent; color:#9B2535; border:2px solid #EDD8DC; border-radius:9px;
+                   padding:8px 22px; font-size:.78rem; cursor:pointer; font-weight:700;
+                   font-family:var(--font); display:block; margin:10px auto 0;
+                   touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+
+    /* MOT ARABE GRAND */
+    .ar-word { font-family:var(--ar); font-size:4rem; direction:rtl; color:#9B2535;
+               text-align:center; line-height:1.2; margin:10px 0; }
+    .ar-word.hidden { opacity:0; }
+    .ar-word.revealed { animation:revealWord .35s ease; }
+    @keyframes revealWord { 0%{transform:scale(.7);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+    /* COUNTDOWN BAR (dictée flash + lecture rapide) */
+    .countdown-wrap { margin:10px 0 6px; }
+    .countdown-bar { height:6px; background:var(--bd); border-radius:3px; overflow:hidden; }
+    .countdown-fill { height:100%; background:#9B2535; border-radius:3px;
+                      transition:width .1s linear; }
+    .countdown-txt { font-size:.65rem; color:var(--muted); text-align:center; margin-top:3px; }
+
+    /* POOL DE LETTRES */
+    .letters-pool { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:12px; }
+    .ltr { font-family:var(--ar); font-size:2.2rem; direction:rtl; color:#9B2535;
+           background:var(--card); border:2.5px solid var(--bd); border-radius:12px;
+           min-width:60px; padding:8px 10px; text-align:center; cursor:pointer; line-height:1.2;
+           touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+           user-select:none; -webkit-user-select:none; transition:border-color .1s,background .1s; }
+    .ltr:hover:not(.used) { border-color:#9B2535; background:#FEF4F6; }
+    .ltr.used { opacity:.2; cursor:default; transform:scale(.86); transition:all .2s; }
+    .ltr.flash-ok { animation:fOk .28s ease; }
+    .ltr.flash-ko { animation:fKo .38s ease; }
+    @keyframes fOk { 0%{background:#E8F7F1;border-color:#3A8A70} 100%{} }
+    @keyframes fKo { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+
+    /* ZONE RÉSULTAT (dictée) */
+    .result-zone { display:flex; flex-direction:row-reverse; justify-content:center;
+                   align-items:center; gap:4px; min-height:70px;
+                   background:#F7EEF0; border:2px dashed var(--bd); border-radius:12px;
+                   padding:8px 12px; margin:10px 0 6px; flex-wrap:wrap; }
+    .rslot { font-family:var(--ar); font-size:2rem; direction:rtl; color:#9B2535;
+             background:var(--card); border:2px solid #EDD8DC; border-radius:8px;
+             min-width:50px; padding:5px 8px; text-align:center; line-height:1.2;
+             animation:popIn .18s ease; }
+    .rplus { font-size:.9rem; color:var(--bd); }
+    .rempty { font-size:.7rem; color:var(--muted); font-style:italic; }
+    @keyframes popIn { 0%{transform:scale(.6);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .reveal-full { font-family:var(--ar); font-size:3rem; direction:rtl; color:#9B2535;
+                   text-align:center; animation:revealWord .35s ease; }
+
+    /* ANALYSE — lettres séparées avec surbrillance */
+    .split-word { display:flex; flex-direction:row-reverse; justify-content:center;
+                  gap:6px; margin:14px 0; flex-wrap:wrap; }
+    .spart { font-family:var(--ar); font-size:2.6rem; direction:rtl; color:#9B2535;
+             background:var(--card); border:2px solid var(--bd); border-radius:10px;
+             min-width:58px; padding:6px 10px; text-align:center; line-height:1.2; }
+    .spart.hl { background:#9B2535; color:white; border-color:#9B2535;
+                box-shadow:0 2px 10px rgba(155,37,53,.3); }
+
+    /* OPTIONS (analyse + compléter + lecture rapide) */
+    .opts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
+    .opt { background:var(--card); border:2.5px solid var(--bd); border-radius:11px;
+           padding:12px 8px; text-align:center; cursor:pointer; font-size:.82rem; font-weight:700;
+           color:#2A1A1E; line-height:1.3; touch-action:manipulation;
+           -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none;
+           transition:all .12s; }
+    .opt:hover:not(.locked) { border-color:#9B2535; background:#FEF4F6; }
+    .opt.correct { background:#E8F7F1; border-color:#3A8A70; color:#276952; }
+    .opt.wrong   { background:#FEF4F6; border-color:#C84060; color:#9B2535;
+                   animation:shk .35s ease; }
+    .opt.locked  { cursor:default; }
+    .opt-ar { font-family:var(--ar); font-size:1.8rem; direction:rtl;
+              display:block; margin-bottom:2px; }
+    @keyframes shk { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+
+    /* COMPLÉTER — mot avec trou */
+    .gap-word { font-family:var(--ar); font-size:3.6rem; direction:rtl; color:#9B2535;
+                text-align:center; margin:14px 0; line-height:1.2; }
+    .gap-blank { display:inline-block; min-width:1.2em; border-bottom:3px solid #C84060;
+                 color:#C84060; text-align:center; font-family:var(--ar); }
+
+    /* LECTURE RAPIDE — timer visuel */
+    .timer-ring { width:60px; height:60px; margin:0 auto 10px;
+                  position:relative; display:flex; align-items:center; justify-content:center; }
+    .timer-num { font-size:1.1rem; font-weight:800; color:#9B2535; }
+    .timer-svg { position:absolute; top:0; left:0; transform:rotate(-90deg); }
+    .timer-track { fill:none; stroke:#EDD8DC; stroke-width:5; }
+    .timer-prog  { fill:none; stroke:#9B2535; stroke-width:5; stroke-linecap:round;
+                   transition:stroke-dashoffset .1s linear; }
+
+    /* SCORE FINAL */
+    .score-final { background:var(--card); border:1.5px solid var(--bd); border-radius:16px;
+                   padding:28px 20px; text-align:center; margin-bottom:14px;
+                   box-shadow:0 2px 12px rgba(155,37,53,.06); }
+    .score-big { font-size:3rem; font-weight:800; color:#9B2535; margin-bottom:6px; }
+    .score-sub { font-size:.82rem; color:var(--muted); margin-bottom:14px; }
+    .score-ar { font-family:var(--ar); font-size:1.6rem; direction:rtl; color:#C84060;
+                margin-bottom:4px; }
+
+    footer { font-size:.62rem; color:#C0A0A8; margin-top:22px; text-align:center; }
+  </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+<header>
+  <div class="h-brand">Al Bidayah · Exercices avancés</div>
+  <div class="h-ar">تَدْرِيبَاتٌ مُتَقَدِّمَة</div>
+  <div class="h-fr">Dictee · Analyse · Completer · Lecture rapide</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('flash')">
+    <span class="tab-num">1</span>Dictée<br>flash
+  </div>
+  <div class="tab" onclick="switchTab('analyse')">
+    <span class="tab-num">2</span>Analyse<br>de mot
+  </div>
+  <div class="tab" onclick="switchTab('completer')">
+    <span class="tab-num">3</span>Complète<br>le mot
+  </div>
+  <div class="tab" onclick="switchTab('rapide')">
+    <span class="tab-num">4</span>Lecture<br>rapide
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     TAB 1 — DICTÉE FLASH
+     Le mot s'affiche 3s puis disparaît.
+     Reconstituer de mémoire.
+═══════════════════════════════════════ -->
+<div class="panel active" id="panel-flash">
+  <div class="prog-bar"><div class="prog-fill" id="f-prog" style="width:0%"></div></div>
+  <div class="score-line" id="f-score">Question 1 / 8 &nbsp;|&nbsp; Score : 0</div>
+  <div class="ex-card" id="f-card">
+    <div class="lbl" id="f-lbl">Memorise ce mot :</div>
+    <div class="ar-word" id="f-word"></div>
+    <div class="countdown-wrap" id="f-cdown" style="display:none">
+      <div class="countdown-bar"><div class="countdown-fill" id="f-cbar" style="width:100%"></div></div>
+      <div class="countdown-txt" id="f-ctxt"></div>
+    </div>
+    <div class="result-zone" id="f-zone" style="display:none">
+      <span class="rempty">clique les lettres dans l'ordre</span>
+    </div>
+    <div class="feedback" id="f-fb"></div>
+    <div class="lbl" id="f-pool-lbl" style="display:none;margin-top:12px">Lettres :</div>
+    <div class="letters-pool" id="f-pool" style="display:none"></div>
+  </div>
+  <button class="btn-restart" onclick="initFlash()">Recommencer</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     TAB 2 — ANALYSE DE MOT
+     Identifier la voyelle d'une lettre.
+═══════════════════════════════════════ -->
+<div class="panel" id="panel-analyse">
+  <div class="prog-bar"><div class="prog-fill" id="a-prog" style="width:0%"></div></div>
+  <div class="score-line" id="a-score">Question 1 / 10 &nbsp;|&nbsp; Score : 0</div>
+  <div class="ex-card">
+    <div class="lbl">Quelle voyelle porte la lettre surlignée ?</div>
+    <div class="ar-word" id="a-full"></div>
+    <div class="split-word" id="a-split"></div>
+    <div class="opts" id="a-opts"></div>
+    <div class="feedback" id="a-fb"></div>
+  </div>
+  <button class="btn-restart" onclick="initAnalyse()">Recommencer</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     TAB 3 — COMPLÉTER LE MOT
+     Un mot avec une lettre manquante.
+═══════════════════════════════════════ -->
+<div class="panel" id="panel-completer">
+  <div class="prog-bar"><div class="prog-fill" id="c-prog" style="width:0%"></div></div>
+  <div class="score-line" id="c-score">Question 1 / 8 &nbsp;|&nbsp; Score : 0</div>
+  <div class="ex-card">
+    <div class="lbl">Complète le mot :</div>
+    <div class="gap-word" id="c-word"></div>
+    <div class="opts" id="c-opts"></div>
+    <div class="feedback" id="c-fb"></div>
+  </div>
+  <button class="btn-restart" onclick="initCompleter()">Recommencer</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     TAB 4 — LECTURE RAPIDE
+     Identifier la voyelle avant la fin du compte à rebours.
+═══════════════════════════════════════ -->
+<div class="panel" id="panel-rapide">
+  <div class="prog-bar"><div class="prog-fill" id="r-prog" style="width:0%"></div></div>
+  <div class="score-line" id="r-score">Question 1 / 10 &nbsp;|&nbsp; Score : 0</div>
+  <div class="ex-card">
+    <div class="lbl">Quelle voyelle porte la lettre surlignée ?</div>
+    <div class="timer-ring">
+      <svg class="timer-svg" width="60" height="60">
+        <circle class="timer-track" cx="30" cy="30" r="26"/>
+        <circle class="timer-prog" id="r-ring" cx="30" cy="30" r="26"
+                stroke-dasharray="163.4" stroke-dashoffset="0"/>
+      </svg>
+      <span class="timer-num" id="r-num">6</span>
+    </div>
+    <div class="split-word" id="r-split"></div>
+    <div class="opts" id="r-opts"></div>
+    <div class="feedback" id="r-fb"></div>
+  </div>
+  <button class="btn-restart" onclick="initRapide()">Recommencer</button>
+</div>
+
+<footer>Al Bidayah · Exercices avancés · Lettres</footer>
+
+<script>
+/* ══════════════════════════════════════
+   DONNÉES COMMUNES
+══════════════════════════════════════ */
+var POOL_LTRS = [
+  'بَ','بِ','بُ','بٌ','تَ','تِ','تُ','تٌ',
+  'دَ','دِ','دُ','دٌ','رَ','رِ','رُ','رٌ',
+  'كَ','كِ','كُ','كٌ','سَ','سِ','سُ','سٌ',
+  'لَ','لِ','لُ','لٌ','جَ','جِ','جُ','جٌ',
+  'مَ','مِ','مُ','مٌ','هَ','هِ','هُ','هٌ',
+  'خَ','خِ','خُ','خٌ','أَ','أِ','أُ','أٌ'
+];
+
+/* Mots pour dictée flash et analyse/lecture rapide */
+var WORDS = [
+  { ar:'جَمَلٌ',   parts:['جَ','مَ','لٌ']      },
+  { ar:'مَلِكٌ',   parts:['مَ','لِ','كٌ']      },
+  { ar:'كِتَابٌ',  parts:['كِ','تَ','ا','بٌ']  },
+  { ar:'بَابٌ',    parts:['بَ','ا','بٌ']       },
+  { ar:'دَخَلَ',   parts:['دَ','خَ','لَ']      },
+  { ar:'أَسَدٌ',   parts:['أَ','سَ','دٌ']      },
+  { ar:'كَتَبَ',   parts:['كَ','تَ','بَ']      },
+  { ar:'جَبَلٌ',   parts:['جَ','بَ','لٌ']      }
+];
+
+/* Questions pour Analyse et Lecture rapide */
+var ANALYSE_QS = [
+  { word:'جَمَلٌ',   parts:['جَ','مَ','لٌ'],      hi:0, ans:'Fatha',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'مَلِكٌ',   parts:['مَ','لِ','كٌ'],      hi:1, ans:'Kasra',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'كِتَابٌ',  parts:['كِ','تَ','ا','بٌ'],  hi:0, ans:'Kasra',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'بَابٌ',    parts:['بَ','ا','بٌ'],       hi:2, ans:'Tanwin ٌ',     opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'دَخَلَ',   parts:['دَ','خَ','لَ'],      hi:1, ans:'Fatha',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'أَسَدٌ',   parts:['أَ','سَ','دٌ'],      hi:2, ans:'Tanwin ٌ',     opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'كَتَبَ',   parts:['كَ','تَ','بَ'],      hi:0, ans:'Fatha',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'جَبَلٌ',   parts:['جَ','بَ','لٌ'],      hi:1, ans:'Fatha',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'مَلِكٌ',   parts:['مَ','لِ','كٌ'],      hi:2, ans:'Tanwin ٌ',     opts:['Fatha','Damma','Kasra','Tanwin ٌ'] },
+  { word:'كِتَابٌ',  parts:['كِ','تَ','ا','بٌ'],  hi:1, ans:'Fatha',        opts:['Fatha','Damma','Kasra','Tanwin ٌ'] }
+];
+
+/* Questions pour Compléter */
+var TROUS = [
+  { before:'جَ', blank:'مَ', after:'لٌ', full:'جَمَلٌ',   opts:['مَ','بَ','كَ','دَ'] },
+  { before:'مَ', blank:'لِ', after:'كٌ', full:'مَلِكٌ',   opts:['لِ','سِ','رِ','بِ'] },
+  { before:'كِ', blank:'تَ', after:'ابٌ',full:'كِتَابٌ',  opts:['تَ','بَ','سَ','رَ'] },
+  { before:'دَ', blank:'خَ', after:'لَ', full:'دَخَلَ',   opts:['خَ','هَ','جَ','مَ'] },
+  { before:'أَ', blank:'سَ', after:'دٌ', full:'أَسَدٌ',   opts:['سَ','كَ','بَ','تَ'] },
+  { before:'كَ', blank:'تَ', after:'بَ', full:'كَتَبَ',   opts:['تَ','رَ','مَ','لَ'] },
+  { before:'جَ', blank:'بَ', after:'لٌ', full:'جَبَلٌ',   opts:['بَ','سَ','دَ','رَ'] },
+  { before:'',   blank:'دَ', after:'ارٌ',full:'دَارٌ',    opts:['دَ','جَ','كَ','مَ'] }
+];
+
+/* ══ UTILITAIRES ══ */
+function shuffle(a) {
+  var b = a.slice();
+  for (var i = b.length-1; i > 0; i--) {
+    var j = Math.floor(Math.random()*(i+1));
+    var t = b[i]; b[i] = b[j]; b[j] = t;
+  }
+  return b;
+}
+function distractors(parts, n) {
+  return shuffle(POOL_LTRS.filter(function(l){ return parts.indexOf(l)===-1; })).slice(0,n);
+}
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(function(t,i){
+    t.classList[['flash','analyse','completer','rapide'][i]===id?'add':'remove']('active');
+  });
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('panel-'+id).classList.add('active');
+}
+function buildSplitWord(containerId, parts, hiIdx) {
+  var c = document.getElementById(containerId);
+  c.innerHTML = '';
+  for (var i = parts.length-1; i >= 0; i--) {
+    var sp = document.createElement('div');
+    sp.className = 'spart' + (i===hiIdx?' hl':'');
+    sp.textContent = parts[i];
+    c.appendChild(sp);
+  }
+}
+function buildOpts(containerId, opts, answer, onAns) {
+  var c = document.getElementById(containerId);
+  c.innerHTML = '';
+  shuffle(opts.slice()).forEach(function(o) {
+    var el = document.createElement('div');
+    el.className = 'opt';
+    var isAr = /[؀-ۿ]/.test(o);
+    if (isAr) el.innerHTML = '<span class="opt-ar">'+o+'</span>';
+    else el.textContent = o;
+    el.addEventListener('click', (function(el2, opt){ return function(){ onAns(el2, opt, answer, containerId); }; })(el, o));
+    c.appendChild(el);
+  });
+}
+function lockOpts(containerId) {
+  document.querySelectorAll('#'+containerId+' .opt').forEach(function(o){ o.classList.add('locked'); });
+}
+function unlockOpts(containerId) {
+  document.querySelectorAll('#'+containerId+' .opt').forEach(function(o){ o.classList.remove('locked','correct','wrong'); });
+}
+
+/* ════════════════════════════════════════
+   TAB 1 — DICTÉE FLASH
+════════════════════════════════════════ */
+var fOrder, fIdx, fScore, fTapped, fTimer, fFlashing;
+
+function initFlash() {
+  fOrder = shuffle(WORDS.map(function(w,i){ return i; }));
+  fIdx = 0; fScore = 0; fFlashing = false;
+  clearInterval(fTimer);
+  loadFlash();
+}
+function loadFlash() {
+  fTapped = 0;
+  var w = WORDS[fOrder[fIdx]];
+  document.getElementById('f-prog').style.width = (fIdx/WORDS.length*100)+'%';
+  document.getElementById('f-score').textContent = 'Question '+(fIdx+1)+' / '+WORDS.length+'   |   Score : '+fScore;
+  document.getElementById('f-fb').textContent = '';
+  document.getElementById('f-fb').className = 'feedback';
+  document.getElementById('f-lbl').textContent = 'Mémorise ce mot :';
+
+  /* Affiche le mot */
+  var wEl = document.getElementById('f-word');
+  wEl.textContent = w.ar;
+  wEl.className = 'ar-word';
+  document.getElementById('f-cdown').style.display = 'none';
+  document.getElementById('f-zone').style.display = 'none';
+  document.getElementById('f-pool').style.display = 'none';
+  document.getElementById('f-pool-lbl').style.display = 'none';
+  document.getElementById('f-zone').innerHTML = '<span class="rempty">clique les lettres dans l\'ordre</span>';
+
+  /* Countdown 3 secondes */
+  var secs = 3, cbar = document.getElementById('f-cbar');
+  document.getElementById('f-cdown').style.display = 'block';
+  cbar.style.width = '100%';
+  document.getElementById('f-ctxt').textContent = secs + 's';
+  fFlashing = true;
+  clearInterval(fTimer);
+  fTimer = setInterval(function() {
+    secs--;
+    cbar.style.width = (secs/3*100)+'%';
+    document.getElementById('f-ctxt').textContent = secs > 0 ? secs+'s' : '';
+    if (secs <= 0) {
+      clearInterval(fTimer);
+      fFlashing = false;
+      /* Cache le mot */
+      wEl.textContent = '؟';
+      document.getElementById('f-lbl').textContent = 'Reconstitue le mot :';
+      document.getElementById('f-cdown').style.display = 'none';
+      document.getElementById('f-zone').style.display = 'flex';
+      document.getElementById('f-pool-lbl').style.display = 'block';
+      document.getElementById('f-pool').style.display = 'flex';
+      buildFlashPool(w);
+    }
+  }, 1000);
+}
+function buildFlashPool(w) {
+  var pool = shuffle(w.parts.concat(distractors(w.parts, 2)));
+  var grid = document.getElementById('f-pool');
+  grid.innerHTML = '';
+  pool.forEach(function(ltr) {
+    var card = document.createElement('div');
+    card.className = 'ltr';
+    card.textContent = ltr;
+    card.addEventListener('click', (function(el,l){ return function(){ tapFlash(el,l,w); }; })(card,ltr));
+    grid.appendChild(card);
+  });
+}
+function tapFlash(card, ltr, w) {
+  if (card.classList.contains('used')) return;
+  if (ltr === w.parts[fTapped]) {
+    card.classList.add('used','flash-ok');
+    setTimeout(function(){ card.classList.remove('flash-ok'); }, 280);
+    fTapped++;
+    /* Mise à jour zone résultat */
+    var zone = document.getElementById('f-zone');
+    zone.innerHTML = '';
+    for (var i = fTapped-1; i >= 0; i--) {
+      var s = document.createElement('div'); s.className = 'rslot'; s.textContent = w.parts[i];
+      zone.appendChild(s);
+      if (i > 0) { var p = document.createElement('span'); p.className = 'rplus'; p.textContent = '+'; zone.appendChild(p); }
+    }
+    if (fTapped === w.parts.length) {
+      fScore++;
+      document.getElementById('f-fb').textContent = 'Correct.';
+      document.getElementById('f-fb').className = 'feedback ok';
+      setTimeout(function(){
+        document.getElementById('f-zone').innerHTML = '<div class="reveal-full">'+w.ar+'</div>';
+        fIdx++;
+        if (fIdx >= WORDS.length) showFlashEnd();
+        else setTimeout(loadFlash, 1200);
+      }, 600);
+    }
+  } else {
+    card.classList.add('flash-ko');
+    setTimeout(function(){ card.classList.remove('flash-ko'); }, 380);
+    document.getElementById('f-fb').textContent = 'Pas celle-là.';
+    document.getElementById('f-fb').className = 'feedback ko';
+    setTimeout(function(){ document.getElementById('f-fb').textContent=''; document.getElementById('f-fb').className='feedback'; }, 900);
+  }
+}
+function showFlashEnd() {
+  document.getElementById('f-prog').style.width = '100%';
+  document.getElementById('f-score').textContent = 'Terminé — Score : '+fScore+' / '+WORDS.length;
+  var card = document.getElementById('f-card');
+  card.innerHTML = '<div class="score-final"><div class="score-big">'+fScore+' / '+WORDS.length+'</div>'
+    +'<div class="score-sub">Dictée flash terminée</div>'
+    +(fScore===WORDS.length?'<div class="score-ar">أَحْسَنْتِ</div>':'')+'</div>';
+}
+
+/* ════════════════════════════════════════
+   TAB 2 — ANALYSE DE MOT
+════════════════════════════════════════ */
+var aOrder, aIdx, aScore;
+
+function initAnalyse() {
+  aOrder = shuffle(ANALYSE_QS.map(function(q,i){ return i; }));
+  aIdx = 0; aScore = 0;
+  loadAnalyse();
+}
+function loadAnalyse() {
+  var q = ANALYSE_QS[aOrder[aIdx]];
+  document.getElementById('a-prog').style.width = (aIdx/ANALYSE_QS.length*100)+'%';
+  document.getElementById('a-score').textContent = 'Question '+(aIdx+1)+' / '+ANALYSE_QS.length+'   |   Score : '+aScore;
+  document.getElementById('a-full').textContent = q.word;
+  document.getElementById('a-fb').textContent = '';
+  document.getElementById('a-fb').className = 'feedback';
+  buildSplitWord('a-split', q.parts, q.hi);
+  buildOpts('a-opts', q.opts, q.ans, answerAnalyse);
+}
+function answerAnalyse(el, opt, answer, cid) {
+  lockOpts(cid);
+  if (opt === answer) {
+    el.classList.add('correct');
+    aScore++;
+    document.getElementById('a-fb').textContent = 'Correct.';
+    document.getElementById('a-fb').className = 'feedback ok';
+    aIdx++;
+    if (aIdx >= ANALYSE_QS.length) {
+      document.getElementById('a-prog').style.width='100%';
+      setTimeout(showAnalyseEnd, 700);
+    } else setTimeout(loadAnalyse, 900);
+  } else {
+    el.classList.add('wrong');
+    document.getElementById('a-fb').textContent = 'Incorrect.';
+    document.getElementById('a-fb').className = 'feedback ko';
+    setTimeout(function(){ unlockOpts(cid); document.getElementById('a-fb').textContent=''; document.getElementById('a-fb').className='feedback'; }, 700);
+  }
+}
+function showAnalyseEnd() {
+  document.getElementById('a-score').textContent = 'Terminé — Score : '+aScore+' / '+ANALYSE_QS.length;
+  document.querySelector('#panel-analyse .ex-card').innerHTML =
+    '<div class="score-final"><div class="score-big">'+aScore+' / '+ANALYSE_QS.length+'</div>'
+    +'<div class="score-sub">Analyse terminée</div>'
+    +(aScore===ANALYSE_QS.length?'<div class="score-ar">أَحْسَنْتِ</div>':'')+'</div>';
+}
+
+/* ════════════════════════════════════════
+   TAB 3 — COMPLÉTER LE MOT
+════════════════════════════════════════ */
+var cOrder, cIdx, cScore;
+
+function initCompleter() {
+  cOrder = shuffle(TROUS.map(function(t,i){ return i; }));
+  cIdx = 0; cScore = 0;
+  loadCompleter();
+}
+function loadCompleter() {
+  var t = TROUS[cOrder[cIdx]];
+  document.getElementById('c-prog').style.width = (cIdx/TROUS.length*100)+'%';
+  document.getElementById('c-score').textContent = 'Question '+(cIdx+1)+' / '+TROUS.length+'   |   Score : '+cScore;
+  document.getElementById('c-fb').textContent = '';
+  document.getElementById('c-fb').className = 'feedback';
+  /* Affiche le mot avec le trou */
+  document.getElementById('c-word').innerHTML =
+    '<span style="direction:rtl;unicode-bidi:bidi-override">'
+    + t.after
+    + '<span class="gap-blank">؟</span>'
+    + t.before
+    + '</span>';
+  buildOpts('c-opts', t.opts, t.blank, answerCompleter);
+}
+function answerCompleter(el, opt, answer, cid) {
+  lockOpts(cid);
+  if (opt === answer) {
+    el.classList.add('correct');
+    cScore++;
+    document.getElementById('c-fb').textContent = 'Correct.';
+    document.getElementById('c-fb').className = 'feedback ok';
+    var t = TROUS[cOrder[cIdx]];
+    document.getElementById('c-word').innerHTML =
+      '<span style="direction:rtl;unicode-bidi:bidi-override;color:#276952">'+t.full+'</span>';
+    cIdx++;
+    if (cIdx >= TROUS.length) {
+      document.getElementById('c-prog').style.width='100%';
+      setTimeout(showCompleterEnd, 900);
+    } else setTimeout(loadCompleter, 1000);
+  } else {
+    el.classList.add('wrong');
+    document.getElementById('c-fb').textContent = 'Incorrect.';
+    document.getElementById('c-fb').className = 'feedback ko';
+    setTimeout(function(){ unlockOpts(cid); document.getElementById('c-fb').textContent=''; document.getElementById('c-fb').className='feedback'; }, 700);
+  }
+}
+function showCompleterEnd() {
+  document.getElementById('c-score').textContent = 'Terminé — Score : '+cScore+' / '+TROUS.length;
+  document.querySelector('#panel-completer .ex-card').innerHTML =
+    '<div class="score-final"><div class="score-big">'+cScore+' / '+TROUS.length+'</div>'
+    +'<div class="score-sub">Compléter terminé</div>'
+    +(cScore===TROUS.length?'<div class="score-ar">أَحْسَنْتِ</div>':'')+'</div>';
+}
+
+/* ════════════════════════════════════════
+   TAB 4 — LECTURE RAPIDE
+   Même principe qu'Analyse + compte à rebours.
+════════════════════════════════════════ */
+var rOrder, rIdx, rScore, rTimer, rAnswered;
+var CIRC = 163.4; /* 2 * PI * 26 */
+
+function initRapide() {
+  rOrder = shuffle(ANALYSE_QS.map(function(q,i){ return i; }));
+  rIdx = 0; rScore = 0;
+  clearInterval(rTimer);
+  loadRapide();
+}
+function loadRapide() {
+  rAnswered = false;
+  clearInterval(rTimer);
+  var q = ANALYSE_QS[rOrder[rIdx]];
+  document.getElementById('r-prog').style.width = (rIdx/ANALYSE_QS.length*100)+'%';
+  document.getElementById('r-score').textContent = 'Question '+(rIdx+1)+' / '+ANALYSE_QS.length+'   |   Score : '+rScore;
+  document.getElementById('r-fb').textContent = '';
+  document.getElementById('r-fb').className = 'feedback';
+  buildSplitWord('r-split', q.parts, q.hi);
+  buildOpts('r-opts', q.opts, q.ans, answerRapide);
+  /* Timer 6 secondes */
+  var secs = 6, ring = document.getElementById('r-ring'), num = document.getElementById('r-num');
+  ring.style.strokeDashoffset = '0';
+  num.textContent = secs;
+  rTimer = setInterval(function() {
+    secs -= .1;
+    ring.style.strokeDashoffset = (CIRC * (1 - secs/6)).toFixed(2);
+    num.textContent = Math.ceil(secs);
+    if (secs <= 0) {
+      clearInterval(rTimer);
+      if (!rAnswered) {
+        rAnswered = true;
+        lockOpts('r-opts');
+        document.getElementById('r-fb').textContent = 'Temps écoulé.';
+        document.getElementById('r-fb').className = 'feedback ko';
+        rIdx++;
+        if (rIdx >= ANALYSE_QS.length) { document.getElementById('r-prog').style.width='100%'; setTimeout(showRapideEnd,800); }
+        else setTimeout(loadRapide, 900);
+      }
+    }
+  }, 100);
+}
+function answerRapide(el, opt, answer, cid) {
+  if (rAnswered) return;
+  rAnswered = true;
+  clearInterval(rTimer);
+  lockOpts(cid);
+  if (opt === answer) {
+    el.classList.add('correct');
+    rScore++;
+    document.getElementById('r-fb').textContent = 'Correct.';
+    document.getElementById('r-fb').className = 'feedback ok';
+  } else {
+    el.classList.add('wrong');
+    document.getElementById('r-fb').textContent = 'Incorrect.';
+    document.getElementById('r-fb').className = 'feedback ko';
+  }
+  rIdx++;
+  if (rIdx >= ANALYSE_QS.length) {
+    document.getElementById('r-prog').style.width='100%';
+    setTimeout(showRapideEnd, 800);
+  } else setTimeout(loadRapide, 900);
+}
+function showRapideEnd() {
+  clearInterval(rTimer);
+  document.getElementById('r-score').textContent = 'Terminé — Score : '+rScore+' / '+ANALYSE_QS.length;
+  document.querySelector('#panel-rapide .ex-card').innerHTML =
+    '<div class="score-final"><div class="score-big">'+rScore+' / '+ANALYSE_QS.length+'</div>'
+    +'<div class="score-sub">Lecture rapide terminée</div>'
+    +(rScore===ANALYSE_QS.length?'<div class="score-ar">أَحْسَنْتِ</div>':'')+'</div>';
+}
+
+/* INIT */
+initFlash();
+initAnalyse();
+initCompleter();
+initRapide();
+</script>
+</body>
+</html>
