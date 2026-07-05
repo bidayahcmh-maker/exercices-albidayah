@@ -7,115 +7,89 @@
   <style>
     :root {
       --brand: #9B2535;
-      --rose:  #C84060;
       --bg:    #FBF2F4;
       --card:  #FFFFFF;
       --bd:    #EDD8DC;
-      --text:  #2A1A1E;
       --muted: #7A5A60;
       --font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
       --ar:   'Noto Naskh Arabic', 'Arabic Typesetting', 'Geeza Pro', serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text);
+    body { font-family: var(--font); background: var(--bg);
            padding: 20px 16px 60px; display: flex; flex-direction: column; align-items: center; }
 
-    /* HEADER */
-    .top-bar { width: 100%; max-width: 620px; height: 5px; border-radius: 3px; margin-bottom: 16px;
-               background: linear-gradient(90deg, #C84060, #9B2535, #C84060); }
-    header { width: 100%; max-width: 620px; background: #FEF4F6;
+    .top-bar { width: 100%; max-width: 600px; height: 5px; border-radius: 3px; margin-bottom: 16px;
+               background: linear-gradient(90deg,#C84060,#9B2535,#C84060); }
+
+    header { width: 100%; max-width: 600px; background: #FEF4F6;
              border: 1.5px solid #EDD8DC; border-top: 5px solid #9B2535;
-             border-radius: 16px; padding: 18px 24px; text-align: center; margin-bottom: 22px;
+             border-radius: 16px; padding: 18px 24px; text-align: center; margin-bottom: 20px;
              box-shadow: 0 3px 16px rgba(155,37,53,.1); }
     .h-brand { font-size: .62rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
                color: #C84060; margin-bottom: 5px; }
     .h-ar { font-family: var(--ar); font-size: 1.7rem; direction: rtl; color: #9B2535; margin-bottom: 3px; }
     .h-fr { font-size: .86rem; font-weight: 600; color: #9B2535; }
 
-    /* PROGRESS */
-    .progress-wrap { width: 100%; max-width: 620px; margin-bottom: 6px; }
-    .progress-bar { height: 5px; background: var(--bd); border-radius: 3px; overflow: hidden; }
+    .progress-bar { width: 100%; max-width: 600px; height: 5px; background: var(--bd);
+                    border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
     .progress-fill { height: 100%; background: linear-gradient(90deg,#C84060,#9B2535);
                      border-radius: 3px; transition: width .5s; }
     .counter { font-size: .7rem; color: var(--muted); font-weight: 600;
-               text-align: center; margin-top: 5px; margin-bottom: 14px; }
+               text-align: center; margin-bottom: 14px; }
 
-    /* CARD */
-    .ex-card { width: 100%; max-width: 620px; background: var(--card);
+    .ex-card { width: 100%; max-width: 600px; background: var(--card);
                border: 1.5px solid var(--bd); border-radius: 18px;
-               padding: 22px 18px 18px; box-shadow: 0 2px 14px rgba(155,37,53,.07); }
+               padding: 24px 18px 20px; box-shadow: 0 2px 14px rgba(155,37,53,.07); }
 
-    /* MOT CIBLE */
-    .target-word { font-family: var(--ar); font-size: 4.2rem; direction: rtl; color: #9B2535;
-                   text-align: center; margin-bottom: 18px; line-height: 1.2;
-                   transition: opacity .3s; }
+    .lbl { font-size: .63rem; text-transform: uppercase; letter-spacing: .09em;
+           color: var(--muted); text-align: center; margin-bottom: 10px; }
 
-    /* PHASE INDICATOR */
-    .phase-steps { display: flex; align-items: center; justify-content: center;
-                   gap: 0; margin-bottom: 6px; }
-    .phase-dot { width: 26px; height: 26px; border-radius: 50%;
-                 border: 2px solid var(--bd); background: var(--card);
-                 display: flex; align-items: center; justify-content: center;
-                 font-size: .68rem; font-weight: 800; color: var(--muted);
-                 transition: all .3s; }
-    .phase-dot.active { border-color: #9B2535; color: #9B2535; }
-    .phase-dot.done   { background: #9B2535; border-color: #9B2535; color: white; }
-    .phase-line { width: 28px; height: 2px; background: var(--bd); transition: background .3s; }
-    .phase-line.done { background: #9B2535; }
-    .phase-label { font-size: .68rem; font-weight: 700; color: var(--muted); text-align: center;
-                   text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+    .target-word { font-family: var(--ar); font-size: 4.4rem; direction: rtl; color: #9B2535;
+                   text-align: center; margin-bottom: 20px; line-height: 1.2; }
 
-    /* ZONE RÉSULTAT */
     .result-zone { display: flex; flex-direction: row-reverse; justify-content: center;
-                   align-items: center; gap: 5px; min-height: 76px;
+                   align-items: center; gap: 5px; min-height: 78px;
                    background: #F7EEF0; border: 2px dashed var(--bd); border-radius: 13px;
                    padding: 10px 14px; margin-bottom: 7px; flex-wrap: wrap; }
-    .result-slot { font-family: var(--ar); font-size: 2.2rem; direction: rtl; color: #9B2535;
+    .result-slot { font-family: var(--ar); font-size: 2.3rem; direction: rtl; color: #9B2535;
                    background: var(--card); border: 2px solid #EDD8DC; border-radius: 9px;
-                   min-width: 54px; padding: 5px 9px; text-align: center; line-height: 1.2;
+                   min-width: 56px; padding: 6px 10px; text-align: center; line-height: 1.2;
                    animation: popIn .18s ease; }
     .result-plus  { font-size: 1rem; color: var(--bd); }
     .result-empty { font-size: .72rem; color: var(--muted); font-style: italic; }
-    .result-word-big { font-family: var(--ar); font-size: 3.2rem; direction: rtl; color: #9B2535;
+    .result-word-big { font-family: var(--ar); font-size: 3.4rem; direction: rtl; color: #9B2535;
                        text-align: center; line-height: 1.3;
                        animation: wordReveal .4s cubic-bezier(.175,.885,.32,1.275); }
     @keyframes popIn      { 0%{transform:scale(.65);opacity:0} 100%{transform:scale(1);opacity:1} }
     @keyframes wordReveal { 0%{transform:scale(.5);opacity:0}  100%{transform:scale(1);opacity:1} }
 
-    /* GRILLE DE LETTRES */
-    .lbl { font-size: .63rem; text-transform: uppercase; letter-spacing: .09em;
-           color: var(--muted); text-align: center; margin: 14px 0 9px; }
-    .letters-grid { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
-    .ltr-card { font-family: var(--ar); font-size: 2.3rem; direction: rtl; color: #9B2535;
+    .feedback { font-size: .8rem; font-weight: 700; text-align: center;
+                min-height: 1.3em; color: var(--muted); margin-bottom: 4px; }
+    .feedback.ok { color: #7A4200; }
+    .feedback.ko { color: #C84060; }
+
+    .letters-grid { display: flex; flex-wrap: wrap; gap: 10px;
+                    justify-content: center; margin-top: 14px; }
+    .ltr-card { font-family: var(--ar); font-size: 2.4rem; direction: rtl; color: #9B2535;
                 background: var(--card); border: 2.5px solid var(--bd); border-radius: 13px;
-                min-width: 64px; padding: 9px 11px; text-align: center; cursor: pointer;
-                line-height: 1.2; transition: border-color .12s, background .12s, opacity .2s, transform .2s;
+                min-width: 66px; padding: 9px 12px; text-align: center; cursor: pointer;
+                line-height: 1.2; transition: border-color .1s, background .1s;
                 touch-action: manipulation; -webkit-tap-highlight-color: transparent;
                 user-select: none; -webkit-user-select: none; }
-    .ltr-card:hover:not(.used):not(.piege) { border-color: #9B2535; background: #FEF4F6; }
-    .ltr-card.next   { border-color: #9B2535; background: #FEF4F6;
-                        box-shadow: 0 0 0 3px rgba(155,37,53,.15); }
-    .ltr-card.used   { opacity: .2; cursor: default; transform: scale(.86); }
-    .ltr-card.piege  { color: #BCA0A8; border-color: #EDD8DC; }
+    .ltr-card:hover:not(.used) { border-color: #9B2535; background: #FEF4F6; }
+    .ltr-card.used   { opacity: .2; cursor: default; transform: scale(.86);
+                        transition: opacity .2s, transform .2s; }
     .ltr-card.flash-ok { animation: fOk .28s ease; }
     .ltr-card.flash-ko { animation: fKo .38s ease; }
     @keyframes fOk { 0%{background:#FFF7E0;border-color:#CC7A00} 100%{} }
     @keyframes fKo { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
 
-    /* FEEDBACK */
-    .feedback { font-size: .8rem; font-weight: 700; text-align: center;
-                min-height: 1.3em; color: var(--muted); margin-top: 5px; }
-    .feedback.ok { color: #7A4200; }
-    .feedback.ko { color: #C84060; }
-
-    /* BOUTON */
     .btn-restart { background: #9B2535; color: white; border: none; border-radius: 10px;
                    padding: 10px 28px; font-size: .85rem; cursor: pointer; font-weight: 700;
                    font-family: var(--font); display: block; margin: 16px auto 0;
                    box-shadow: 0 2px 10px rgba(155,37,53,.25);
                    touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
-    /* CELEBRATION */
     .celebration { display: none; position: fixed; inset: 0; background: rgba(155,37,53,.96);
                    z-index: 999; flex-direction: column; align-items: center;
                    justify-content: center; text-align: center; padding: 24px; }
@@ -149,45 +123,26 @@
 
 <header>
   <div class="h-brand">Al Bidayah · Exercices de lecture</div>
-  <div class="h-ar">تَرْكِيبٌ وَتَحْلِيلٌ</div>
-  <div class="h-fr">Exercice de lettres — 3 niveaux</div>
+  <div class="h-ar">اكْتُبِ الْكَلِمَةَ</div>
+  <div class="h-fr">Ecris le mot</div>
 </header>
 
-<div class="progress-wrap">
-  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
-  <div class="counter" id="counter">Mot 1 / 10</div>
-</div>
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+<div class="counter" id="counter">Mot 1 / 10</div>
 
 <div class="ex-card">
-
-  <!-- Mot cible -->
+  <div class="lbl">Ecris ce mot :</div>
   <div class="target-word" id="target"></div>
-
-  <!-- Indicateur de phase -->
-  <div class="phase-steps">
-    <div class="phase-dot" id="pd1">1</div>
-    <div class="phase-line" id="pl1"></div>
-    <div class="phase-dot" id="pd2">2</div>
-    <div class="phase-line" id="pl2"></div>
-    <div class="phase-dot" id="pd3">3</div>
-  </div>
-  <div class="phase-label" id="phase-label">Lis les lettres</div>
-
-  <!-- Zone résultat -->
   <div class="result-zone" id="result-zone">
-    <span class="result-empty">tape les lettres dans l'ordre</span>
+    <span class="result-empty">clique les bonnes lettres dans l'ordre</span>
   </div>
   <div class="feedback" id="feedback"></div>
-
-  <!-- Grille de lettres -->
-  <div class="lbl" id="grid-label">Lettres :</div>
+  <div class="lbl" style="margin-top:14px">Lettres :</div>
   <div class="letters-grid" id="letter-grid"></div>
-
 </div>
 
-<button class="btn-restart" onclick="initExercise()">Recommencer</button>
+<button class="btn-restart" onclick="init()">Recommencer</button>
 
-<!-- CELEBRATION -->
 <div class="celebration" id="celebration">
   <div class="cel-icon">🌟</div>
   <div class="cel-ar">مَا شَاءَ اللهُ</div>
@@ -200,10 +155,6 @@
 <footer>Al Bidayah · Exercices de lecture · Lettres</footer>
 
 <script>
-/* ══════════════════════════════════════
-   DONNÉES
-   Lettres étudiées : ب ت د ر ك س ل ج م ه خ ء
-══════════════════════════════════════ */
 var WORDS = [
   { ar: 'بَابٌ',    parts: ['بَ','ا','بٌ']      },
   { ar: 'دَارٌ',    parts: ['دَ','ا','رٌ']       },
@@ -217,7 +168,6 @@ var WORDS = [
   { ar: 'دَخَلَ',   parts: ['دَ','خَ','لَ']      }
 ];
 
-/* Pool pour les pièges (lettres étudiées) */
 var POOL = [
   'بَ','بِ','بُ','بٌ','تَ','تِ','تُ','تٌ',
   'دَ','دِ','دُ','دٌ','رَ','رِ','رُ','رٌ',
@@ -227,20 +177,8 @@ var POOL = [
   'خَ','خِ','خُ','خٌ','أَ','أِ','أُ','أٌ'
 ];
 
-/* PHASES :
-   1 — lettres dans l'ordre (lecture guidée, la prochaine est mise en avant)
-   2 — lettres mélangées, pas de pièges (remets dans l'ordre)
-   3 — lettres mélangées + 2 pièges (écris le mot)              */
-var PHASE_LABELS = [
-  'Lis les lettres dans l\'ordre',
-  'Remets les lettres dans l\'ordre',
-  'Ecris le mot (attention aux pieges !)'
-];
+var order, idx, tapped;
 
-/* ══ ÉTAT ══ */
-var wOrder, wIdx, phase, tapped;
-
-/* ══ UTILITAIRES ══ */
 function shuffle(a) {
   var b = a.slice();
   for (var i = b.length - 1; i > 0; i--) {
@@ -255,186 +193,86 @@ function distractors(parts, n) {
   return cands.slice(0, n);
 }
 
-/* ══ CELEBRATION ══ */
-function showCelebration(fn) {
-  var cel = document.getElementById('celebration');
-  cel.classList.add('visible');
-  document.getElementById('btn-cel').onclick = function() {
-    cel.classList.remove('visible'); fn();
-  };
+function init() {
+  order = shuffle(WORDS.map(function(w, i) { return i; }));
+  idx = 0;
+  load();
 }
 
-/* ══ INDICATEUR DE PHASE ══ */
-function updatePhaseUI() {
-  var labels = ['pd1','pd2','pd3'];
-  var lines  = ['pl1','pl2'];
-  for (var i = 0; i < 3; i++) {
-    var el = document.getElementById(labels[i]);
-    el.className = 'phase-dot';
-    if (i + 1 < phase)  el.classList.add('done');
-    if (i + 1 === phase) el.classList.add('active');
-  }
-  for (var j = 0; j < 2; j++) {
-    var ln = document.getElementById(lines[j]);
-    ln.className = 'phase-line' + (j + 1 < phase ? ' done' : '');
-  }
-  document.getElementById('phase-label').textContent = PHASE_LABELS[phase - 1];
-}
+function load() {
+  tapped = 0;
+  var w = WORDS[order[idx]];
 
-/* ══ ZONE RÉSULTAT ══ */
-function buildResult(parts, n) {
-  var zone = document.getElementById('result-zone');
-  zone.innerHTML = '';
-  for (var i = n - 1; i >= 0; i--) {
-    var slot = document.createElement('div');
-    slot.className = 'result-slot';
-    slot.textContent = parts[i];
-    zone.appendChild(slot);
-    if (i > 0) {
-      var plus = document.createElement('span');
-      plus.className = 'result-plus';
-      plus.textContent = '+';
-      zone.appendChild(plus);
-    }
-  }
-}
-
-function emptyResult() {
+  document.getElementById('prog').style.width = (idx / WORDS.length * 100) + '%';
+  document.getElementById('counter').textContent = 'Mot ' + (idx + 1) + ' / ' + WORDS.length;
+  document.getElementById('target').textContent = w.ar;
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('feedback').className = 'feedback';
   document.getElementById('result-zone').innerHTML =
-    '<span class="result-empty">tape les lettres dans l\'ordre</span>';
-}
+    '<span class="result-empty">clique les bonnes lettres dans l\'ordre</span>';
 
-function revealWord(ar) {
-  document.getElementById('result-zone').innerHTML =
-    '<div class="result-word-big">' + ar + '</div>';
-}
-
-/* ══ GRILLE ══ */
-function buildGrid(letters, isPhase1) {
+  var pool = shuffle(w.parts.concat(distractors(w.parts, 2)));
   var grid = document.getElementById('letter-grid');
   grid.innerHTML = '';
-  letters.forEach(function(ltr, idx) {
+  pool.forEach(function(ltr) {
     var card = document.createElement('div');
     card.className = 'ltr-card';
     card.textContent = ltr;
-    /* En phase 1 : mettre la première carte en surbrillance */
-    if (isPhase1 && idx === letters.length - 1) card.classList.add('next');
     card.addEventListener('click', (function(el, l) {
-      return function() { tapLetter(el, l); };
+      return function() { tap(el, l); };
     })(card, ltr));
     grid.appendChild(card);
   });
 }
 
-/* En phase 1, les lettres sont dans l'ordre MAIS affichées RTL.
-   On a besoin de retrouver la carte correspondant à parts[tapped]. */
-function highlightNext(parts) {
-  if (phase !== 1) return;
-  var cards = document.getElementById('letter-grid').querySelectorAll('.ltr-card');
-  /* Retire next de toutes */
-  for (var i = 0; i < cards.length; i++) cards[i].classList.remove('next');
-  /* La prochaine à tapper est parts[tapped].
-     En phase 1 les cartes sont dans l'ordre parts (affichage RTL), donc :
-     index dans le DOM = (parts.length - 1 - tapped)  */
-  var targetIdx = parts.length - 1 - tapped;
-  if (targetIdx >= 0 && cards[targetIdx]) cards[targetIdx].classList.add('next');
-}
-
-/* ══ CŒUR DE L'EXERCICE ══ */
-function initExercise() {
-  wOrder = shuffle(WORDS.map(function(w,i){ return i; }));
-  wIdx = 0;
-  loadWord();
-}
-
-function loadWord() {
-  phase = 1;
-  loadPhase();
-  updateProgress();
-}
-
-function updateProgress() {
-  var total = WORDS.length * 3;
-  var done  = wIdx * 3 + (phase - 1);
-  document.getElementById('prog').style.width = (done / total * 100) + '%';
-  document.getElementById('counter').textContent =
-    'Mot ' + (wIdx + 1) + ' / ' + WORDS.length + '  —  Niveau ' + phase + ' / 3';
-}
-
-function loadPhase() {
-  tapped = 0;
-  var w = WORDS[wOrder[wIdx]];
-
-  document.getElementById('target').textContent = w.ar;
-  document.getElementById('feedback').textContent = '';
-  document.getElementById('feedback').className = 'feedback';
-  emptyResult();
-  updatePhaseUI();
-  updateProgress();
-
-  var pool, isPhase1 = false;
-
-  if (phase === 1) {
-    /* Lettres dans l'ordre — affichage RTL naturel (parts[0] à droite) */
-    pool = w.parts.slice();
-    isPhase1 = true;
-    document.getElementById('grid-label').textContent = 'Tape chaque lettre dans l\'ordre :';
-  } else if (phase === 2) {
-    /* Lettres mélangées, pas de pièges */
-    pool = shuffle(w.parts.slice());
-    document.getElementById('grid-label').textContent = 'Remets les lettres dans l\'ordre :';
-  } else {
-    /* Lettres mélangées + 2 pièges */
-    pool = shuffle(w.parts.concat(distractors(w.parts, 2)));
-    document.getElementById('grid-label').textContent = 'Clique les bonnes lettres dans l\'ordre :';
-  }
-
-  buildGrid(pool, isPhase1);
-  if (isPhase1) highlightNext(w.parts);
-}
-
-function tapLetter(card, ltr) {
+function tap(card, ltr) {
   if (card.classList.contains('used')) return;
-  var w = WORDS[wOrder[wIdx]];
+  var w = WORDS[order[idx]];
 
   if (ltr === w.parts[tapped]) {
-    /* Bonne lettre */
     card.classList.add('used');
-    card.classList.remove('next');
     card.classList.add('flash-ok');
     setTimeout(function() { card.classList.remove('flash-ok'); }, 280);
-
     tapped++;
-    buildResult(w.parts, tapped);
 
-    if (phase === 1) highlightNext(w.parts);
-
-    if (tapped === w.parts.length) {
-      /* Phase terminée */
-      document.getElementById('feedback').textContent = phase < 3 ? 'Bien !' : 'Parfait !';
-      document.getElementById('feedback').className = 'feedback ok';
-
-      if (phase < 3) {
-        setTimeout(function() {
-          phase++;
-          loadPhase();
-        }, 750);
-      } else {
-        /* Mot complet — révèle le mot et passe au suivant */
-        setTimeout(function() {
-          revealWord(w.ar);
-          wIdx++;
-          if (wIdx >= WORDS.length) {
-            document.getElementById('prog').style.width = '100%';
-            setTimeout(function() { showCelebration(initExercise); }, 700);
-          } else {
-            setTimeout(function() { loadWord(); }, 1400);
-          }
-        }, 700);
+    /* Construit la zone résultat */
+    var zone = document.getElementById('result-zone');
+    zone.innerHTML = '';
+    for (var i = tapped - 1; i >= 0; i--) {
+      var slot = document.createElement('div');
+      slot.className = 'result-slot';
+      slot.textContent = w.parts[i];
+      zone.appendChild(slot);
+      if (i > 0) {
+        var plus = document.createElement('span');
+        plus.className = 'result-plus';
+        plus.textContent = '+';
+        zone.appendChild(plus);
       }
     }
+
+    if (tapped === w.parts.length) {
+      document.getElementById('feedback').textContent = 'Parfait !';
+      document.getElementById('feedback').className = 'feedback ok';
+      setTimeout(function() {
+        document.getElementById('result-zone').innerHTML =
+          '<div class="result-word-big">' + w.ar + '</div>';
+        idx++;
+        if (idx >= WORDS.length) {
+          document.getElementById('prog').style.width = '100%';
+          setTimeout(function() {
+            var cel = document.getElementById('celebration');
+            cel.classList.add('visible');
+            document.getElementById('btn-cel').onclick = function() {
+              cel.classList.remove('visible'); init();
+            };
+          }, 600);
+        } else {
+          setTimeout(load, 1200);
+        }
+      }, 700);
+    }
   } else {
-    /* Mauvaise lettre */
     card.classList.add('flash-ko');
     setTimeout(function() { card.classList.remove('flash-ko'); }, 380);
     var fb = document.getElementById('feedback');
@@ -444,8 +282,7 @@ function tapLetter(card, ltr) {
   }
 }
 
-/* INIT */
-initExercise();
+init();
 </script>
 </body>
 </html>
