@@ -1,0 +1,512 @@
+<title>Quiz — فِي الْمَدْرَسَةِ</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #1A0D15;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  /* subtle background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(139,50,82,.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(200,151,10,.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ── SHELL ── */
+  .shell {
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── BRAND ── */
+  .brand {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .brand-name {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(245,237,224,.45);
+    font-weight: 700;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: #FDFBF7;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(200,151,10,.15);
+  }
+
+  /* ── SCREEN base ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ═══ START SCREEN ═══ */
+  .start-inner {
+    padding: 40px 32px 36px;
+    text-align: center;
+  }
+  .start-arabic {
+    font-family: 'Geeza Pro', 'Traditional Arabic', 'Arabic Typesetting', serif;
+    font-size: 48px;
+    color: #7A2845;
+    direction: rtl;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .start-subtitle {
+    font-size: 13px;
+    color: #8B7A6A;
+    margin-bottom: 32px;
+  }
+  .start-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .info-pill {
+    background: #F3E9DF;
+    border: 1px solid #E0D0C0;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    color: #5C4F44;
+    font-weight: 600;
+  }
+  .btn-play {
+    width: 100%;
+    background: linear-gradient(135deg, #7A2845, #A03A5C);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .03em;
+    box-shadow: 0 6px 20px rgba(122,40,69,.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-play:active { transform: scale(.97); box-shadow: 0 3px 10px rgba(122,40,69,.3); }
+
+  /* ═══ QUIZ SCREEN ═══ */
+  .progress-bar-wrap {
+    height: 5px;
+    background: #E8DDD4;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #C8970A, #E8B030);
+    transition: width .4s ease;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .quiz-top {
+    padding: 16px 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .q-counter {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8B7A6A;
+    letter-spacing: .06em;
+  }
+  .score-badge {
+    background: #F3E9DF;
+    border: 1px solid #E0D0C0;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #7A2845;
+  }
+
+  .direction-tag {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #C8970A;
+    padding: 14px 22px 0;
+  }
+
+  .question-box {
+    padding: 20px 28px 24px;
+    text-align: center;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .q-word-ar {
+    font-family: 'Geeza Pro', 'Traditional Arabic', 'Arabic Typesetting', serif;
+    font-size: 52px;
+    color: #1A0D15;
+    direction: rtl;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  .q-word-fr {
+    font-size: 24px;
+    color: #1A0D15;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .divider { height: 1px; background: #EDE4DA; margin: 0 22px; }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 18px 20px 24px;
+  }
+  .opt-btn {
+    background: #F8F2EC;
+    border: 2px solid #E8DDD4;
+    border-radius: 12px;
+    padding: 14px 10px;
+    font-size: 14px;
+    color: #1A0D15;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color .12s, background .12s, transform .08s;
+    line-height: 1.4;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .opt-btn.ar-opt {
+    font-family: 'Geeza Pro', 'Traditional Arabic', 'Arabic Typesetting', serif;
+    font-size: 22px;
+    direction: rtl;
+  }
+  .opt-btn:hover:not(.locked) {
+    border-color: #C8970A;
+    background: #FDF5E2;
+  }
+  .opt-btn:active:not(.locked) { transform: scale(.96); }
+  .opt-btn.correct {
+    background: #E8F8EE;
+    border-color: #27AE60;
+    color: #1A6E3C;
+    font-weight: 700;
+  }
+  .opt-btn.wrong {
+    background: #FCE8EC;
+    border-color: #C0392B;
+    color: #7A1010;
+    animation: shk .3s ease;
+  }
+  .opt-btn.locked { cursor: default; }
+
+  @keyframes shk {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* feedback emoji burst */
+  .feedback-burst {
+    text-align: center;
+    font-size: 28px;
+    height: 36px;
+    line-height: 36px;
+    margin-top: -8px;
+    margin-bottom: 4px;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .feedback-burst.show { opacity: 1; }
+
+  /* ═══ RESULT SCREEN ═══ */
+  .result-inner {
+    padding: 44px 32px 40px;
+    text-align: center;
+  }
+  .result-stars {
+    font-size: 42px;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .result-score-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #8B7A6A;
+    margin-bottom: 6px;
+  }
+  .result-score {
+    font-family: Georgia, serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #7A2845;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .result-total {
+    font-size: 18px;
+    color: #8B7A6A;
+    margin-bottom: 20px;
+  }
+  .result-msg {
+    font-size: 15px;
+    color: #5C4F44;
+    line-height: 1.65;
+    background: #F3E9DF;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 30px;
+  }
+  .result-msg .ar {
+    font-family: 'Geeza Pro', 'Traditional Arabic', serif;
+    direction: rtl;
+    font-size: 22px;
+    color: #7A2845;
+    display: block;
+    margin-top: 6px;
+  }
+  .btn-replay {
+    width: 100%;
+    background: linear-gradient(135deg, #7A2845, #A03A5C);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(122,40,69,.4);
+    transition: transform .12s;
+  }
+  .btn-replay:active { transform: scale(.97); }
+
+  /* screen fade */
+  .screen { animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+</style>
+
+<div class="shell">
+  <div class="brand"><span class="brand-name">BIDAYAH · Quiz de vocabulaire</span></div>
+
+  <div class="card">
+
+    <!-- ── START ── -->
+    <div class="screen active" id="start-screen">
+      <div class="start-inner">
+        <div class="start-arabic">فِي الْمَدْرَسَةِ</div>
+        <div class="start-subtitle">Quiz de vocabulaire</div>
+        <div class="start-info">
+          <span class="info-pill">📚 14 mots</span>
+          <span class="info-pill">🔄 Arabe ↔ Français</span>
+        </div>
+        <button class="btn-play" onclick="startQuiz()">▶ Commencer le quiz</button>
+      </div>
+    </div>
+
+    <!-- ── QUIZ ── -->
+    <div class="screen" id="quiz-screen">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
+      </div>
+      <div class="quiz-top">
+        <span class="q-counter" id="q-counter">1 / 14</span>
+        <span class="score-badge">⭐ <span id="score-live">0</span></span>
+      </div>
+      <div class="direction-tag" id="dir-tag">Arabe → Français</div>
+      <div class="question-box">
+        <div id="q-word"></div>
+      </div>
+      <div class="feedback-burst" id="feedback-burst"></div>
+      <div class="divider"></div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <div class="screen" id="result-screen">
+      <div class="result-inner">
+        <span class="result-stars" id="result-stars">⭐⭐⭐</span>
+        <div class="result-score-label">SCORE FINAL</div>
+        <div class="result-score" id="result-score">0</div>
+        <div class="result-total" id="result-total">/ 14</div>
+        <div class="result-msg" id="result-msg"></div>
+        <button class="btn-replay" onclick="startQuiz()">🔄 Rejouer</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var VOCAB = [
+  { ar: 'دَخَلَ',       fr: 'il entra' },
+  { ar: 'الْفَصْلُ',    fr: 'la classe' },
+  { ar: 'أَصْدِقَاءُ',  fr: 'les amis' },
+  { ar: 'جَلَسَ',       fr: 'il s\'assit' },
+  { ar: 'الْمُعَلِّمُ', fr: 'le professeur' },
+  { ar: 'يَشْرَحُ',     fr: 'il explique' },
+  { ar: 'جَدِيدٌ',      fr: 'nouveau' },
+  { ar: 'انْتَبَهَ',    fr: 'il fit attention' },
+  { ar: 'فَهِمَ',       fr: 'il comprit' },
+  { ar: 'الْأُسْتَاذُ', fr: 'le maître' },
+  { ar: 'التَّلَامِيذُ',fr: 'les élèves' },
+  { ar: 'وَاجِبَاتٌ',   fr: 'devoirs' },
+  { ar: 'نِظَامٌ',      fr: 'ordre, discipline' },
+  { ar: 'هُدُوءٌ',      fr: 'calme, tranquillité' },
+];
+
+var questions = [], qIndex = 0, score = 0, answered = false;
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function buildQuestions() {
+  var order = shuffle(VOCAB);
+  return order.map(function(item, i) {
+    var arToFr = (i % 2 === 0);
+    var correct = arToFr ? item.fr : item.ar;
+    var pool = VOCAB.filter(function(v) { return v !== item; });
+    var wrongs = shuffle(pool).slice(0, 3).map(function(v) { return arToFr ? v.fr : v.ar; });
+    return {
+      question: arToFr ? item.ar : item.fr,
+      isArabicQ: arToFr,
+      correct: correct,
+      options: shuffle([correct].concat(wrongs))
+    };
+  });
+}
+
+function startQuiz() {
+  questions = buildQuestions();
+  qIndex = 0;
+  score = 0;
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  var q = questions[qIndex];
+  var total = questions.length;
+
+  document.getElementById('prog-fill').style.width = (qIndex / total * 100) + '%';
+  document.getElementById('q-counter').textContent = (qIndex + 1) + ' / ' + total;
+  document.getElementById('score-live').textContent = score;
+  document.getElementById('dir-tag').textContent = q.isArabicQ ? 'Arabe → Français' : 'Français → Arabe';
+
+  var wordEl = document.getElementById('q-word');
+  if (q.isArabicQ) {
+    wordEl.innerHTML = '<div class="q-word-ar">' + q.question + '</div>';
+  } else {
+    wordEl.innerHTML = '<div class="q-word-fr">« ' + q.question + ' »</div>';
+  }
+
+  var burst = document.getElementById('feedback-burst');
+  burst.textContent = '';
+  burst.classList.remove('show');
+
+  var grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  q.options.forEach(function(opt) {
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn' + (!q.isArabicQ ? ' ar-opt' : '');
+    btn.textContent = opt;
+    btn.onclick = function() { pick(btn, opt, q.correct); };
+    grid.appendChild(btn);
+  });
+}
+
+function pick(btn, chosen, correct) {
+  if (answered) return;
+  answered = true;
+
+  var btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(function(b) { b.classList.add('locked'); });
+
+  var burst = document.getElementById('feedback-burst');
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('score-live').textContent = score;
+    burst.textContent = ['✨','🌟','⭐','🎉'][Math.floor(Math.random()*4)];
+    burst.classList.add('show');
+  } else {
+    btn.classList.add('wrong');
+    btns.forEach(function(b) {
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+    burst.textContent = '💪';
+    burst.classList.add('show');
+  }
+
+  setTimeout(function() {
+    qIndex++;
+    if (qIndex < questions.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 1400);
+}
+
+function showResult() {
+  document.getElementById('prog-fill').style.width = '100%';
+  var total = questions.length;
+  document.getElementById('result-score').textContent = score;
+  document.getElementById('result-total').textContent = '/ ' + total;
+
+  var pct = score / total;
+  var stars, msg, ar;
+  if (pct === 1) {
+    stars = '⭐⭐⭐'; msg = 'Parfait ! Tu connais tous les mots par cœur.'; ar = 'أَحْسَنْتِ ! مَمْتَازٌ !';
+  } else if (pct >= 0.7) {
+    stars = '⭐⭐'; msg = 'Très bien ! Encore un peu de révision et ce sera parfait.'; ar = 'جَيِّدٌ جِدّاً !';
+  } else if (pct >= 0.5) {
+    stars = '⭐'; msg = 'Bien essayé. Relis le vocabulaire et refais le quiz !'; ar = 'اِسْتَمِرِّي !';
+  } else {
+    stars = ''; msg = 'Continue de réviser — tu peux le faire !'; ar = 'لَا تَيْأَسِي !';
+  }
+
+  document.getElementById('result-stars').textContent = stars || '📖';
+  document.getElementById('result-msg').innerHTML = msg + '<span class="ar">' + ar + '</span>';
+  showScreen('result-screen');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  var el = document.getElementById(id);
+  el.classList.add('active');
+}
+</script>
