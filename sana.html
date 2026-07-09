@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>في الْمَدْرَسَةِ — Sana</title>
+  <style>
+    :root{--rose:#c2697c;--deep:#7a3347;--pale:#f8ecef;--gold:#c9a84c;--dark:#1e1318;--mid:#6b5460;--border:#eddde3;--bg:#f5eff2;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--dark);padding:20px 14px 40px;}
+    .page{width:100%;max-width:840px;margin:0 auto;}
+
+    .top-strip{height:5px;background:linear-gradient(90deg,var(--deep),var(--rose),var(--gold));border-radius:3px;margin-bottom:12px;}
+    .header{background:linear-gradient(135deg,var(--deep) 0%,#a04560 100%);color:white;border-radius:14px;padding:16px 24px 14px;text-align:center;margin-bottom:22px;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(122,51,71,.25);}
+    .header::before{content:'البداية';font-size:6.5rem;font-weight:700;color:rgba(255,255,255,.05);position:absolute;left:-1rem;top:-1rem;line-height:1;pointer-events:none;}
+    .h-brand{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;opacity:.75;margin-bottom:5px;}
+    .h-title{font-size:2.2rem;font-family:'Geeza Pro',Arial,serif;direction:rtl;font-weight:700;margin-bottom:3px;}
+    .h-sub{font-size:.83rem;opacity:.85;margin-bottom:8px;}
+    .h-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+    .h-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 12px;font-size:.73rem;}
+
+    .section{margin-bottom:26px;}
+    .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+    .sec-num{background:var(--deep);color:white;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Geeza Pro',Arial,serif;font-size:.85rem;font-weight:700;flex-shrink:0;}
+    .sec-ar{font-size:1.15rem;font-family:'Geeza Pro',Arial,serif;direction:rtl;color:var(--deep);font-weight:700;}
+    .sec-fr{font-size:.75rem;color:var(--mid);margin-right:auto;font-style:italic;}
+    .sec-bar{height:2px;background:linear-gradient(90deg,var(--rose),transparent);margin-bottom:14px;}
+
+    /* TEXTE */
+    .nass-box{background:white;border:1.5px solid var(--border);border-radius:14px;padding:20px 26px;box-shadow:0 2px 12px rgba(194,105,124,.08);}
+    .nass-title{font-size:1.6rem;font-family:'Geeza Pro',Arial,serif;direction:rtl;color:var(--deep);font-weight:700;text-align:center;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--rose);}
+    .nass-p{font-size:1.4rem;font-family:'Geeza Pro',Arial,serif;direction:rtl;line-height:2.6;color:var(--dark);margin-bottom:10px;}
+    .nass-note{font-size:.73rem;color:var(--mid);font-style:italic;margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+    .btn-trad{background:transparent;border:1.5px solid var(--rose);color:var(--rose);border-radius:8px;padding:6px 16px;font-size:.76rem;cursor:pointer;font-weight:700;margin-top:12px;font-family:'Segoe UI',Arial,sans-serif;display:inline-block;}
+    .btn-trad:hover{background:var(--rose);color:white;}
+    .trad-box{display:none;margin-top:12px;background:#fef9f5;border:1.5px solid var(--border);border-left:4px solid var(--gold);border-radius:10px;padding:14px 18px;}
+    .trad-box p{font-size:.88rem;color:#444;line-height:1.85;margin-bottom:8px;}
+    .trad-box p:last-child{margin-bottom:0;}
+
+    /* VOCAB */
+    table.vocab{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(194,105,124,.08);}
+    table.vocab thead tr{background:linear-gradient(135deg,var(--deep),#a04560);color:white;}
+    table.vocab th{padding:9px 12px;font-size:.82rem;font-weight:600;text-align:center;}
+    table.vocab td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:center;font-size:.88rem;}
+    table.vocab tr:last-child td{border-bottom:none;}
+    table.vocab tr:nth-child(even) td{background:var(--pale);}
+    .td-ar{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.18rem;color:var(--deep);font-weight:700;}
+    .td-fr{font-style:italic;color:#444;}
+    .td-ex{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:.98rem;color:var(--mid);}
+
+    /* PRONOMS INTERROGATIFS */
+    .interro-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 10px rgba(74,32,112,.1);}
+    table.interro{width:100%;border-collapse:collapse;background:white;min-width:520px;}
+    table.interro thead tr{background:linear-gradient(135deg,#4a2070,#7a3090);color:white;}
+    table.interro th{padding:9px 12px;font-size:.78rem;font-weight:600;text-align:center;}
+    table.interro td{padding:8px 12px;border-bottom:1px solid #e0d0f0;vertical-align:middle;}
+    table.interro tr:last-child td{border-bottom:none;}
+    table.interro tr:nth-child(even) td{background:#f7f2fb;}
+    .ti-ar{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.4rem;color:#4a2070;font-weight:700;text-align:center;}
+    .ti-fr{font-weight:700;color:var(--dark);font-size:.88rem;text-align:center;}
+    .ti-use{font-size:.76rem;color:var(--mid);text-align:center;}
+    .ti-ex{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:.9rem;color:#4a2070;line-height:1.7;}
+    .interro-note{background:#f7f2fb;border:1px solid #d5c8e8;border-left:4px solid #7a3090;border-radius:10px;padding:10px 14px;font-size:.78rem;color:#4a2070;line-height:1.65;margin-top:10px;}
+
+    /* COMPRÉHENSION */
+    .q-list{display:flex;flex-direction:column;gap:11px;}
+    .q-item{background:white;border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;}
+    .q-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+    .q-badge{background:var(--rose);color:white;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;}
+    .q-text{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.1rem;color:var(--dark);font-weight:600;flex:1;}
+    .btn-ans{background:transparent;border:1.5px solid var(--border);color:var(--mid);border-radius:7px;padding:4px 11px;font-size:.7rem;cursor:pointer;font-weight:700;font-family:'Segoe UI',Arial,sans-serif;white-space:nowrap;flex-shrink:0;}
+    .btn-ans:hover{border-color:var(--gold);color:var(--deep);}
+    .q-hint{font-size:.7rem;color:var(--mid);font-style:italic;margin-bottom:6px;text-align:right;direction:rtl;}
+    .q-answer{display:none;margin-top:8px;padding:8px 12px;background:#fdf5e0;border:1.5px solid var(--gold);border-radius:8px;font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.05rem;color:#7a600a;font-weight:600;}
+    .write-line{height:34px;border:none;border-bottom:1.5px solid var(--border);width:100%;background:transparent;font-family:'Geeza Pro',Arial,serif;font-size:1.05rem;direction:rtl;outline:none;color:var(--dark);}
+
+    /* QUIZ VOCAB */
+    .quiz-intro{font-size:.8rem;color:var(--mid);font-style:italic;margin-bottom:14px;padding:8px 12px;background:white;border-radius:8px;border:1px solid var(--border);}
+    .qv-item{background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+    .qv-q{font-size:.76rem;color:var(--mid);margin-bottom:6px;font-style:italic;}
+    .qv-word{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.6rem;color:var(--deep);font-weight:700;margin-bottom:10px;}
+    .qv-word.fr-word{font-family:'Segoe UI',Arial,sans-serif;font-size:1.1rem;direction:ltr;color:#333;}
+    .qv-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .qv-btn{background:var(--pale);border:1.5px solid var(--border);border-radius:8px;padding:9px 10px;font-size:.88rem;color:var(--dark);cursor:pointer;text-align:center;transition:all .15s;font-family:'Segoe UI',Arial,sans-serif;}
+    .qv-btn.ar-opt{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.1rem;color:var(--deep);}
+    .qv-btn:hover:not(.locked){border-color:var(--rose);background:white;}
+    .qv-btn.correct{background:#fdf5e0;border-color:var(--gold);color:#7a600a;}
+    .qv-btn.wrong{background:#fce8ec;border-color:#e53935;color:#b71c1c;animation:shk .35s ease;}
+    .qv-btn.locked{cursor:default;}
+
+    /* QCM */
+    .exo-title{font-size:.92rem;font-weight:700;color:var(--deep);margin-bottom:10px;}
+    .exo-sub{font-size:.75rem;color:var(--mid);font-style:italic;margin-bottom:10px;}
+    .qcm-item{background:white;border:1.5px solid var(--border);border-radius:12px;padding:13px 16px;margin-bottom:11px;}
+    .qcm-q{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.08rem;font-weight:700;color:var(--dark);margin-bottom:10px;}
+    .qcm-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .qcm-btn{background:var(--pale);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Geeza Pro',Arial,serif;font-size:.98rem;color:var(--dark);cursor:pointer;direction:rtl;text-align:right;transition:all .15s;}
+    .qcm-btn:hover:not(.locked){border-color:var(--rose);background:white;}
+    .qcm-btn.correct{background:#fdf5e0;border-color:var(--gold);color:#7a600a;}
+    .qcm-btn.wrong{background:#fce8ec;border-color:#e53935;color:#b71c1c;animation:shk .35s ease;}
+    .qcm-btn.locked{cursor:default;}
+
+    /* VRAI / FAUX */
+    .vf-item{background:white;border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .vf-text{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.05rem;flex:1;min-width:200px;}
+    .vf-btns{display:flex;gap:8px;flex-shrink:0;}
+    .vf-btn{padding:7px 16px;border-radius:8px;border:1.5px solid;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Segoe UI',Arial,sans-serif;}
+    .vf-v{border-color:#66bb6a;background:#e8f5e9;color:#2e7d32;}
+    .vf-f{border-color:#ef5350;background:#fce8ec;color:#c62828;}
+    .vf-btn:hover:not(.locked){transform:scale(1.04);}
+    .vf-btn.correct{box-shadow:0 0 0 2px var(--gold);}
+    .vf-btn.wrong{opacity:.35;}
+    .vf-btn.locked{cursor:default;}
+
+    /* GRAMMAIRE */
+    .gram-box{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 10px rgba(194,105,124,.07);}
+    .gram-head{background:var(--pale);border-bottom:2px solid var(--rose);padding:9px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    .gram-icon{font-size:1.1rem;}
+    .gram-title-ar{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1rem;font-weight:700;color:var(--deep);}
+    .gram-title-fr{font-size:.73rem;color:var(--mid);font-style:italic;}
+    .gram-body{padding:16px 18px;}
+    .gram-regle{background:var(--pale);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.82rem;color:var(--deep);border-right:3px solid var(--rose);direction:rtl;line-height:1.7;}
+    .gram-regle-title{font-weight:700;margin-bottom:4px;}
+
+    /* GENRE — tableaux */
+    table.gtab{width:100%;border-collapse:collapse;}
+    table.gtab th{padding:8px 12px;font-size:.78rem;text-align:center;color:white;}
+    table.gtab td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:center;font-size:.88rem;}
+    table.gtab tr:last-child td{border-bottom:none;}
+    table.gtab tr:nth-child(even) td{background:#f9f3f5;}
+    .ar-m{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.2rem;color:#3a6070;font-weight:700;}
+    .ar-f{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.2rem;color:var(--rose);font-weight:700;}
+    .fr-cell{font-size:.82rem;color:var(--mid);font-style:italic;}
+    .arr{color:var(--rose);}
+
+    .gram-intro{font-size:.86rem;color:var(--dark);line-height:1.75;margin-bottom:14px;}
+    .gram-sub{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--deep);margin:14px 0 8px;border-left:3px solid var(--rose);padding-left:8px;}
+    .badge-m{display:inline-block;background:#e3f0f5;color:#3a6070;border:1px solid #b0cfd8;border-radius:6px;padding:2px 8px;font-size:.68rem;font-weight:700;}
+    .badge-f{display:inline-block;background:#fde8ed;color:var(--rose);border:1px solid #f0b8c6;border-radius:6px;padding:2px 8px;font-size:.68rem;font-weight:700;}
+
+    .accord-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;align-items:center;direction:rtl;}
+    .accord-box{background:#f9f3f5;border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.1rem;color:var(--dark);line-height:1.8;}
+    .accord-box .m{color:#3a6070;font-weight:700;}
+    .accord-box .f{color:var(--rose);font-weight:700;}
+    .accord-arr{color:var(--mid);font-size:1.4rem;align-self:center;}
+
+    /* Exercices genre */
+    .mf-item{background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:11px;}
+    .mf-q-label{font-size:.76rem;color:var(--mid);font-style:italic;margin-bottom:6px;}
+    .mf-word{font-family:'Geeza Pro',Arial,serif;direction:rtl;font-size:1.5rem;color:var(--deep);font-weight:700;margin-bottom:10px;}
+    .mf-q-fr{font-size:.9rem;color:var(--dark);margin-bottom:10px;font-weight:600;}
+    .mf-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .mf-btn{background:var(--pale);border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:'Geeza Pro',Arial,serif;font-size:1.05rem;color:var(--deep);cursor:pointer;direction:rtl;text-align:center;transition:all .15s;}
+    .mf-btn.fr{font-family:'Segoe UI',Arial,sans-serif;direction:ltr;font-size:.88rem;color:var(--dark);}
+    .mf-btn:hover:not(.locked){border-color:var(--rose);background:white;}
+    .mf-btn.correct{background:#fdf5e0;border-color:var(--gold);color:#7a600a;}
+    .mf-btn.wrong{background:#fce8ec;border-color:#e53935;color:#b71c1c;animation:shk .35s ease;}
+    .mf-btn.locked{cursor:default;}
+
+    /* SCORE */
+    .score-zone{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+    .pill{background:white;border:1.5px solid var(--border);border-radius:20px;padding:5px 16px;font-weight:700;color:var(--deep);font-size:.78rem;}
+    .btn-reset{background:var(--rose);color:white;border:none;border-radius:8px;padding:7px 18px;font-size:.78rem;cursor:pointer;font-weight:600;font-family:'Segoe UI',Arial,sans-serif;}
+    .btn-reset:hover{background:var(--deep);}
+
+    /* DICTÉE */
+    .dictee-box{background:white;border:2px dashed var(--rose);border-radius:12px;padding:16px 20px;}
+    .dictee-line{display:flex;align-items:center;gap:10px;margin-bottom:18px;direction:rtl;}
+    .dictee-num{font-size:.78rem;color:white;background:var(--rose);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+    .dictee-field{flex:1;border:none;border-bottom:1.5px solid var(--border);height:36px;font-family:'Geeza Pro',Arial,serif;font-size:1.1rem;direction:rtl;outline:none;color:var(--dark);background:transparent;}
+
+    .sep{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:22px 0;}
+
+    @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+    @media print{
+      body{background:white;padding:0;}
+      .no-print{display:none;}
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+<div class="top-strip"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="h-brand">BIDAYAH — Fiche de cours</div>
+  <div class="h-title">فِي الْمَدْرَسَةِ</div>
+  <div class="h-sub">À l'école — Lecture, vocabulaire, grammaire &amp; exercices</div>
+  <div class="h-pills">
+    <span class="h-pill">فِي الْمَدْرَسَةِ</span>
+    <span class="h-pill">أَدَوَاتُ الِاسْتِفْهَامِ</span>
+    <span class="h-pill">الْمُذَكَّرُ وَالْمُؤَنَّثُ</span>
+  </div>
+</div>
+
+
+<!-- ═══ 1. TEXTE ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">١</div>
+    <div class="sec-ar">النَّصُّ</div>
+    <div class="sec-fr">Le texte — Lis et écoute</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="nass-box">
+    <div class="nass-title">فِي الْمَدْرَسَةِ</div>
+    <p class="nass-p">دَخَلَ رَشِيدٌ فِي الْفَصْلِ مَعَ أَصْدِقَائِهِ وَجَلَسَ. أَخَذَ الْمُعَلِّمُ يَشْرَحُ دَرْساً جَدِيداً فَانْتَبَهَ رَشِيدٌ وَفَهِمَ هَذَا الدَّرْسَ.</p>
+    <p class="nass-p">بَعْدَمَا أَتَمَّ الْأُسْتَاذُ شَرْحَهُ ذَكَّرَ التَّلَامِيذَ بِوَاجِبَاتِهِمْ ثُمَّ أَذِنَ لَهُمْ بِالْخُرُوجِ فَخَرَجُوا بِنِظَامٍ وَهُدُوءٍ.</p>
+    <div class="nass-note">📌 Lis le texte deux fois à voix haute, puis essaie de répondre aux questions sans regarder.</div>
+    <button class="btn-trad no-print" onclick="toggleTrad(this)">Afficher la traduction</button>
+    <div class="trad-box" id="trad">
+      <p>Rachid entra dans la classe avec ses amis et s'assit. Le professeur commença à expliquer une nouvelle leçon ; alors Rachid fit bien attention et comprit cette leçon.</p>
+      <p>Après que le maître eut terminé son explication, il rappela aux élèves leurs devoirs, puis leur donna la permission de sortir. Ils sortirent en ordre et dans le calme.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ 2. VOCABULAIRE ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٢</div>
+    <div class="sec-ar">الْمُفْرَدَاتُ الْجَدِيدَةُ</div>
+    <div class="sec-fr">Vocabulaire nouveau</div>
+  </div>
+  <div class="sec-bar"></div>
+  <table class="vocab">
+    <thead><tr><th style="width:22%">الْكَلِمَةُ</th><th style="width:28%">الْمَعْنَى بِالْفَرَنْسِيَّةِ</th><th>مِثَالٌ مِنَ النَّصِّ</th></tr></thead>
+    <tbody>
+      <tr><td class="td-ar">دَخَلَ</td><td class="td-fr">il entra</td><td class="td-ex">دَخَلَ رَشِيدٌ فِي الْفَصْلِ</td></tr>
+      <tr><td class="td-ar">الْفَصْلُ</td><td class="td-fr">la classe</td><td class="td-ex">دَخَلَ فِي الْفَصْلِ</td></tr>
+      <tr><td class="td-ar">أَصْدِقَاءُ</td><td class="td-fr">les amis (pl. de صَدِيقٌ)</td><td class="td-ex">مَعَ أَصْدِقَائِهِ</td></tr>
+      <tr><td class="td-ar">جَلَسَ</td><td class="td-fr">il s'assit</td><td class="td-ex">وَجَلَسَ</td></tr>
+      <tr><td class="td-ar">الْمُعَلِّمُ</td><td class="td-fr">le professeur</td><td class="td-ex">أَخَذَ الْمُعَلِّمُ يَشْرَحُ</td></tr>
+      <tr><td class="td-ar">يَشْرَحُ</td><td class="td-fr">il explique</td><td class="td-ex">يَشْرَحُ دَرْساً جَدِيداً</td></tr>
+      <tr><td class="td-ar">جَدِيدٌ</td><td class="td-fr">nouveau / nouvelle</td><td class="td-ex">دَرْسٌ جَدِيدٌ</td></tr>
+      <tr><td class="td-ar">انْتَبَهَ</td><td class="td-fr">il fit attention</td><td class="td-ex">فَانْتَبَهَ رَشِيدٌ</td></tr>
+      <tr><td class="td-ar">فَهِمَ</td><td class="td-fr">il comprit</td><td class="td-ex">وَفَهِمَ هَذَا الدَّرْسَ</td></tr>
+      <tr><td class="td-ar">الْأُسْتَاذُ</td><td class="td-fr">le maître / l'enseignant</td><td class="td-ex">أَتَمَّ الْأُسْتَاذُ شَرْحَهُ</td></tr>
+      <tr><td class="td-ar">التَّلَامِيذُ</td><td class="td-fr">les élèves</td><td class="td-ex">ذَكَّرَ التَّلَامِيذَ</td></tr>
+      <tr><td class="td-ar">وَاجِبَاتٌ</td><td class="td-fr">devoirs (pl.)</td><td class="td-ex">بِوَاجِبَاتِهِمْ</td></tr>
+      <tr><td class="td-ar">خَرَجُوا</td><td class="td-fr">ils sortirent</td><td class="td-ex">فَخَرَجُوا</td></tr>
+      <tr><td class="td-ar">نِظَامٌ</td><td class="td-fr">ordre, discipline</td><td class="td-ex">بِنِظَامٍ وَهُدُوءٍ</td></tr>
+      <tr><td class="td-ar">هُدُوءٌ</td><td class="td-fr">calme, tranquillité</td><td class="td-ex">بِنِظَامٍ وَهُدُوءٍ</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══ 3. PRONOMS INTERROGATIFS ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٣</div>
+    <div class="sec-ar">أَدَوَاتُ الِاسْتِفْهَامِ</div>
+    <div class="sec-fr">Les pronoms interrogatifs étudiés</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="interro-wrap">
+    <table class="interro">
+      <thead>
+        <tr>
+          <th style="width:13%">الأَدَاةُ</th>
+          <th style="width:16%">Sens</th>
+          <th style="width:18%">Pour quoi ?</th>
+          <th>Exemple</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ti-ar">مَنْ</td>
+          <td class="ti-fr">Qui</td>
+          <td class="ti-use">Une personne</td>
+          <td><div class="ti-ex">مَنْ دَخَلَ فِي الْفَصْلِ ؟ — Qui est entré dans la classe ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">مَاذَا</td>
+          <td class="ti-fr">Que / Quoi</td>
+          <td class="ti-use">Une action</td>
+          <td><div class="ti-ex">مَاذَا فَعَلَ الْمُعَلِّمُ ؟ — Qu'a fait le professeur ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">أَيْنَ</td>
+          <td class="ti-fr">Où</td>
+          <td class="ti-use">Le lieu</td>
+          <td><div class="ti-ex">أَيْنَ جَلَسَ رَشِيدٌ ؟ — Où s'est assis Rachid ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">مَتَى</td>
+          <td class="ti-fr">Quand</td>
+          <td class="ti-use">Le temps</td>
+          <td><div class="ti-ex">مَتَى أَذِنَ الأُسْتَاذُ بِالْخُرُوجِ ؟ — Quand le maître a-t-il permis de sortir ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">كَيْفَ</td>
+          <td class="ti-fr">Comment</td>
+          <td class="ti-use">La manière</td>
+          <td><div class="ti-ex">كَيْفَ خَرَجَ التَّلَامِيذُ ؟ — Comment les élèves sortirent-ils ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">لِمَاذَا</td>
+          <td class="ti-fr">Pourquoi</td>
+          <td class="ti-use">La cause / le motif</td>
+          <td><div class="ti-ex">لِمَاذَا انْتَبَهَ رَشِيدٌ ؟ — Pourquoi Rachid fit-il attention ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">كَمْ</td>
+          <td class="ti-fr">Combien</td>
+          <td class="ti-use">La quantité / le nombre</td>
+          <td><div class="ti-ex">كَمْ تِلْمِيذاً فِي الْفَصْلِ ؟ — Combien d'élèves dans la classe ?</div></td>
+        </tr>
+        <tr>
+          <td class="ti-ar">هَلْ</td>
+          <td class="ti-fr">Est-ce que</td>
+          <td class="ti-use">Question oui / non</td>
+          <td><div class="ti-ex">هَلْ فَهِمَ رَشِيدٌ الدَّرْسَ ؟ — Est-ce que Rachid a compris ?</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interro-note">
+    📌 <strong>À retenir :</strong> les pronoms interrogatifs se placent toujours <strong>au début de la phrase</strong>, avant le verbe.
+    Ces 8 pronoms sont utilisés dans les questions de compréhension ci-dessous.
+  </div>
+</div>
+
+
+<!-- ═══ 4. COMPRÉHENSION ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٤</div>
+    <div class="sec-ar">أَسْئِلَةُ الْفَهْمِ</div>
+    <div class="sec-fr">Questions de compréhension en arabe</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="q-list">
+
+    <div class="q-item">
+      <div class="q-header">
+        <div class="q-badge">١</div>
+        <div class="q-text">مَنْ دَخَلَ فِي الْفَصْلِ ؟</div>
+        <button class="btn-ans no-print" onclick="showAns('ans1',this)">Réponse</button>
+      </div>
+      <div class="q-hint">Qui est entré dans la classe ?</div>
+      <input class="write-line" type="text" placeholder=""/>
+      <div class="q-answer" id="ans1">دَخَلَ رَشِيدٌ فِي الْفَصْلِ.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-header">
+        <div class="q-badge">٢</div>
+        <div class="q-text">لِمَاذَا انْتَبَهَ رَشِيدٌ ؟</div>
+        <button class="btn-ans no-print" onclick="showAns('ans2',this)">Réponse</button>
+      </div>
+      <div class="q-hint">Pourquoi Rachid fit-il attention ?</div>
+      <input class="write-line" type="text"/>
+      <div class="q-answer" id="ans2">انْتَبَهَ لِأَنَّ الْمُعَلِّمَ كَانَ يَشْرَحُ دَرْساً جَدِيداً.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-header">
+        <div class="q-badge">٣</div>
+        <div class="q-text">مَاذَا فَعَلَ الْمُعَلِّمُ ؟</div>
+        <button class="btn-ans no-print" onclick="showAns('ans3',this)">Réponse</button>
+      </div>
+      <div class="q-hint">Qu'a fait le professeur ?</div>
+      <input class="write-line" type="text" placeholder=""/>
+      <div class="q-answer" id="ans3">أَخَذَ الْمُعَلِّمُ يَشْرَحُ دَرْساً جَدِيداً.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-header">
+        <div class="q-badge">٤</div>
+        <div class="q-text">هَلْ فَهِمَ رَشِيدٌ الدَّرْسَ ؟</div>
+        <button class="btn-ans no-print" onclick="showAns('ans4',this)">Réponse</button>
+      </div>
+      <div class="q-hint">Est-ce que Rachid a compris la leçon ?</div>
+      <input class="write-line" type="text" placeholder=""/>
+      <div class="q-answer" id="ans4">نَعَمْ، فَهِمَ رَشِيدٌ الدَّرْسَ الْجَدِيدَ.</div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-header">
+        <div class="q-badge">٥</div>
+        <div class="q-text">كَيْفَ خَرَجَ التَّلَامِيذُ ؟</div>
+        <button class="btn-ans no-print" onclick="showAns('ans5',this)">Réponse</button>
+      </div>
+      <div class="q-hint">Comment les élèves sont-ils sortis ?</div>
+      <input class="write-line" type="text" placeholder=""/>
+      <div class="q-answer" id="ans5">خَرَجَ التَّلَامِيذُ بِنِظَامٍ وَهُدُوءٍ.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══ 5. QUIZ VOCABULAIRE ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٥</div>
+    <div class="sec-ar">تَمَارِينُ الْمُفْرَدَاتِ</div>
+    <div class="sec-fr">Quiz vocabulaire interactif</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="quiz-intro">Clique sur la bonne réponse. Les questions alternent arabe → français et français → arabe.</div>
+
+  <div class="qv-item" id="qv1">
+    <div class="qv-q">Quel est le sens de ce mot ?</div>
+    <div class="qv-word">الْفَصْلُ</div>
+    <div class="qv-opts">
+      <button class="qv-btn" onclick="qvAns(this,'qv1',true)">la classe</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv1',false)">l'école</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv1',false)">le livre</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv1',false)">la porte</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv2">
+    <div class="qv-q">Quelle est la traduction arabe de :</div>
+    <div class="qv-word fr-word">« il comprit »</div>
+    <div class="qv-opts">
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv2',false)">جَلَسَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv2',false)">خَرَجَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv2',true)">فَهِمَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv2',false)">دَخَلَ</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv3">
+    <div class="qv-q">Quel est le sens de ce mot ?</div>
+    <div class="qv-word">انْتَبَهَ</div>
+    <div class="qv-opts">
+      <button class="qv-btn" onclick="qvAns(this,'qv3',false)">il comprit</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv3',false)">il s'assit</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv3',true)">il fit attention</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv3',false)">il sortit</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv4">
+    <div class="qv-q">Quelle est la traduction arabe de :</div>
+    <div class="qv-word fr-word">« les élèves »</div>
+    <div class="qv-opts">
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv4',false)">الْمُعَلِّمُونَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv4',true)">التَّلَامِيذُ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv4',false)">الْأُسْتَاذُ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv4',false)">أَصْدِقَاءُ</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv5">
+    <div class="qv-q">Quel est le sens de ce mot ?</div>
+    <div class="qv-word">هُدُوءٌ</div>
+    <div class="qv-opts">
+      <button class="qv-btn" onclick="qvAns(this,'qv5',false)">ordre</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv5',true)">calme / tranquillité</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv5',false)">discipline</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv5',false)">bruit</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv6">
+    <div class="qv-q">Quelle est la traduction arabe de :</div>
+    <div class="qv-word fr-word">« il s'assit »</div>
+    <div class="qv-opts">
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv6',false)">دَخَلَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv6',false)">فَهِمَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv6',false)">انْتَبَهَ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv6',true)">جَلَسَ</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv7">
+    <div class="qv-q">Quel est le sens de ce mot ?</div>
+    <div class="qv-word">وَاجِبَاتٌ</div>
+    <div class="qv-opts">
+      <button class="qv-btn" onclick="qvAns(this,'qv7',false)">leçons</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv7',false)">cours</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv7',true)">devoirs</button>
+      <button class="qv-btn" onclick="qvAns(this,'qv7',false)">amis</button>
+    </div>
+  </div>
+
+  <div class="qv-item" id="qv8">
+    <div class="qv-q">Quelle est la traduction arabe de :</div>
+    <div class="qv-word fr-word">« nouveau »</div>
+    <div class="qv-opts">
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv8',true)">جَدِيدٌ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv8',false)">كَثِيرٌ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv8',false)">كَبِيرٌ</button>
+      <button class="qv-btn ar-opt" onclick="qvAns(this,'qv8',false)">صَغِيرٌ</button>
+    </div>
+  </div>
+
+  <div class="score-zone">
+    <div class="pill">⭐ Score : <span id="score-qv">0</span> / 8</div>
+    <button class="btn-reset no-print" onclick="resetQV()">🔄 Recommencer</button>
+  </div>
+</div>
+
+
+<!-- ═══ 6. QCM ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٦</div>
+    <div class="sec-ar">أَسْئِلَةٌ مُتَعَدِّدَةُ الْخِيَارَاتِ</div>
+    <div class="sec-fr">QCM — Compréhension du texte</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="exo-sub">Clique sur la bonne réponse.</div>
+
+  <div class="qcm-item" id="q1">
+    <div class="qcm-q">مَنْ دَخَلَ فِي الْفَصْلِ ؟</div>
+    <div class="qcm-opts">
+      <button class="qcm-btn" onclick="qcmAns(this,'q1',true)">رَشِيدٌ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q1',false)">فَاطِمَةُ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q1',false)">مُحَمَّدٌ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q1',false)">أَحْمَدُ</button>
+    </div>
+  </div>
+  <div class="qcm-item" id="q2">
+    <div class="qcm-q">مَاذَا فَعَلَ الْمُعَلِّمُ ؟</div>
+    <div class="qcm-opts">
+      <button class="qcm-btn" onclick="qcmAns(this,'q2',false)">يَلْعَبُ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q2',true)">يَشْرَحُ دَرْساً جَدِيداً</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q2',false)">يَأْكُلُ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q2',false)">يَنَامُ</button>
+    </div>
+  </div>
+  <div class="qcm-item" id="q3">
+    <div class="qcm-q">كَيْفَ خَرَجَ التَّلَامِيذُ ؟</div>
+    <div class="qcm-opts">
+      <button class="qcm-btn" onclick="qcmAns(this,'q3',false)">بِفَوْضَى</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q3',false)">بِسُرْعَةٍ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q3',true)">بِنِظَامٍ وَهُدُوءٍ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q3',false)">بِصَوْتٍ عَالٍ</button>
+    </div>
+  </div>
+  <div class="qcm-item" id="q4">
+    <div class="qcm-q">مَتَى أَذِنَ الأُسْتَاذُ لِلتَّلَامِيذِ بِالْخُرُوجِ ؟</div>
+    <div class="qcm-opts">
+      <button class="qcm-btn" onclick="qcmAns(this,'q4',true)">بَعْدَ الشَّرْحِ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q4',false)">قَبْلَ الدَّرْسِ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q4',false)">فِي بِدَايَةِ الْيَوْمِ</button>
+      <button class="qcm-btn" onclick="qcmAns(this,'q4',false)">بَعْدَ الْغَدَاءِ</button>
+    </div>
+  </div>
+
+  <div class="score-zone">
+    <div class="pill">⭐ Score : <span id="score-qcm">0</span> / 4</div>
+    <button class="btn-reset no-print" onclick="resetQCM()">🔄 Recommencer</button>
+  </div>
+</div>
+
+
+<!-- ═══ 7. VRAI / FAUX ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٧</div>
+    <div class="sec-ar">صَحِيحٌ أَمْ خَاطِئٌ ؟</div>
+    <div class="sec-fr">Vrai ou Faux</div>
+  </div>
+  <div class="sec-bar"></div>
+
+  <div class="vf-item" id="vf1">
+    <div class="vf-text">دَخَلَ رَشِيدٌ الْفَصْلَ وَحْدَهُ.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-v" onclick="vfAns(this,'vf1',false)">✓ صَحِيحٌ</button>
+      <button class="vf-btn vf-f" onclick="vfAns(this,'vf1',true)">✗ خَاطِئٌ</button>
+    </div>
+  </div>
+  <div class="vf-item" id="vf2">
+    <div class="vf-text">فَهِمَ رَشِيدٌ الدَّرْسَ الْجَدِيدَ.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-v" onclick="vfAns(this,'vf2',true)">✓ صَحِيحٌ</button>
+      <button class="vf-btn vf-f" onclick="vfAns(this,'vf2',false)">✗ خَاطِئٌ</button>
+    </div>
+  </div>
+  <div class="vf-item" id="vf3">
+    <div class="vf-text">خَرَجَ التَّلَامِيذُ بِفَوْضَى.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-v" onclick="vfAns(this,'vf3',false)">✓ صَحِيحٌ</button>
+      <button class="vf-btn vf-f" onclick="vfAns(this,'vf3',true)">✗ خَاطِئٌ</button>
+    </div>
+  </div>
+  <div class="vf-item" id="vf4">
+    <div class="vf-text">ذَكَّرَ الْأُسْتَاذُ التَّلَامِيذَ بِوَاجِبَاتِهِمْ.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-v" onclick="vfAns(this,'vf4',true)">✓ صَحِيحٌ</button>
+      <button class="vf-btn vf-f" onclick="vfAns(this,'vf4',false)">✗ خَاطِئٌ</button>
+    </div>
+  </div>
+  <div class="vf-item" id="vf5">
+    <div class="vf-text">أَذِنَ الْأُسْتَاذُ لِلتَّلَامِيذِ بِالدُّخُولِ.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-v" onclick="vfAns(this,'vf5',false)">✓ صَحِيحٌ</button>
+      <button class="vf-btn vf-f" onclick="vfAns(this,'vf5',true)">✗ خَاطِئٌ</button>
+    </div>
+  </div>
+
+  <div class="score-zone">
+    <div class="pill">⭐ Score : <span id="score-vf">0</span> / 5</div>
+    <button class="btn-reset no-print" onclick="resetVF()">🔄 Recommencer</button>
+  </div>
+</div>
+
+
+<!-- ═══ 8. MASCULIN / FÉMININ ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٨</div>
+    <div class="sec-ar">الْمُذَكَّرُ وَالْمُؤَنَّثُ</div>
+    <div class="sec-fr">Cours complet — Masculin et féminin</div>
+  </div>
+  <div class="sec-bar"></div>
+
+  <!-- A : Le genre grammatical -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">📘</span>
+      <span class="gram-title-ar">الْجِنْسُ فِي اللُّغَةِ الْعَرَبِيَّةِ</span>
+      <span class="gram-title-fr">— Le genre grammatical en arabe</span>
+    </div>
+    <div class="gram-body">
+      <p class="gram-intro">En arabe, <strong>tous les noms ont un genre</strong> : soit masculin (<span class="badge-m">مُذَكَّر</span>), soit féminin (<span class="badge-f">مُؤَنَّث</span>). Il n'existe pas de neutre. Ce genre influe sur la forme des adjectifs et des verbes qui accompagnent le nom.</p>
+    </div>
+  </div>
+
+  <!-- B : Le masculin -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">🔵</span>
+      <span class="gram-title-ar">الْمُذَكَّرُ</span>
+      <span class="gram-title-fr">— Le masculin : la forme de base</span>
+    </div>
+    <div class="gram-body">
+      <p class="gram-intro">Le masculin est la forme par défaut en arabe. Il ne porte <strong>aucune marque particulière</strong>.</p>
+      <div class="gram-sub">Exemples — noms du texte au masculin</div>
+      <table class="gtab">
+        <thead><tr style="background:#3a6070"><th>الْكَلِمَةُ</th><th>Sens</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-m">مُعَلِّمٌ</td><td class="fr-cell">professeur</td></tr>
+          <tr><td class="ar-m">أُسْتَاذٌ</td><td class="fr-cell">maître, enseignant</td></tr>
+          <tr><td class="ar-m">تِلْمِيذٌ</td><td class="fr-cell">élève (m)</td></tr>
+          <tr><td class="ar-m">صَدِيقٌ</td><td class="fr-cell">ami</td></tr>
+          <tr><td class="ar-m">دَرْسٌ</td><td class="fr-cell">leçon, cours</td></tr>
+          <tr><td class="ar-m">فَصْلٌ</td><td class="fr-cell">classe, salle</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- C : Le féminin -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">🔴</span>
+      <span class="gram-title-ar">الْمُؤَنَّثُ</span>
+      <span class="gram-title-fr">— Le féminin : deux types</span>
+    </div>
+    <div class="gram-body">
+
+      <div class="gram-sub">Type 1 — Féminin marqué : التَّاءُ الْمَرْبُوطَةُ (ةٌ)</div>
+      <p class="gram-intro">Le cas le plus courant : on ajoute <strong style="color:var(--rose);font-family:'Geeza Pro',Arial,serif;font-size:1.1rem">ةٌ</strong> à la fin du masculin. Cette lettre s'appelle <em>tāʾ marbūṭa</em>. Elle se lit <strong>« a »</strong> quand on continue de lire, et elle devient muette en fin de phrase.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th><span class="badge-m">مُذَكَّر</span></th><th class="arr">←</th><th><span class="badge-f">مُؤَنَّث</span></th><th>Traduction</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-m">مُعَلِّمٌ</td><td class="arr">←</td><td class="ar-f">مُعَلِّمَةٌ</td><td class="fr-cell">professeur/e</td></tr>
+          <tr><td class="ar-m">أُسْتَاذٌ</td><td class="arr">←</td><td class="ar-f">أُسْتَاذَةٌ</td><td class="fr-cell">maître/sse</td></tr>
+          <tr><td class="ar-m">تِلْمِيذٌ</td><td class="arr">←</td><td class="ar-f">تِلْمِيذَةٌ</td><td class="fr-cell">élève</td></tr>
+          <tr><td class="ar-m">صَدِيقٌ</td><td class="arr">←</td><td class="ar-f">صَدِيقَةٌ</td><td class="fr-cell">ami/e</td></tr>
+          <tr><td class="ar-m">جَدِيدٌ</td><td class="arr">←</td><td class="ar-f">جَدِيدَةٌ</td><td class="fr-cell">nouveau/elle</td></tr>
+        </tbody>
+      </table>
+
+      <div class="gram-sub" style="margin-top:18px">Type 2 — Féminin naturel (sans تَاءٌ مَرْبُوطَةٌ)</div>
+      <p class="gram-intro">Certains mots sont féminins <strong>par leur sens</strong>, sans porter de ة. C'est le cas des femmes par nature, de certaines parties du corps et de quelques noms géographiques.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th>الْكَلِمَةُ</th><th>Sens</th><th>Pourquoi féminin ?</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-f">أُمٌّ</td><td class="fr-cell">mère</td><td class="fr-cell">féminin par nature (être humain)</td></tr>
+          <tr><td class="ar-f">بِنْتٌ</td><td class="fr-cell">fille</td><td class="fr-cell">féminin par nature</td></tr>
+          <tr><td class="ar-f">أُخْتٌ</td><td class="fr-cell">sœur</td><td class="fr-cell">féminin par nature</td></tr>
+          <tr><td class="ar-f">يَدٌ</td><td class="fr-cell">main</td><td class="fr-cell">membre du corps (paire)</td></tr>
+          <tr><td class="ar-f">عَيْنٌ</td><td class="fr-cell">œil</td><td class="fr-cell">membre du corps (paire)</td></tr>
+          <tr><td class="ar-f">شَمْسٌ</td><td class="fr-cell">soleil</td><td class="fr-cell">féminin par convention</td></tr>
+          <tr><td class="ar-f">أَرْضٌ</td><td class="fr-cell">terre / sol</td><td class="fr-cell">féminin par convention</td></tr>
+        </tbody>
+      </table>
+
+      <div class="gram-sub" style="margin-top:18px">Type 3 — الأَلِفُ الْمَقْصُورَةُ (ى)</div>
+      <p class="gram-intro">Les mots se terminant par <strong style="color:var(--rose);font-family:'Geeza Pro',Arial,serif;font-size:1.1rem">ى</strong> (alif maqsura) sont souvent féminins. C'est fréquent pour les prénoms féminins et certains adjectifs.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th>الْكَلِمَةُ</th><th>Sens</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-f">سَلْمَى</td><td class="fr-cell">Salma (prénom féminin)</td></tr>
+          <tr><td class="ar-f">لَيْلَى</td><td class="fr-cell">Leila (prénom féminin)</td></tr>
+          <tr><td class="ar-f">كُبْرَى</td><td class="fr-cell">la plus grande</td></tr>
+          <tr><td class="ar-f">صُغْرَى</td><td class="fr-cell">la plus petite</td></tr>
+        </tbody>
+      </table>
+
+      <div class="gram-sub" style="margin-top:18px">Type 4 — الأَلِفُ الْمَمْدُودَةُ (اءُ)</div>
+      <p class="gram-intro">Les mots se terminant par <strong style="color:var(--rose);font-family:'Geeza Pro',Arial,serif;font-size:1.1rem">اءُ</strong> (alif mamduda avec hamza) sont souvent féminins. C'est fréquent pour les couleurs et les prénoms.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th>الْكَلِمَةُ</th><th>Sens</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-f">أَسْمَاءُ</td><td class="fr-cell">Asma (prénom féminin)</td></tr>
+          <tr><td class="ar-f">زَهْرَاءُ</td><td class="fr-cell">Zahra (prénom féminin)</td></tr>
+          <tr><td class="ar-f">حَمْرَاءُ</td><td class="fr-cell">rouge (f)</td></tr>
+          <tr><td class="ar-f">بَيْضَاءُ</td><td class="fr-cell">blanche</td></tr>
+          <tr><td class="ar-f">صَحْرَاءُ</td><td class="fr-cell">désert</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- C2 : Noms propres -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">🏷️</span>
+      <span class="gram-title-ar">الأَعْلَامُ</span>
+      <span class="gram-title-fr">— Les noms propres et le genre</span>
+    </div>
+    <div class="gram-body">
+      <p class="gram-intro">Les prénoms féminins sont toujours féminins, quelle que soit leur terminaison. Les prénoms masculins sont toujours masculins — <strong>même s'ils se terminent par ةٌ</strong>.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th>الِاسْمُ</th><th>Genre</th><th>Remarque</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-f">مَرْيَمُ</td><td class="fr-cell"><span class="badge-f">مُؤَنَّث</span></td><td class="fr-cell">prénom féminin</td></tr>
+          <tr><td class="ar-f">لَيْلَى</td><td class="fr-cell"><span class="badge-f">مُؤَنَّث</span></td><td class="fr-cell">alif maqsura</td></tr>
+          <tr><td class="ar-f">فَاطِمَةُ</td><td class="fr-cell"><span class="badge-f">مُؤَنَّث</span></td><td class="fr-cell">tāʾ marbūṭa</td></tr>
+          <tr><td class="ar-m">أُسَامَةُ</td><td class="fr-cell"><span class="badge-m">مُذَكَّر</span></td><td class="fr-cell" style="color:#b71c1c;font-weight:700">masculin malgré le ة !</td></tr>
+          <tr><td class="ar-m">مُعَاوِيَةُ</td><td class="fr-cell"><span class="badge-m">مُذَكَّر</span></td><td class="fr-cell" style="color:#b71c1c;font-weight:700">masculin malgré le ة !</td></tr>
+          <tr><td class="ar-m">طَلْحَةُ</td><td class="fr-cell"><span class="badge-m">مُذَكَّر</span></td><td class="fr-cell" style="color:#b71c1c;font-weight:700">masculin malgré le ة !</td></tr>
+        </tbody>
+      </table>
+      <div class="gram-regle" style="margin-top:12px">
+        <div class="gram-regle-title">📌 Exception à retenir</div>
+        بَعْضُ الأَسْمَاءِ الْمُذَكَّرَةِ تَنْتَهِي بِالتَّاءِ الْمَرْبُوطَةِ — فَالْعِبْرَةُ بِالْمَعْنَى لَا بِالشَّكْلِ.<br>
+        <span style="font-size:.72rem;color:var(--mid);">Certains prénoms masculins portent la tāʾ marbūṭa. C'est le sens (et l'usage) qui détermine le genre, pas la terminaison.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- C3 : Pluriel brisé des inanimés -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">📚</span>
+      <span class="gram-title-ar">جَمْعُ التَّكْسِيرِ لِغَيْرِ الْعَاقِلِ</span>
+      <span class="gram-title-fr">— Le pluriel brisé des inanimés</span>
+    </div>
+    <div class="gram-body">
+      <p class="gram-intro">En arabe, le pluriel <strong>brisé</strong> (جمع تكسير) des objets et inanimés est traité <strong>comme un féminin singulier</strong> pour l'accord de l'adjectif et du verbe.</p>
+      <div class="gram-sub">Exemples</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+        <div class="accord-box">
+          <span class="m">دَرْسٌ جَدِيدٌ</span> — une leçon nouvelle (singulier)<br>
+          <span class="f">دُرُوسٌ جَدِيدَةٌ</span> — des leçons nouvelles (pluriel brisé → accord féminin singulier)
+        </div>
+        <div class="accord-box">
+          <span class="m">كِتَابٌ جَدِيدٌ</span> — un livre nouveau<br>
+          <span class="f">كُتُبٌ جَدِيدَةٌ</span> — des livres nouveaux (féminin singulier)
+        </div>
+        <div class="accord-box">
+          <span class="m">وَاجِبٌ صَعْبٌ</span> — un devoir difficile<br>
+          <span class="f">وَاجِبَاتٌ صَعْبَةٌ</span> — des devoirs difficiles (féminin singulier)
+        </div>
+      </div>
+      <div class="gram-regle">
+        <div class="gram-regle-title">📌 Règle</div>
+        جَمْعُ التَّكْسِيرِ لِغَيْرِ الْعَاقِلِ يُعَامَلُ مُعَامَلَةَ الْمُؤَنَّثِ الْمُفْرَدِ.<br>
+        <span style="font-size:.72rem;color:var(--mid);">Le pluriel brisé des non-humains (objets, inanimés) se comporte comme un féminin singulier pour l'accord de l'adjectif et du verbe.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- D : L'accord -->
+  <div class="gram-box">
+    <div class="gram-head">
+      <span class="gram-icon">🔗</span>
+      <span class="gram-title-ar">التَّطَابُقُ فِي الْجِنْسِ</span>
+      <span class="gram-title-fr">— L'accord en genre</span>
+    </div>
+    <div class="gram-body">
+      <p class="gram-intro">En arabe, <strong>l'adjectif s'accorde toujours avec le nom</strong> auquel il se rapporte. Le verbe aussi s'accorde avec son sujet.</p>
+
+      <div class="gram-sub">Accord de l'adjectif</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+        <div class="accord-box"><span class="m">مُعَلِّمٌ جَدِيدٌ</span> &nbsp;↔&nbsp; <span class="f">مُعَلِّمَةٌ جَدِيدَةٌ</span></div>
+        <div class="accord-box"><span class="m">تِلْمِيذٌ جَدِيدٌ</span> &nbsp;↔&nbsp; <span class="f">تِلْمِيذَةٌ جَدِيدَةٌ</span></div>
+        <div class="accord-box"><span class="m">صَدِيقٌ جَدِيدٌ</span> &nbsp;↔&nbsp; <span class="f">صَدِيقَةٌ جَدِيدَةٌ</span></div>
+      </div>
+
+      <div class="gram-sub">Accord du verbe au passé</div>
+      <p style="font-size:.82rem;color:var(--dark);margin-bottom:10px;line-height:1.7;">Au passé, on ajoute <strong style="color:var(--rose);font-family:'Geeza Pro',Arial,serif;font-size:1.1rem">تْ</strong> à la fin du verbe pour le féminin singulier.</p>
+      <table class="gtab">
+        <thead><tr style="background:#7a3347"><th><span class="badge-m">Masculin</span></th><th>Sens</th><th class="arr">←</th><th><span class="badge-f">Féminin</span></th><th>Sens</th></tr></thead>
+        <tbody>
+          <tr><td class="ar-m">دَخَلَ</td><td class="fr-cell">il entra</td><td class="arr">←</td><td class="ar-f">دَخَلَتْ</td><td class="fr-cell">elle entra</td></tr>
+          <tr><td class="ar-m">فَهِمَ</td><td class="fr-cell">il comprit</td><td class="arr">←</td><td class="ar-f">فَهِمَتْ</td><td class="fr-cell">elle comprit</td></tr>
+          <tr><td class="ar-m">خَرَجَ</td><td class="fr-cell">il sortit</td><td class="arr">←</td><td class="ar-f">خَرَجَتْ</td><td class="fr-cell">elle sortit</td></tr>
+          <tr><td class="ar-m">جَلَسَ</td><td class="fr-cell">il s'assit</td><td class="arr">←</td><td class="ar-f">جَلَسَتْ</td><td class="fr-cell">elle s'assit</td></tr>
+        </tbody>
+      </table>
+      <div class="gram-regle" style="margin-top:12px">
+        <div class="gram-regle-title">📌 À retenir</div>
+        الْاسْمُ يُؤَثِّرُ فِي الصِّفَةِ وَفِي الْفِعْلِ : إِذَا كَانَ الِاسْمُ مُؤَنَّثاً، وَجَبَ تَأْنِيثُ الصِّفَةِ وَالْفِعْلِ.<br>
+        <span style="font-size:.72rem;color:var(--mid);">Le nom impose son genre à l'adjectif et au verbe. Si le nom est féminin, adjectif et verbe le deviennent aussi.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXERCICES -->
+  <div class="exo-title" style="margin-top:18px">Exercices — Masculin / Féminin</div>
+  <div class="exo-sub">Ces questions testent ta compréhension du genre, pas seulement la forme des mots.</div>
+
+  <!-- mf1 : accord adjectif -->
+  <div class="mf-item" id="mf1">
+    <div class="mf-q-label">Choisis la forme correcte pour compléter la phrase :</div>
+    <div class="mf-word" style="font-size:1.2rem">الأُسْتَاذَةُ شَرَحَتْ دَرْساً ___</div>
+    <div class="mf-opts">
+      <button class="mf-btn" onclick="mfAns(this,'mf1',false)">جَدِيدٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf1',true)">جَدِيدًا</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf1',false)">جَدِيدَةٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf1',false)">جَدِيدَةً</button>
+    </div>
+  </div>
+
+  <!-- mf2 : type de féminin -->
+  <div class="mf-item" id="mf2">
+    <div class="mf-q-label">Le mot أُمٌّ (mère) est féminin. Pourquoi ?</div>
+    <div class="mf-opts">
+      <button class="mf-btn fr" onclick="mfAns(this,'mf2',false)">Il porte la tāʾ marbūṭa (ة)</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf2',true)">C'est un féminin naturel, sans ة</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf2',false)">Il se termine par alif</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf2',false)">Ce n'est pas un féminin</button>
+    </div>
+  </div>
+
+  <!-- mf3 : accord verbe -->
+  <div class="mf-item" id="mf3">
+    <div class="mf-q-label">Dans le texte : رَشِيدٌ دَخَلَ — si c'était une fille (رَشِيدَةُ), le verbe devient :</div>
+    <div class="mf-opts">
+      <button class="mf-btn" onclick="mfAns(this,'mf3',false)">دَخَلَ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf3',true)">دَخَلَتْ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf3',false)">دَخَلُوا</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf3',false)">دَخَلْنَ</button>
+    </div>
+  </div>
+
+  <!-- mf4 : phrase avec accord correct -->
+  <div class="mf-item" id="mf4">
+    <div class="mf-q-label">Quelle phrase a un accord correct en genre ?</div>
+    <div class="mf-opts">
+      <button class="mf-btn" onclick="mfAns(this,'mf4',false)">الطَّالِبَةُ جَدِيدٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf4',true)">الأُسْتَاذَةُ جَدِيدَةٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf4',false)">الْمُعَلِّمُ جَدِيدَةٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf4',false)">الدَّرْسُ جَدِيدَةٌ</button>
+    </div>
+  </div>
+
+  <!-- mf5 : exception noms propres -->
+  <div class="mf-item" id="mf5">
+    <div class="mf-q-label">Le prénom أُسَامَةُ se termine par ةٌ. Il est...</div>
+    <div class="mf-opts">
+      <button class="mf-btn fr" onclick="mfAns(this,'mf5',false)">Féminin car il porte la tāʾ marbūṭa</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf5',true)">Masculin, malgré la tāʾ marbūṭa</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf5',false)">Féminin naturel (sans ة)</button>
+      <button class="mf-btn fr" onclick="mfAns(this,'mf5',false)">Ni masculin ni féminin</button>
+    </div>
+  </div>
+
+  <!-- mf6 : identifier alif mamduda -->
+  <div class="mf-item" id="mf6">
+    <div class="mf-q-label">Quel mot est féminin grâce à l'alif mamduda (اءُ) ?</div>
+    <div class="mf-opts">
+      <button class="mf-btn" onclick="mfAns(this,'mf6',true)">حَمْرَاءُ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf6',false)">مُعَلِّمَةٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf6',false)">شَمْسٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf6',false)">صَدِيقَةٌ</button>
+    </div>
+  </div>
+
+  <!-- mf7 : accord pluriel brisé -->
+  <div class="mf-item" id="mf7">
+    <div class="mf-q-label">Complète avec le bon adjectif : دُرُوسٌ ___ (nouvelles)</div>
+    <div class="mf-opts">
+      <button class="mf-btn" onclick="mfAns(this,'mf7',true)">جَدِيدَةٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf7',false)">جَدِيدٌ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf7',false)">جَدِيدُونَ</button>
+      <button class="mf-btn" onclick="mfAns(this,'mf7',false)">جَدِيدَاتٌ</button>
+    </div>
+  </div>
+
+  <div class="score-zone">
+    <div class="pill">⭐ Score : <span id="score-mf">0</span> / 7</div>
+    <button class="btn-reset no-print" onclick="resetMF()">🔄 Recommencer</button>
+  </div>
+</div>
+
+
+<!-- ═══ 9. DICTÉE ═══ -->
+<div class="section">
+  <div class="sec-head">
+    <div class="sec-num">٩</div>
+    <div class="sec-ar">الْإِمْلَاءُ</div>
+    <div class="sec-fr">Dictée</div>
+  </div>
+  <div class="sec-bar"></div>
+  <div class="dictee-box">
+    <div class="dictee-line">
+      <div class="dictee-num">١</div>
+      <input class="dictee-field" type="text" placeholder=""/>
+    </div>
+    <div class="dictee-line">
+      <div class="dictee-num">٢</div>
+      <input class="dictee-field" type="text" placeholder=""/>
+    </div>
+    <div class="dictee-line">
+      <div class="dictee-num">٣</div>
+      <input class="dictee-field" type="text" placeholder=""/>
+    </div>
+  </div>
+  <div id="correction" style="display:none;margin-top:14px;">
+    <div class="gram-box">
+      <div class="gram-head">
+        <span class="gram-icon">✅</span>
+        <span class="gram-title-ar">التَّصْحِيحُ</span>
+        <span class="gram-title-fr">— Correction</span>
+      </div>
+      <div class="gram-body">
+        <div style="direction:rtl;font-family:'Geeza Pro',Arial,serif;font-size:1.1rem;line-height:2.4;color:var(--deep);">
+          ١. دَخَلَ رَشِيدٌ فِي الْفَصْلِ مَعَ أَصْدِقَائِهِ.<br>
+          ٢. فَهِمَ رَشِيدٌ الدَّرْسَ الْجَدِيدَ.<br>
+          ٣. خَرَجَ التَّلَامِيذُ بِنِظَامٍ وَهُدُوءٍ.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:10px;">
+    <button class="btn-reset no-print" onclick="document.getElementById('correction').style.display='block';this.style.display='none'">👁 Afficher la correction</button>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:30px;font-size:.72rem;color:var(--mid);">
+  BIDAYAH · Cours d'arabe · Sana · <span id="today"></span>
+</div>
+</div>
+
+<script>
+  document.getElementById('today').textContent = new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+
+  function toggleTrad(btn) {
+    var box = document.getElementById('trad');
+    var shown = box.style.display === 'block';
+    box.style.display = shown ? 'none' : 'block';
+    btn.textContent = shown ? 'Afficher la traduction' : 'Masquer la traduction';
+  }
+
+  function showAns(id, btn) {
+    var box = document.getElementById(id);
+    box.style.display = 'block';
+    btn.style.display = 'none';
+  }
+
+  /* Generic helpers */
+  function lockBtns(sel) { document.querySelectorAll('#'+sel+' button').forEach(function(b){b.classList.add('locked');}); }
+
+  /* Quiz vocabulaire */
+  var qvScore=0, qvDone={};
+  function qvAns(btn,id,ok) {
+    if(qvDone[id]) return; qvDone[id]=true;
+    lockBtns(id);
+    btn.classList.add(ok?'correct':'wrong');
+    if(ok){qvScore++;document.getElementById('score-qv').textContent=qvScore;}
+  }
+  function resetQV(){
+    qvScore=0;qvDone={};document.getElementById('score-qv').textContent='0';
+    ['qv1','qv2','qv3','qv4','qv5','qv6','qv7','qv8'].forEach(function(id){
+      document.querySelectorAll('#'+id+' button').forEach(function(b){b.classList.remove('correct','wrong','locked');});
+    });
+  }
+
+  /* QCM */
+  var qcmScore=0, qcmDone={};
+  function qcmAns(btn,id,ok) {
+    if(qcmDone[id]) return; qcmDone[id]=true;
+    lockBtns(id);
+    btn.classList.add(ok?'correct':'wrong');
+    if(ok){qcmScore++;document.getElementById('score-qcm').textContent=qcmScore;}
+  }
+  function resetQCM(){
+    qcmScore=0;qcmDone={};document.getElementById('score-qcm').textContent='0';
+    ['q1','q2','q3','q4'].forEach(function(id){
+      document.querySelectorAll('#'+id+' button').forEach(function(b){b.classList.remove('correct','wrong','locked');});
+    });
+  }
+
+  /* Vrai / Faux */
+  var vfScore=0, vfDone={};
+  function vfAns(btn,id,ok) {
+    if(vfDone[id]) return; vfDone[id]=true;
+    document.querySelectorAll('#'+id+' .vf-btn').forEach(function(b){b.classList.add('locked');});
+    btn.classList.add(ok?'correct':'wrong');
+    if(ok){vfScore++;document.getElementById('score-vf').textContent=vfScore;}
+  }
+  function resetVF(){
+    vfScore=0;vfDone={};document.getElementById('score-vf').textContent='0';
+    ['vf1','vf2','vf3','vf4','vf5'].forEach(function(id){
+      document.querySelectorAll('#'+id+' .vf-btn').forEach(function(b){b.classList.remove('correct','wrong','locked');});
+    });
+  }
+
+  /* Masc/Fém */
+  var mfScore=0, mfDone={};
+  function mfAns(btn,id,ok) {
+    if(mfDone[id]) return; mfDone[id]=true;
+    document.querySelectorAll('#'+id+' button').forEach(function(b){b.classList.add('locked');});
+    btn.classList.add(ok?'correct':'wrong');
+    if(ok){mfScore++;document.getElementById('score-mf').textContent=mfScore;}
+  }
+  function resetMF(){
+    mfScore=0;mfDone={};document.getElementById('score-mf').textContent='0';
+    ['mf1','mf2','mf3','mf4','mf5','mf6','mf7'].forEach(function(id){
+      document.querySelectorAll('#'+id+' button').forEach(function(b){b.classList.remove('correct','wrong','locked');});
+    });
+  }
+</script>
+</body>
+</html>
